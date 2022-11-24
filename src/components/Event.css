@@ -1,0 +1,11 @@
+.event {
+    width: 100px;
+    border: 1px solid gray;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+  }
+  
+  .event-image {
+    width: 100%;
+  }

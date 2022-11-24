@@ -1,0 +1,12 @@
+.day {
+    width: 200px;
+    height: 400px;
+    border: 1px solid gray;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+  }
+  
+  .product-image {
+    width: 100%;
+  }

@@ -1,0 +1,6 @@
+.events {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    gap: 5px;
+  }

@@ -13,8 +13,6 @@ function Event({ id, title, image, note }) {
         }),
     }));
 
-
-
     return (
 
         <button

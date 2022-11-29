@@ -9,8 +9,6 @@ import days from '../days';
 import Events from './Events';
 import events from '../events';
 
-
-
 function App() {
 
   return (

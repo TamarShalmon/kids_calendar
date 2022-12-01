@@ -11,7 +11,8 @@ function Week({ days }) {
                 <Day
                     key={day.id}
                     title={day.title}
-                    description={day.description} />)}
+                    description={day.description}
+                     />)}
         </div>
     )
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import {useState} from 'react';
 import styled from 'styled-components';
 import './App.css';
 import Week from './Week';
@@ -15,10 +15,13 @@ const Title = styled.h2`
 
 function App() {
 
+
+
+
   return (
     <div className="container">
       <Title>Hello user, L'ets plan your week!</Title>
-      <Week days={days} />
+      <Week days={days} events={events} />
       <div>
         <h3>Events board</h3>
       <Events events={events} />

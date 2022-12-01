@@ -3,10 +3,10 @@ import "./Event.css";
 
 function Event({ title, image }) {
     return (
-        <div className='event'>
+        <button className='event'>
             <h4>{title}</h4>
             <p>{image}</p>
-        </div>
+        </button>
     )
 }
 

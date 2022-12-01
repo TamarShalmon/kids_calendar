@@ -1,6 +1,6 @@
 .day {
     width: 200px;
-    height: 400px;
+    height: 450px;
     border: 1px solid gray;
     padding: 10px;
     border-radius: 5px;
@@ -9,4 +9,12 @@
   
   .product-image {
     width: 100%;
+  }
+
+  .event{
+    width: 100px;
+    border: 1px solid gray;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
   }

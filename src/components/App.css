@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Neucha&display=swap');
+
+* {
+    font-family: 'Neucha', cursive;
+    letter-spacing: 1.2px;
+}
+
+
+
+.container {
+    background: url("/public/img-background.png"), url("/public/sun-backgrond.png");
+    background-repeat: no-repeat;
+    background-color: #a2daf3;
+    background-position: -0.5cm bottom, center top;
+}

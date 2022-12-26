@@ -1,12 +1,12 @@
 import React from 'react'
 import { useDrag } from "react-dnd";
-import "./Event.css";
+import "./Weather.css";
 
-function Event({ id, title, image }) {
+function Weather({ id, image }) {
 
     const [{ isDragging }, drag] = useDrag(() => ({
         type: "button",
-        item: { id, title, image, score: 0 },
+        item: { id, image },
         collect: (monitor) => ({
             isDragging: !!monitor.isDragging(),
         }),
@@ -15,12 +15,12 @@ function Event({ id, title, image }) {
 
     return (
         <button
-            className='event'
+            className='weatherIcon'
             ref={drag}
             style={{ border: isDragging ? "2px solid black" : "0px" }} >
-            <img className='event-image' src={image}/>
+            <img className='weather-icon' src={image} />
         </button>
     )
 }
 
-export default Event
+export default Weather

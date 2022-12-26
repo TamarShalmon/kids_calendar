@@ -1,68 +1,68 @@
 export default [
     {
         id: 1,
-        title: "shower",
+        title: "Shower",
         category: "",
-        image: "",
+        image: "https://cdn-icons-png.flaticon.com/512/4632/4632332.png",
         score: ""
     },
     {
         id: 2,
-        title: "brush teeth",
+        title: "Brush teeth",
         category: "",
-        image: "",
+        image: "https://cdn-icons-png.flaticon.com/512/3640/3640522.png",
         score: ""
 
     }, 
     {
         id: 3,
-        title: "get dress",
+        title: "Get dress",
         category: "",
-        image: "",
+        image: "https://cdn-icons-png.flaticon.com/512/4416/4416235.png",
         score: ""
 
     }, 
     {
         id: 4,
-        title: "kindergarten",
+        title: "Playground",
         category: "",
-        image: "",
+        image: "https://cdn-icons-png.flaticon.com/512/4230/4230597.png",
         score: ""
 
     },
     {
         id: 5,
-        title: "sport",
+        title: "Sport",
         category: "",
-        image: "",
+        image: "https://cdn-icons-png.flaticon.com/512/7511/7511089.png",
         score:"",
     },
     {
         id: 6,
-        title: "shower",
+        title: "Ride a bike",
         category: "",
-        image: "",
+        image: "https://cdn-icons-png.flaticon.com/512/4072/4072154.png",
         score:"",
     },
     {
         id: 7,
-        title: "shower",
+        title: "Beach",
         category: "",
-        image: "",
+        image: "https://cdn-icons-png.flaticon.com/512/7894/7894015.png",
         score:"",
     },
     {
         id: 8,
-        title: "shower",
+        title: "Zoo",
         category: "",
-        image: "",
+        image: "https://cdn-icons-png.flaticon.com/512/4300/4300067.png",
         score:"",
     },
     {
         id: 9,
-        title: "shower",
+        title: "Birthday",
         category: "",
-        image: "",
+        image: "https://cdn-icons-png.flaticon.com/512/6170/6170683.png",
         score:"",
     },
 ];

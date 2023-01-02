@@ -3,15 +3,7 @@ import "./Header.css";
 import Weather from './Weather';
 
 function Header({ weatherIcon, days }) {
-
-    function getDateStyle(dayId, dayStyle) {
-        const toDay = new Date();
-        const dayOfWeek = toDay.getDay();
-
-        if (dayOfWeek === dayId) {
-            return { backgroundColor: dayStyle };
-        }
-    }
+    const dayOfWeek = new Date().getDay();
 
     return (
         <>
@@ -24,7 +16,7 @@ function Header({ weatherIcon, days }) {
 
                 <div className='right-header'>
                     <div className='date'
-                        style={getDateStyle(days.id, days.style)}>
+                        style={days[dayOfWeek].style}>
                         {new Date().toLocaleString("en-US", { day: '2-digit' }) + " " + new Date().toLocaleString("en-US", { month: "long" }) + " " + new Date().getFullYear()}
                     </div>
                     <div className='weather'>

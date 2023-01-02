@@ -1,5 +1,6 @@
 
   .event-image {
     width: 2.8rem;
-    margin:0 auto
+    margin:0 auto;
+    pointer-events: none;
   }

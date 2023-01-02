@@ -7,7 +7,7 @@
 }
 
 
-.clock {
+.date {
     background-color: #fff;
     border: 0 solid #E5E7EB;
     box-sizing: border-box;
@@ -43,19 +43,10 @@
     left: 2px;
 }
 
-.weather{
-    display: flex;
-    gap: 8px;
-    padding: 15px 5% 0 0;
-}
-
-.weatherIcon{
-    width: 40px;
-    height: auto;
-}
 
 .right-header{
     display: flex;
     align-items: flex-end;
     flex-direction: column;
-}
+    gap: 10px;
+} 

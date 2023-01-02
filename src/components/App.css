@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Neucha&display=swap');
+@import "~slick-carousel/slick/slick.css"; 
+@import "~slick-carousel/slick/slick-theme.css";
 
 * {
     font-family: 'Neucha', cursive;
@@ -12,4 +14,4 @@
     background-repeat: no-repeat;
     background-color: #a2daf3;
     background-position: -0.5cm bottom, center top;
-}
+    }

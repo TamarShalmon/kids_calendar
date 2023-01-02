@@ -1,12 +1,13 @@
+import { style } from '@mui/system';
 import React from 'react'
 import { useDrag } from "react-dnd";
 import "./Weather.css";
 
-function Weather({ id, image }) {
+function Weather({ id, image, style }) {
 
     const [{ isDragging }, drag] = useDrag(() => ({
         type: "button",
-        item: { id, image },
+        item: { id, image, type: 'weather' },
         collect: (monitor) => ({
             isDragging: !!monitor.isDragging(),
         }),
@@ -15,12 +16,14 @@ function Weather({ id, image }) {
 
     return (
         <button
-            className='weatherIcon'
-            ref={drag}
-            style={{ border: isDragging ? "2px solid black" : "0px" }} >
-            <img className='weather-icon' src={image} />
+            className='weatherIcon-btn'
+            style={style}
+            ref={drag}>
+            <img 
+            className='weatherIcon' 
+            src={image} />
         </button>
     )
 }
 
-export default Weather
+export default Weather 

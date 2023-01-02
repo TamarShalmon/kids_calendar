@@ -1,12 +1,19 @@
 .day {
   width: 200px;
-  height: 450px;
+  height: 455px;
   padding: 15px 10px 5px 10px;
   border-radius: 5px;
   text-align: center;
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+.day-weather {
+  height: 65px;
+  background: no-repeat center/3rem url("/public/2480626.png");
+  display: flex;
+  justify-content: center;
 }
 
 .day-events {
@@ -18,7 +25,7 @@
   grid-template-rows: 60px;
   align-content: stretch;
   justify-content: center;
-
+  
 }
 
 .product-image {
@@ -27,10 +34,11 @@
 
 .event {
   width: 100px;
-  border: 1px solid gray;
+  border: transparent;
   padding: 10px;
   border-radius: 5px;
   text-align: center;
+  background-color: white;
 }
 
 .day-title {
@@ -39,4 +47,3 @@
   font-size: 1.35rem;
   font-weight: 700;
 }
-

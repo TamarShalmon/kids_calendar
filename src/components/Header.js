@@ -2,7 +2,17 @@ import React from 'react'
 import "./Header.css";
 import Weather from './Weather';
 
-function Header({ weatherIcon }) {
+function Header({ weatherIcon, days }) {
+
+    function getDateStyle(dayId, dayStyle) {
+        const toDay = new Date();
+        const dayOfWeek = toDay.getDay();
+
+        if (dayOfWeek === dayId) {
+            return { backgroundColor: dayStyle };
+        }
+    }
+
     return (
         <>
             <div className='header'>
@@ -13,18 +23,16 @@ function Header({ weatherIcon }) {
                 </div>
 
                 <div className='right-header'>
-                    <div className='clock'>
+                    <div className='date'
+                        style={getDateStyle(days.id, days.style)}>
                         {new Date().toLocaleString("en-US", { day: '2-digit' }) + " " + new Date().toLocaleString("en-US", { month: "long" }) + " " + new Date().getFullYear()}
                     </div>
                     <div className='weather'>
                         {weatherIcon.map(icon =>
-                            //Weather //weatherIcon
-                            <img
-                                className='weatherIcon'
+                            <Weather
                                 key={icon.id}
                                 id={icon.id}
-                                // image //src
-                                src={icon.image}
+                                image={icon.image}
                                 style={icon.style}
                             />)}
                     </div>

@@ -16,11 +16,9 @@ function App() {
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="container">
-        <Header weatherIcon={weatherIcon} />
+        <Header weatherIcon={weatherIcon} days={days} />
         <Week days={days} events={events} />
-        <div>
-          <Events events={events} />
-        </div>
+        <Events events={events} />
       </div>
     </DndProvider>
   );

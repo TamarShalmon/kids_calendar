@@ -4,12 +4,15 @@ import { useDrop } from 'react-dnd';
 import Event from './Event';
 import "./Day.css";
 import Weather from './Weather';
+import Custom from './Custom';
 
 
 function Day({ title, style, id, image }) {
 
     const [board, setBoard] = useState([]);
     const [weatherBoard, setWeatherBoard] = useState();
+    const [modalOpen, setModalOpen] = useState(false);
+
 
     ///// Local Storage--------------------
     useEffect(() => {
@@ -57,7 +60,14 @@ function Day({ title, style, id, image }) {
     ///// Drag and drop Event--------------
     const [{ isOver }, drop] = useDrop(() => ({
         accept: "button",
-        drop: (eventItem) => addImageToBoard(eventItem),
+        drop: (eventItem) => {
+            addImageToBoard(eventItem);
+            if (eventItem.id === 1) {
+                const taskNote = prompt('Which task you wanna do?');
+                eventItem.note = taskNote;
+            }
+            //setModalOpen(eventItem.id === 1) // If is note event
+        },
         collect: (monitor) => ({
             isOver: !!monitor.isOver(),
         }),
@@ -78,6 +88,7 @@ function Day({ title, style, id, image }) {
 
     return (
         <>
+            { modalOpen && <Custom setOpenModal={setModalOpen} /> }
             <div className='day' style={style}>
                 <div className='day-title'>{title}</div>
 
@@ -93,6 +104,7 @@ function Day({ title, style, id, image }) {
                         <Event
                             key={event.id}
                             index={index}
+                            note={event.note}
                             title={event.title}
                             image={event.image} />
                     )}

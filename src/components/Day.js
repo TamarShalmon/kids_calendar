@@ -1,17 +1,17 @@
-import update from 'immutability-helper'
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 import { useDrop } from 'react-dnd';
 import Event from './Event';
 import "./Day.css";
 import Weather from './Weather';
-import Custom from './Custom';
+import CustomTaskModal from './CustomTaskModal';
 
 
-function Day({ title, style, id, image }) {
+function Day({ title, style, id, image, }) {
 
     const [board, setBoard] = useState([]);
     const [weatherBoard, setWeatherBoard] = useState();
     const [modalOpen, setModalOpen] = useState(false);
+    const [inputTask, setInputTask] = useState("");
 
 
     ///// Local Storage--------------------
@@ -22,7 +22,10 @@ function Day({ title, style, id, image }) {
         if (localStorage.getItem(`${title}-weather`)) {
             setWeatherBoard(JSON.parse(localStorage.getItem(`${title}-weather`)))
         }
-    }, [])
+        if (localStorage.getItem(`${title}-inputTask`)) {
+            setInputTask(localStorage.getItem(`${title}-inputTask`));
+        }
+    }, []);
 
     useEffect(() => {
         if (board.length) {
@@ -35,9 +38,15 @@ function Day({ title, style, id, image }) {
         } else {
             localStorage.removeItem(`${title}-weather`)
         }
+        if (inputTask) {
+            localStorage.setItem(`${title}-inputTask`, inputTask);
+        } else {
+            localStorage.removeItem(`${title}-inputTask`);
+        }
         console.log('board', board)
         console.log('weatherBoard', weatherBoard)
-    }, [board, weatherBoard])
+        console.log('weatherBoard', weatherBoard)
+    }, [board, weatherBoard, inputTask]);
     /////----------------------------------
 
     ///// Drag and drop Weather------------
@@ -58,15 +67,17 @@ function Day({ title, style, id, image }) {
     /////----------------------------------
 
     ///// Drag and drop Event--------------
+    const handleSubmit = (task) => {
+        setInputTask(task);
+    };
+
     const [{ isOver }, drop] = useDrop(() => ({
         accept: "button",
         drop: (eventItem) => {
             addImageToBoard(eventItem);
-            if (eventItem.id === 1) {
-                const taskNote = prompt('Which task you wanna do?');
-                eventItem.note = taskNote;
+            if (eventItem.id === 2) {
+                setModalOpen(true)
             }
-            //setModalOpen(eventItem.id === 1) // If is note event
         },
         collect: (monitor) => ({
             isOver: !!monitor.isOver(),
@@ -77,7 +88,7 @@ function Day({ title, style, id, image }) {
         console.log('Event ID', eventItem)
         if (eventItem.id && eventItem.type === 'event') {
             const existEvent = board.filter(item => item.id === eventItem.id);
-            if (existEvent.length === 0 && board.length < 6) {
+            if (existEvent.length === 0 ) {
                 setBoard((board) => [...board, eventItem]);
 
             }
@@ -88,7 +99,7 @@ function Day({ title, style, id, image }) {
 
     return (
         <>
-            { modalOpen && <Custom setOpenModal={setModalOpen} /> }
+            {modalOpen && <CustomTaskModal setOpenModal={setModalOpen} onSubmit={handleSubmit} />}
             <div className='day' style={style}>
                 <div className='day-title'>{title}</div>
 
@@ -100,11 +111,11 @@ function Day({ title, style, id, image }) {
 
                 <div ref={drop} className="day-events">
 
-                    {board.slice(0, 5).map((event, index) =>
+                    {board.slice(0, 6).map((event, index) =>
                         <Event
                             key={event.id}
                             index={index}
-                            note={event.note}
+                            note={inputTask}
                             title={event.title}
                             image={event.image} />
                     )}

@@ -1,7 +1,7 @@
 .modalBackground {
     width: 100vw;
     height: 100vh;
-    background-color: rgba(200, 200, 200);
+    background-color: rgba(200, 200, 200, 0.50);
     position: fixed;
     top:0;
     display: flex;
@@ -11,20 +11,19 @@
   }
   
   .modalContainer {
-    width: 500px;
-    height: 500px;
+    width: 495px;
+    height: 320px;
     border-radius: 12px;
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     display: flex;
     flex-direction: column;
-    padding: 25px;
+    padding: 20px;
   }
   
   .modalContainer .title {
     display: inline-block;
     text-align: center;
-    margin-top: 10px;
   }
   
   .titleCloseBtn {
@@ -40,11 +39,15 @@
   }
   
   .modalContainer .body {
-    flex: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    
     font-size: 1.7rem;
+    text-align: center;
+  }
+
+  input{
+    width: 235px;
+    height: 30px;
+    font-size: 20px;
     text-align: center;
   }
   

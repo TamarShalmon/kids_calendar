@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useDrag, useDrop } from "react-dnd";
+import { useDrag } from "react-dnd";
 import "./Event.css";
 
 function Event({ id, title, image, note }) {

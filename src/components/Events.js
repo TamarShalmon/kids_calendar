@@ -5,12 +5,17 @@ import Slider from "react-slick";
 
 
 
-function Events({ events }) {
+function Events({ events, title }) {
+
+
+
+
     const settings = {
         dots: false,
         infinite: false,
         speed: 300,
-        slidesToShow: 7,
+        //slidesToShow: 7,
+        slidesToShow: window.innerWidth >= 1400 ? 9 : 7,
         slidesToScroll: 1,
     };
 
@@ -21,7 +26,7 @@ function Events({ events }) {
                     <img src='https://cdn-icons-png.flaticon.com/512/69/69524.png' />
                 </button>
                 <div className='events'>
-                    <Slider {...settings} >
+                    <Slider {...settings}  >
                         {events.map(event =>
                             <Event
                                 key={event.id}
@@ -30,7 +35,7 @@ function Events({ events }) {
                                 image={event.image} />)}
                     </Slider>
                 </div>
-                <button >
+                <button>
                     <img src='https://cdn-icons-png.flaticon.com/512/3976/3976956.png' />
                 </button>
             </div>

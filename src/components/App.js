@@ -11,12 +11,25 @@ import events from '../events';
 
 function App() {
 
+  const [showEvents, setShowEvents] = useState(false);
+
   return (
     <DndProvider backend={HTML5Backend}>
-      <div className="container">
+
+      <div className='container' >
         <Header weatherIcon={weatherIcon} days={days} />
         <Week days={days} events={events} />
-        <Events events={events} />
+
+        <button
+          onClick={() => setShowEvents(!showEvents)}>
+          Toggle Events
+        </button>
+        <div>
+          {showEvents && <Events
+            className="event-show"
+            events={events}
+            style={{ position: 'fixed', bottom: showEvents ? '0' : '-200px', transition: 'bottom 0.5s ease-in-out' }} />}
+        </div>
       </div>
     </DndProvider>
   );

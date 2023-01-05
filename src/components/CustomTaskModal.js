@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import "./CustomTaskModal.css";
 
-function CustomTaskModal({ setOpenModal, onSubmit }) {
+function CustomTaskModal({ setModalOpen, onSubmit, eventItem }) {
   const [inputTask, setInputTask] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
-    onSubmit(inputTask);
+    eventItem.note = inputTask;
+    onSubmit(eventItem);
     setInputTask("");
-    setOpenModal(false); 
-
+    setModalOpen(null); 
   }
 
   return (
@@ -18,7 +18,7 @@ function CustomTaskModal({ setOpenModal, onSubmit }) {
         <div className="titleCloseBtn">
           <button
             onClick={() => {
-              setOpenModal(false);
+              setModalOpen(null);
             }}
           >
             X
@@ -42,7 +42,7 @@ function CustomTaskModal({ setOpenModal, onSubmit }) {
           <div className="footer">
             <button
               onClick={() => {
-                setOpenModal(false);
+                setModalOpen(null);
               }}
               id="cancelBtn"
             >

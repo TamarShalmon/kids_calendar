@@ -11,8 +11,6 @@ function Day({ title, style, id, image, }) {
     const [board, setBoard] = useState([]);
     const [weatherBoard, setWeatherBoard] = useState();
     const [modalOpen, setModalOpen] = useState(false);
-    const [inputTask, setInputTask] = useState("");
-
 
     ///// Local Storage--------------------
     useEffect(() => {
@@ -21,9 +19,6 @@ function Day({ title, style, id, image, }) {
         }
         if (localStorage.getItem(`${title}-weather`)) {
             setWeatherBoard(JSON.parse(localStorage.getItem(`${title}-weather`)))
-        }
-        if (localStorage.getItem(`${title}-inputTask`)) {
-            setInputTask(localStorage.getItem(`${title}-inputTask`));
         }
     }, []);
 
@@ -38,15 +33,9 @@ function Day({ title, style, id, image, }) {
         } else {
             localStorage.removeItem(`${title}-weather`)
         }
-        if (inputTask) {
-            localStorage.setItem(`${title}-inputTask`, inputTask);
-        } else {
-            localStorage.removeItem(`${title}-inputTask`);
-        }
         console.log('board', board)
         console.log('weatherBoard', weatherBoard)
-        console.log('weatherBoard', weatherBoard)
-    }, [board, weatherBoard, inputTask]);
+    }, [board, weatherBoard]);
     /////----------------------------------
 
     ///// Drag and drop Weather------------
@@ -67,16 +56,18 @@ function Day({ title, style, id, image, }) {
     /////----------------------------------
 
     ///// Drag and drop Event--------------
-    const handleSubmit = (task) => {
-        setInputTask(task);
+    const handleSubmit = (eventItem) => {
+        addImageToBoard(eventItem);
+        setModalOpen(null)
     };
 
     const [{ isOver }, drop] = useDrop(() => ({
         accept: "button",
         drop: (eventItem) => {
-            addImageToBoard(eventItem);
             if (eventItem.id === 2) {
-                setModalOpen(true)
+                setModalOpen(eventItem)
+            } else {
+                addImageToBoard(eventItem);
             }
         },
         collect: (monitor) => ({
@@ -87,11 +78,7 @@ function Day({ title, style, id, image, }) {
     const addImageToBoard = (eventItem) => {
         console.log('Event ID', eventItem)
         if (eventItem.id && eventItem.type === 'event') {
-            const existEvent = board.filter(item => item.id === eventItem.id);
-            if (existEvent.length === 0 ) {
-                setBoard((board) => [...board, eventItem]);
-
-            }
+            setBoard((board) => [...board, eventItem]);
         }
     };
     /////----------------------------------
@@ -99,7 +86,7 @@ function Day({ title, style, id, image, }) {
 
     return (
         <>
-            {modalOpen && <CustomTaskModal setOpenModal={setModalOpen} onSubmit={handleSubmit} />}
+            {modalOpen && <CustomTaskModal eventItem={modalOpen} setModalOpen={setModalOpen} onSubmit={handleSubmit} />}
             <div className='day' style={style}>
                 <div className='day-title'>{title}</div>
 
@@ -115,7 +102,7 @@ function Day({ title, style, id, image, }) {
                         <Event
                             key={event.id}
                             index={index}
-                            note={inputTask}
+                            note={event.note}
                             title={event.title}
                             image={event.image} />
                     )}

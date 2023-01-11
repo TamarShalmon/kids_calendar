@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useDrag } from "react-dnd";
 import "./Event.css";
 
-function Event({ id, title, image, note }) {
+function Event({ id, title, image, note, pic }) {
 
 
     const [{ isDragging }, drag] = useDrag(() => ({
@@ -20,7 +20,9 @@ function Event({ id, title, image, note }) {
             ref={drag}
         // style={{ border: isDragging ? "1px solid white" : "0px" }}
         >
-            {note ? <p>{note}</p> :  <img className='event-image' src={image} />}
+
+            {note ? <p>{note}</p> : (pic ? <img src={pic} /> : <img className='event-image' src={image} />)}
+            {/* {note ? <p>{note}</p> : <img className='event-image' src={image} />} */}
         </button>
 
     )

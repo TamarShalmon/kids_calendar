@@ -1,21 +1,23 @@
-.weather{
+.weather {
     display: flex;
-    gap: 8px;
+    gap: 10px;
 
 }
 
-.weatherIcon{
+.weatherIcon {
     width: 40px;
     height: auto;
 
 }
 
-.weatherIcon-btn{
+.weatherIcon-btn {
     display: flex;
     background: white;
     border: thick double white;
     border-radius: 5px;
     padding: 1px;
     cursor: grab;
-    
-} 
+    justify-content: center;
+    width: 50px;
+
+}

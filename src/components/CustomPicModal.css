@@ -1,0 +1,92 @@
+.PICmodalBackground {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(200, 200, 200, 0.50);
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.PICmodalContainer {
+  width: 495px;
+  height: 455px;
+  border-radius: 12px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.PICmodalContainer .title {
+  display: inline-block;
+  text-align: center;
+}
+
+.PICtitleCloseBtn {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.PICtitleCloseBtn button {
+  background-color: transparent;
+  border: none;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.PICmodalContainer .PICbody {
+
+  font-size: 1.7rem;
+  text-align: center;
+  padding: 5px;
+}
+
+input {
+  width: 235px;
+  height: 30px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.PICmodalContainer .PICfooter {
+  flex: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.PICmodalContainer .PICfooter button {
+  width: 150px;
+  height: 45px;
+  margin: 10px;
+  border: none;
+  background-color: cornflowerblue;
+  color: white;
+  border-radius: 8px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+#cancelBtn {
+  background-color: crimson;
+}
+
+h1 {
+  text-align: center;
+}
+
+.PICdiv-image-preview {
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.PICimage-preview{
+  width: 25%;
+}

@@ -4,13 +4,15 @@ import Event from './Event';
 import "./Day.css";
 import Weather from './Weather';
 import CustomTaskModal from './CustomTaskModal';
+import CustomPicModal from './CustomPicModal';
 
 
-function Day({ title, style, id, image, }) {
+function Day({ title, style, currentDay, id, image, }) {
 
     const [board, setBoard] = useState([]);
     const [weatherBoard, setWeatherBoard] = useState();
     const [modalOpen, setModalOpen] = useState(false);
+    const [modalPicOpen, setModalPicOpen] = useState(false);
 
     ///// Local Storage--------------------
     useEffect(() => {
@@ -61,11 +63,18 @@ function Day({ title, style, id, image, }) {
         setModalOpen(null)
     };
 
+    const handlePicSubmit = (eventItem) => {
+        addImageToBoard(eventItem);
+        setModalPicOpen(null)
+    };
+
     const [{ isOver }, drop] = useDrop(() => ({
         accept: "button",
         drop: (eventItem) => {
             if (eventItem.id === 2) {
                 setModalOpen(eventItem)
+            } if (eventItem.id === 1) {
+                setModalPicOpen(eventItem)
             } else {
                 addImageToBoard(eventItem);
             }
@@ -76,7 +85,7 @@ function Day({ title, style, id, image, }) {
     }));
 
     const addImageToBoard = (eventItem) => {
-        console.log('Event ID', eventItem)
+        //console.log('Event ID', eventItem)
         if (eventItem.id && eventItem.type === 'event') {
             setBoard((board) => [...board, eventItem]);
         }
@@ -87,8 +96,12 @@ function Day({ title, style, id, image, }) {
     return (
         <>
             {modalOpen && <CustomTaskModal eventItem={modalOpen} setModalOpen={setModalOpen} onSubmit={handleSubmit} />}
-            <div className='day' style={style}>
-                <div className='day-title'>{title}</div>
+            {modalPicOpen && <CustomPicModal eventItem={modalOpen} setModalPicOpen={setModalPicOpen} onSubmit={handlePicSubmit} />}
+            
+            <div className={`day ${currentDay ? "current-day-day" : ""}`} style={style}>
+            
+                <div className={`day-title ${currentDay ? "current-day-title" : ""}`}>
+                    {title}</div>
 
                 <div ref={dropWeather} className="day-weather">
                     {weatherBoard && <Weather
@@ -97,12 +110,12 @@ function Day({ title, style, id, image, }) {
                 </div>
 
                 <div ref={drop} className="day-events">
-
-                    {board.slice(0, 6).map((event, index) =>
+                    {board.map((event, index) =>
                         <Event
                             key={event.id}
                             index={index}
                             note={event.note}
+                            pic={event.pic}
                             title={event.title}
                             image={event.image} />
                     )}

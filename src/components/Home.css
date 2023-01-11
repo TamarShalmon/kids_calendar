@@ -1,0 +1,65 @@
+.container-home {
+    background: url("/public/img-background.png"), url("/public/sun-backgrond.png");
+    background-repeat: no-repeat;
+    background-color: #a2daf3;
+    background-position: -0.5cm bottom, 23cm top;
+
+}
+
+h1 {
+    font-size: 140px;
+    color: white;
+    padding: 10px;
+    margin: 0 auto;
+}
+
+p {
+    font-size: 40px;
+    color: black;
+    margin: 0;
+    padding: 0 0 0 25px;
+}
+
+img {
+    width: 5.6rem;
+}
+
+h3 {
+    text-align: center;
+    font-size: 30px;
+    margin: 0 auto;
+    padding: 10px 0 20px 0;
+}
+
+.pics-flex {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    padding: 20px 0 0 35px;
+
+}
+
+.container-name {
+    height: 90px;
+    width: 650px;
+    border: none;
+    border-radius: 5px;
+    margin: 0 auto;
+    background: hsl(0deg 0% 91%);
+    box-shadow: inset 0 3px 3px hsl(0deg 0% 0% / 35%), 0 0px 0 hsl(0deg 0% 100% / 15%);
+
+}
+
+.bnt-flex {
+    display: flex;
+    justify-content: center;
+}
+
+.bnt-flex img {
+    width: 3rem;
+    padding: 20px;
+}
+
+.fill-home {
+    height: 100vh;
+}

@@ -6,8 +6,8 @@ function CustomTaskModal({ setModalOpen, onSubmit, eventItem }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    eventItem.note = inputTask;
-    onSubmit(eventItem);
+    const updatedEventItem = {...eventItem, note: inputTask};
+    onSubmit(updatedEventItem);
     setInputTask("");
     setModalOpen(null); 
   }

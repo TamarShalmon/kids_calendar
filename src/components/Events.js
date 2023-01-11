@@ -2,26 +2,33 @@ import React from 'react'
 import Event from './Event'
 import './Events.css'
 import Slider from "react-slick";
-
+import { useState } from 'react';
 
 
 function Events({ events, title }) {
 
-
+    const [showEvents, setShowEvents] = useState(false);
 
 
     const settings = {
         dots: false,
         infinite: false,
         speed: 300,
-        //slidesToShow: 7,
-        slidesToShow: window.innerWidth >= 1400 ? 9 : 7,
+        slidesToShow: 8,
         slidesToScroll: 1,
     };
 
     return (
         <>
-            <div className='flex-events'>
+
+            <div className={showEvents ? 'flex-events visible' : 'flex-events'}>
+                <button
+                    className='toggle-button'
+                    onClick={() => setShowEvents(!showEvents)}>
+                    {/* Toggle Events */}
+                    <img src="https://cdn-icons-png.flaticon.com/512/3388/3388823.png" alt='Toggle Events'/>
+                </button>
+
                 <button >
                     <img src='https://cdn-icons-png.flaticon.com/512/69/69524.png' />
                 </button>

@@ -1,6 +1,6 @@
 .day {
   width: 200px;
-  height: 560px;
+  height: 520px;
   padding: 15px 10px 5px 10px;
   border-radius: 5px;
   text-align: center;
@@ -50,4 +50,14 @@
   border-radius: 5px;
   font-size: 1.35rem;
   font-weight: 700;
+}
+
+.current-day-title {
+  background-color: white;
+}
+
+.current-day-day {
+  background: no-repeat center 33.2rem/6rem url("/public/733800.png");
+  height: 555px;
+  border: solid white 2px;
 }

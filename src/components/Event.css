@@ -1,6 +1,10 @@
+.event-image {
+  width: 2.8rem;
+  margin: 0 auto;
+  pointer-events: none;
+}
 
-  .event-image {
-    width: 2.8rem;
-    margin:0 auto;
-    pointer-events: none;
-  }
+img[src*="blob"] {
+  width: 3.7rem;
+  height: 3.5rem;
+}

@@ -7,7 +7,7 @@ import CustomTaskModal from './CustomTaskModal';
 import CustomPicModal from './CustomPicModal';
 
 
-function Day({ title, style, currentDay, id, image, }) {
+function Day({ events, title, style, currentDay, id, image, }) {
 
     const [board, setBoard] = useState([]);
     const [weatherBoard, setWeatherBoard] = useState();
@@ -64,6 +64,7 @@ function Day({ title, style, currentDay, id, image, }) {
     };
 
     const handlePicSubmit = (eventItem) => {
+        console.log('event', eventItem)
         addImageToBoard(eventItem);
         setModalPicOpen(null)
     };
@@ -73,7 +74,7 @@ function Day({ title, style, currentDay, id, image, }) {
         drop: (eventItem) => {
             if (eventItem.id === 2) {
                 setModalOpen(eventItem)
-            } if (eventItem.id === 1) {
+            } else if (eventItem.id === 1) {
                 setModalPicOpen(eventItem)
             } else {
                 addImageToBoard(eventItem);
@@ -85,6 +86,7 @@ function Day({ title, style, currentDay, id, image, }) {
     }));
 
     const addImageToBoard = (eventItem) => {
+        //console.clear()
         //console.log('Event ID', eventItem)
         if (eventItem.id && eventItem.type === 'event') {
             setBoard((board) => [...board, eventItem]);
@@ -96,10 +98,10 @@ function Day({ title, style, currentDay, id, image, }) {
     return (
         <>
             {modalOpen && <CustomTaskModal eventItem={modalOpen} setModalOpen={setModalOpen} onSubmit={handleSubmit} />}
-            {modalPicOpen && <CustomPicModal eventItem={modalOpen} setModalPicOpen={setModalPicOpen} onSubmit={handlePicSubmit} />}
-            
+            {modalPicOpen && <CustomPicModal eventItem={modalPicOpen} setModalPicOpen={setModalPicOpen} onSubmit={handlePicSubmit} />}
+
             <div className={`day ${currentDay ? "current-day-day" : ""}`} style={style}>
-            
+
                 <div className={`day-title ${currentDay ? "current-day-title" : ""}`}>
                     {title}</div>
 

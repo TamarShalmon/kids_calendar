@@ -21,7 +21,7 @@ function Event({ id, title, image, note, pic }) {
         // style={{ border: isDragging ? "1px solid white" : "0px" }}
         >
 
-            {note ? <p>{note}</p> : (pic ? <img src={pic} /> : <img className='event-image' src={image} />)}
+            {note ? <p>{note}</p> : <img className='event-image' src={pic ? pic : image} />}
             {/* {note ? <p>{note}</p> : <img className='event-image' src={image} />} */}
         </button>
 

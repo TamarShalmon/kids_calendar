@@ -1,8 +1,9 @@
 import React from 'react'
+import { useState } from 'react';
 import Event from './Event'
 import './Events.css'
 import Slider from "react-slick";
-import { useState } from 'react';
+import EraseButtom from './EraseButtom'
 
 
 function Events({ events, title }) {
@@ -42,9 +43,10 @@ function Events({ events, title }) {
                                 image={event.image} />)}
                     </Slider>
                 </div>
-                <button>
-                    <img src='https://cdn-icons-png.flaticon.com/512/3976/3976956.png' />
-                </button>
+                <EraseButtom events={events}/>
+                {/* <button>
+                    <img src='https://cdn-icons-png.flaticon.com/512/3976/3976956.png'/>
+                </button> */}
             </div>
         </>
     )

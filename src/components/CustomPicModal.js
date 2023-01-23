@@ -1,40 +1,36 @@
-import React, { useState } from "react";
+import Slider from '@mui/joy/Slider';
+import React, { useRef, useState } from "react";
+import AvatarEditor from 'react-avatar-editor'
 import "./CustomPicModal.css";
 
-function CustomPicModal({ setModalPicOpen, onSubmit, eventItem }) {
-  const [inputTask, setInputTask] = useState("");
+
+const CustomPicModal = ({ setModalPicOpen, onSubmit, eventItem }) => {
   const [imagePreviewUrl, setImagePreviewUrl] = useState("");
+  const [scale, setScale] = useState(1);
+  const [rotate, setRotate] = useState(0);
 
-  function handleImageChange(e) {
+  const editor = useRef()
+
+  const handleImageChange = (e) => {
     e.preventDefault();
+    const file = e.target.files[0];
+    setImagePreviewUrl(URL.createObjectURL(file));
+  };
 
-    let reader = new FileReader();
-    let file = e.target.files[0];
-
-    reader.onloadend = () => {
-      setImagePreviewUrl(reader.result);
-    }
-
-    reader.readAsDataURL(file)
-  }
-
-  function handlePicSubmit(e) {
+  const handlePicSubmit = async (e) => {
     e.preventDefault();
-    const updatedEventItem = { ...eventItem, pic: inputTask };
-    onSubmit(updatedEventItem);
-    setInputTask("");
+    let canvas = editor.current.getImageScaledToCanvas().toDataURL();
+    let blob = await fetch(canvas).then(r => r.blob());
+    let imgUrl = URL.createObjectURL(blob);
+    onSubmit({ ...eventItem, originalPic: imagePreviewUrl, pic: imgUrl });
     setModalPicOpen(null);
-  }
+  };
 
   return (
     <div className="PICmodalBackground">
       <div className="PICmodalContainer">
         <div className="PICtitleCloseBtn">
-          <button
-            onClick={() => {
-              setModalPicOpen(null);
-            }}
-          >
+          <button onClick={() => setModalPicOpen(null)}>
             X
           </button>
         </div>
@@ -46,20 +42,41 @@ function CustomPicModal({ setModalPicOpen, onSubmit, eventItem }) {
             <input
               type="file"
               required
-              onChange={handleImageChange} />
-              <div className="PICdiv-image-preview">
-            {imagePreviewUrl && (
-              <img src={imagePreviewUrl} alt="Selected Image" className="PICimage-preview" />
-            )}
+              onChange={handleImageChange}
+            />
+            <div className="PICdiv-image-preview">
+
+              {imagePreviewUrl && (
+                <AvatarEditor
+                  ref={editor}
+                  className="PICimage-preview"
+                  image={imagePreviewUrl}
+                  width={200}
+                  height={180}
+                  border={30}
+                  color={[255, 255, 255, 0.6]}
+                  scale={scale}
+                  rotate={rotate}
+                />
+              )}
+            </div>
+            <div className="edit-flex">
+              <img
+                className="rotate-img"
+                onClick={() => setRotate(rotate + 90)}
+                src="/refresh.png" />
+              {/* <Slider 
+                min={1}
+                max={2}
+                step={0.1}
+                value={scale}
+                onChange={(e, newValue) => setScale(newValue)} /> */}
+              <input type="range" min="1" max="2" step="0.1" value={scale} onChange={e => setScale(+e.target.value)} />
             </div>
           </div>
+
           <div className="PICfooter">
-            <button
-              onClick={() => {
-                setModalPicOpen(null);
-              }}
-              id="cancelBtn"
-            >
+            <button onClick={() => setModalPicOpen(null)} id="cancelBtn">
               Cancel
             </button>
             <button type="submit">Submit</button>
@@ -68,6 +85,6 @@ function CustomPicModal({ setModalPicOpen, onSubmit, eventItem }) {
       </div>
     </div>
   );
-}
+};
 
 export default CustomPicModal;

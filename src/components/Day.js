@@ -89,7 +89,7 @@ function Day({ events, title, style, currentDay, id, image, }) {
         //console.clear()
         //console.log('Event ID', eventItem)
         if (eventItem.id && eventItem.type === 'event') {
-            setBoard((board) => [...board, eventItem]);
+            setBoard((board) => [...board, {...eventItem, id:board.length}]);
         }
     };
     /////----------------------------------
@@ -114,6 +114,7 @@ function Day({ events, title, style, currentDay, id, image, }) {
                 <div ref={drop} className="day-events">
                     {board.map((event, index) =>
                         <Event
+                            id={event.id}
                             key={event.id}
                             index={index}
                             note={event.note}

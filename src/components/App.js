@@ -16,7 +16,7 @@ import Home from './Home'
 function App() {
   
   return (
-    // <Home/>
+    //<Home/>
     <DndProvider backend={HTML5Backend}>
 
       <div className='container' >

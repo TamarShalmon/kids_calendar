@@ -89,11 +89,21 @@ function Day({ events, title, style, currentDay, id, image, }) {
         //console.clear()
         //console.log('Event ID', eventItem)
         if (eventItem.id && eventItem.type === 'event') {
-            setBoard((board) => [...board, {...eventItem, id:board.length}]);
+            setBoard((board) => [...board, { ...eventItem, id: board.length }]);
         }
     };
     /////----------------------------------
 
+    const removeBoardItemById = (eraseItemId) => {
+
+        console.log('board before revmoe', board, eraseItemId)
+        setBoard([...board.filter(item => item.id !== eraseItemId)])
+        console.log('board AFTER revmoe', board, eraseItemId)
+        const index = board.findIndex(event => event.id === eraseItemId);
+        if (index !== -1) {
+            setBoard(board.splice(index, 1));
+        }
+    }
 
     return (
         <>
@@ -114,6 +124,7 @@ function Day({ events, title, style, currentDay, id, image, }) {
                 <div ref={drop} className="day-events">
                     {board.map((event, index) =>
                         <Event
+                            removeItem={removeBoardItemById}
                             id={event.id}
                             key={event.id}
                             index={index}

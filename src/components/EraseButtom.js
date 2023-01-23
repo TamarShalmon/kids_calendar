@@ -1,11 +1,7 @@
 import { useDrop } from 'react-dnd';
-import events from '../events';
 
 
-
-function EraseButtom({ events, title, style, id, image, board, setBoard }) {
-
-
+function EraseButtom() {
 
 
     ///// Drag and drop Erase------------
@@ -19,14 +15,9 @@ function EraseButtom({ events, title, style, id, image, board, setBoard }) {
 
     const EraseFromBoard = (eraseItem) => {
         console.log('Event Erase ID before', eraseItem)
-        if (eraseItem.id && eraseItem.type === 'event') {
+        if (eraseItem.id !== undefined && eraseItem.type === 'event') {
             console.log('Event Erase ID after', eraseItem)
-            // const index = board.findIndex(event => event.id === eraseItem.id);
-            // if (index !== -1) {
-            //     board.splice(index, 1);
-            // }
-
-           
+            eraseItem.removeItem(eraseItem.id)
         }
     };
     /////----------------------------------

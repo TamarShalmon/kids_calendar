@@ -2,12 +2,12 @@ import { useState } from 'react'
 import { useDrag } from "react-dnd";
 import "./Event.css";
 
-function Event({ id, title, image, note, pic, removeItem }) {
+function Event({ id, title, image, note, pic, board, setBoard }) {
 
 
     const [{ isDragging }, drag] = useDrag(() => ({
         type: "button",
-        item: { id, title, image, score: 0, type: 'event', removeItem },
+        item: { id, title, image, score: 0, type: 'event', board, setBoard },
         collect: (monitor) => ({
             isDragging: !!monitor.isDragging(),
         }),

@@ -1,18 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useDrop } from 'react-dnd';
 import Event from './Event';
 import "./Day.css";
 import Weather from './Weather';
 import CustomTaskModal from './CustomTaskModal';
 import CustomPicModal from './CustomPicModal';
+import EraseModal from './EraseModal';
+import { ModalEraseContext } from './App'
 
 
-function Day({ events, title, style, currentDay, id, image, }) {
+function Day({ title, style, currentDay }) {
 
     const [board, setBoard] = useState([]);
     const [weatherBoard, setWeatherBoard] = useState();
     const [modalOpen, setModalOpen] = useState(false);
     const [modalPicOpen, setModalPicOpen] = useState(false);
+
 
     ///// Local Storage--------------------
     useEffect(() => {
@@ -89,21 +92,31 @@ function Day({ events, title, style, currentDay, id, image, }) {
         //console.clear()
         //console.log('Event ID', eventItem)
         if (eventItem.id && eventItem.type === 'event') {
-            setBoard((board) => [...board, {...eventItem, id:board.length}]);
+            setBoard((board) => [...board, eventItem]);
         }
     };
     /////----------------------------------
 
-    const removeBoardItemById = (eraseItemId) =>{
-            console.log('444444: ', board)
+    // const removeBoardItemById = (eraseItemId) => {
 
-       setBoard([...board.filter(item => item.id !== eraseItemId)])
-    }
+    //     console.log('board BEFORE remove', board, eraseItemId)
+    //     setBoard([...board.filter(item => item.id !== eraseItemId)])
+    //     console.log('board AFTER remove', board, eraseItemId)
+    // }
+
+    // const removeAllItem = () => {
+    //     // console.log('erase from day', eventItem)
+    //     setBoard([])
+    // }
+
+
 
     return (
         <>
             {modalOpen && <CustomTaskModal eventItem={modalOpen} setModalOpen={setModalOpen} onSubmit={handleSubmit} />}
             {modalPicOpen && <CustomPicModal eventItem={modalPicOpen} setModalPicOpen={setModalPicOpen} onSubmit={handlePicSubmit} />}
+            {/* {modalEraseOpen && <EraseModal eraseItem={modalEraseOpen} setModalEraseOpen={setModalEraseOpen} onSubmit={removeAllItem} />} */}
+
 
             <div className={`day ${currentDay ? "current-day-day" : ""}`} style={style}>
 
@@ -119,10 +132,10 @@ function Day({ events, title, style, currentDay, id, image, }) {
                 <div ref={drop} className="day-events">
                     {board.map((event, index) =>
                         <Event
-                            removeItem={removeBoardItemById}
-                            id={event.id}
-                            key={event.id}
+                            setBoard={setBoard}
+                            board={[...board]}
                             index={index}
+                            id={board.length}
                             note={event.note}
                             pic={event.pic}
                             title={event.title}

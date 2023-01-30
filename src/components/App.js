@@ -1,7 +1,9 @@
 
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { useState } from "react";
+
+import { useState, createContext } from "react";
+
 
 import './App.css';
 import Header from './Header';
@@ -13,19 +15,29 @@ import events from '../events';
 import Home from './Home'
 
 
+export const ModalEraseContext = createContext();
+
 function App() {
   
+  const [modalEraseOpen, setModalEraseOpen] = useState(false);
+  
+
+
+
   return (
     //<Home/>
-    <DndProvider backend={HTML5Backend}>
+    <ModalEraseContext.Provider value={{modalEraseOpen, setModalEraseOpen}}>
+      <DndProvider backend={HTML5Backend}>
 
-      <div className='container' >
-        <Header weatherIcon={weatherIcon} days={days} />
-        <Week days={days} events={events} />
-        <Events className="event-show" events={events}/>
-      </div>
+        <div className='container' >
+          <Header weatherIcon={weatherIcon} days={days} />
+          <Week days={days} events={events}  />
+          <Events className="event-show" events={events} />
+        </div>
 
-    </DndProvider>
+      </DndProvider>
+    </ModalEraseContext.Provider>
+
   );
 }
 

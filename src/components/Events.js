@@ -1,5 +1,5 @@
-import React from 'react'
-import { useState } from 'react';
+import React, { useState } from 'react'
+
 import Event from './Event'
 import './Events.css'
 import Slider from "react-slick";
@@ -7,6 +7,7 @@ import EraseButtom from './EraseButtom'
 
 
 function Events({ events, title }) {
+
 
     const [showEvents, setShowEvents] = useState(false);
 
@@ -27,7 +28,7 @@ function Events({ events, title }) {
                     className='toggle-button'
                     onClick={() => setShowEvents(!showEvents)}>
                     {/* Toggle Events */}
-                    <img src="https://cdn-icons-png.flaticon.com/512/3388/3388823.png" alt='Toggle Events'/>
+                    <img src="https://cdn-icons-png.flaticon.com/512/3388/3388823.png" alt='Toggle Events' />
                 </button>
 
                 <button >
@@ -43,10 +44,7 @@ function Events({ events, title }) {
                                 image={event.image} />)}
                     </Slider>
                 </div>
-                <EraseButtom events={events}/>
-                {/* <button>
-                    <img src='https://cdn-icons-png.flaticon.com/512/3976/3976956.png'/>
-                </button> */}
+                <EraseButtom />
             </div>
         </>
     )

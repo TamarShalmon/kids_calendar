@@ -1,7 +1,11 @@
 import { useDrop } from 'react-dnd';
+import { useContext } from 'react';
+import { ModalEraseContext } from './App'
 
 
 function EraseButtom() {
+
+    const { setModalEraseOpen } = useContext(ModalEraseContext)
 
 
     ///// Drag and drop Erase------------
@@ -13,11 +17,14 @@ function EraseButtom() {
         }),
     }));
 
+    
+
     const EraseFromBoard = (eraseItem) => {
-        console.log('Event Erase ID before', eraseItem)
-        if (eraseItem.id !== undefined && eraseItem.type === 'event') {
-            console.log('Event Erase ID after', eraseItem)
-            eraseItem.removeItem(eraseItem.id)
+        // console.log('Event Erase ID before', eraseItem)
+       // if (eraseItem.id !== undefined && eraseItem.type === 'event')
+        {
+            console.log('Even', eraseItem)
+            eraseItem.setBoard([])
         }
     };
     /////----------------------------------
@@ -27,8 +34,8 @@ function EraseButtom() {
     return (
         <>
 
-            <div ref={dropErase} className="">
-                <button>
+            <div ref={dropErase} onClick={(eraseItem) => setModalEraseOpen(eraseItem)} >
+                <button >
                     <img src='https://cdn-icons-png.flaticon.com/512/3976/3976956.png' />
                 </button>
             </div>

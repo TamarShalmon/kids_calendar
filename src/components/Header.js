@@ -1,12 +1,17 @@
-import React from 'react'
+import { useContext } from 'react'
+import { UsersContext } from './App'
+
 import "./Header.css";
 import Weather from './Weather';
 
 function Header({ weatherIcon, days }) {
+
+   
     const dayOfWeek = new Date().getDay();
 
     return (
         <>
+        
             <div className='header'>
 
                 <div className='hello'>

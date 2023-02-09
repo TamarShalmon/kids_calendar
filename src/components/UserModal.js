@@ -1,14 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { UsersContext } from './App'
+
+
 import "./CustomTaskModal.css";
 
-function CustomTaskModal({ setModalOpen, onSubmit, eventItem }) {
-  const [inputTask, setInputTask] = useState("");
+function UserModal({ setModalOpen, onSubmit, eventItem }) {
+ 
+  //const {inputUser, setInputUser} = useContext(UsersContext);
+    const [inputUser, setInputUser]= useState("")
+
 
   function handleSubmit(e) {
     e.preventDefault();
-    const updatedEventItem = {...eventItem, note: inputTask};
+    const updatedEventItem = {...eventItem, note: inputUser};
     onSubmit(updatedEventItem);
-    setInputTask("");
+    setInputUser("");
     setModalOpen(null); 
   }
 
@@ -35,8 +41,8 @@ function CustomTaskModal({ setModalOpen, onSubmit, eventItem }) {
               required
               minlength="3"
               maxlength="8"
-              value={inputTask}
-              onChange={(e) => setInputTask(e.target.value)}
+              value={inputUser}
+              onChange={(e) => setInputUser(e.target.value)}
             />
           </div>
           <div className="footer">
@@ -56,4 +62,6 @@ function CustomTaskModal({ setModalOpen, onSubmit, eventItem }) {
   );
 }
 
-export default CustomTaskModal;
+export default UserModal;
+
+

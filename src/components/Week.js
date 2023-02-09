@@ -1,49 +1,37 @@
-import {useContext, createContext, useState} from 'react';
-import { ModalEraseContext } from './App'
+import { useContext, createContext, useState } from 'react';
+import { BoardContext } from "../context/BoardContext";
 import Day from './Day';
 import './Week.css';
 import EraseModal from './EraseModal'
+import CustomTaskModal from './CustomTaskModal'
+import CustomPicModal from './CustomPicModal';
 
-export const BoardsContext = createContext();
 
-
-function Week({ days }) {
+function Week() {
+    const { week, modalEraseOpen, modalOpen, modalPicOpen, } = useContext(BoardContext);
 
     const currentDay = new Date().getDay() + 1;
 
-
-    const { modalEraseOpen, setModalEraseOpen } = useContext(ModalEraseContext);
-    const [boards, setBoards] = useState({
-        sunday:[],
-        monday:[],
-    });
-
-
-    const removeAllItem = () => {
-         console.log('erase from week')
-        setBoards({
-            sunday:[],
-            monday:[],
-        })
-    }
-    
     return (
-        
-        <BoardsContext.Provider value={{modalEraseOpen, setModalEraseOpen}}>
-        {modalEraseOpen && <EraseModal eraseItem={modalEraseOpen} setModalEraseOpen={setModalEraseOpen} onSubmit={removeAllItem} />}
-        
-        <div className="week">
-            {days.map((day) => (
-                <Day
-                    key={day.id}
-                    title={day.title}
-                    style={day.style}
-                    currentDay={currentDay === day.id}
-                />
-            ))}
-        </div>
-        </BoardsContext.Provider>
-        
+
+        <>
+            {modalEraseOpen && <EraseModal eraseItem={modalEraseOpen} />}
+            {/* {modalOpen && <CustomTaskModal eventItem={modalOpen} />}
+            {modalPicOpen && <CustomPicModal eventItem={modalPicOpen}  />} */}
+
+
+            <div className="week">
+                {week.map((day) => (
+                    <Day
+                        key={day.id}
+                        eventsList={day.eventsList}
+                        name={day.name}
+                        style={day.style}
+                        currentDay={currentDay === day.id}
+                    />
+                ))}
+            </div>
+        </>
     );
 }
 

@@ -1,20 +1,19 @@
 import "./EraseModal.css";
 import { useContext } from "react";
-import { ModalEraseContext } from './App'
+import {BoardContext} from "../context/BoardContext";
 
 
-function EraseModal({ removeAll, onSubmit }) {
+function EraseModal() {
 
-  const {setModalEraseOpen} = useContext(ModalEraseContext);
+  const { modalEraseToggle, deleteAllEvents } = useContext(BoardContext);
 
 
   function handleSubmit(e) {
     e.preventDefault();
     console.log("tamar");
-    onSubmit(removeAll);
-    setModalEraseOpen(null);
+    deleteAllEvents();
+    modalEraseToggle(null);
   }
-
 
 
   return (
@@ -23,7 +22,7 @@ function EraseModal({ removeAll, onSubmit }) {
         <div className="titleCloseBtn">
           <button
             onClick={() => {
-              setModalEraseOpen(null);
+              modalEraseToggle(null);
             }}
           >
             X
@@ -37,7 +36,7 @@ function EraseModal({ removeAll, onSubmit }) {
           <div className="footer">
             <button
               onClick={() => {
-                setModalEraseOpen(null);
+                modalEraseToggle(null);
               }}
               id="cancelBtn">
               Cancel

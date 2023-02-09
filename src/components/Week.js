@@ -1,4 +1,4 @@
-import { useContext, createContext, useState } from 'react';
+import { useContext, createContext, useState, useEffect } from 'react';
 import { BoardContext } from "../context/BoardContext";
 import Day from './Day';
 import './Week.css';
@@ -12,12 +12,16 @@ function Week() {
 
     const currentDay = new Date().getDay() + 1;
 
+    useEffect(() => {
+        localStorage.setItem('events', JSON.stringify(week));
+    }, [week])
+
     return (
 
         <>
             {modalEraseOpen && <EraseModal eraseItem={modalEraseOpen} />}
-            {/* {modalOpen && <CustomTaskModal eventItem={modalOpen} />}
-            {modalPicOpen && <CustomPicModal eventItem={modalPicOpen}  />} */}
+            {modalOpen && <CustomTaskModal eventItem={modalOpen} />}
+            {modalPicOpen && <CustomPicModal eventItem={modalPicOpen} />}
 
 
             <div className="week">

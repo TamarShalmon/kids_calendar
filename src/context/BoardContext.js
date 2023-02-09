@@ -7,7 +7,9 @@ export const BoardContextProvider = ({ children }) => {
     const [modalOpen, setModalOpen] = useState(false);
     const [modalPicOpen, setModalPicOpen] = useState(false);
 
-    const [week, setWeek] = useState(days)
+    // Init App
+    const initDays = localStorage.getItem('events') ? JSON.parse(localStorage.getItem('events')) : days;
+    const [week, setWeek] = useState(initDays)
 
     const value = useMemo(() => ({
         week,
@@ -15,8 +17,8 @@ export const BoardContextProvider = ({ children }) => {
         modalOpen,
         modalPicOpen,
         modalEraseToggle: (newState) => setModalEraseOpen(newState),
-        modalOpen: (newState) => setModalOpen(newState),
-        modalPicOpen: (newState) => setModalPicOpen(newState),
+        modalOpenToggle: (newState) => setModalOpen(newState),
+        modalPicOpenToggle: (newState) => setModalPicOpen(newState),
         addEvent: (dayName, newEventToAdd) => {
             setWeek((currentWeek) => {
                 return currentWeek.map((day, index) => {

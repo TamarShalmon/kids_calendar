@@ -1,13 +1,16 @@
 import Slider from '@mui/joy/Slider';
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import AvatarEditor from 'react-avatar-editor'
+import { BoardContext } from '../context/BoardContext';
 import "./CustomPicModal.css";
 
 
-const CustomPicModal = ({ setModalPicOpen, onSubmit, eventItem }) => {
+const CustomPicModal = ({ eventItem }) => {
   const [imagePreviewUrl, setImagePreviewUrl] = useState("");
   const [scale, setScale] = useState(1);
   const [rotate, setRotate] = useState(0);
+
+  const { modalPicOpenToggle, addEvent } = useContext(BoardContext);
 
   const editor = useRef()
 
@@ -22,15 +25,15 @@ const CustomPicModal = ({ setModalPicOpen, onSubmit, eventItem }) => {
     let canvas = editor.current.getImageScaledToCanvas().toDataURL();
     let blob = await fetch(canvas).then(r => r.blob());
     let imgUrl = URL.createObjectURL(blob);
-    onSubmit({ ...eventItem, originalPic: imagePreviewUrl, pic: imgUrl });
-    setModalPicOpen(null);
+    addEvent(eventItem.day, { ...eventItem, originalPic: imagePreviewUrl, pic: imgUrl });
+    modalPicOpenToggle(null);
   };
 
   return (
     <div className="PICmodalBackground">
       <div className="PICmodalContainer">
         <div className="PICtitleCloseBtn">
-          <button onClick={() => setModalPicOpen(null)}>
+          <button onClick={() => modalPicOpenToggle(null)}>
             X
           </button>
         </div>
@@ -76,7 +79,7 @@ const CustomPicModal = ({ setModalPicOpen, onSubmit, eventItem }) => {
           </div>
 
           <div className="PICfooter">
-            <button onClick={() => setModalPicOpen(null)} id="cancelBtn">
+            <button onClick={() => modalPicOpenToggle(null)} id="cancelBtn">
               Cancel
             </button>
             <button type="submit">Submit</button>

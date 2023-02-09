@@ -12,7 +12,7 @@ function EraseModal() {
     e.preventDefault();
     console.log("tamar");
     deleteAllEvents();
-    modalEraseToggle(null);
+    modalEraseToggle(false);
   }
 
 
@@ -22,7 +22,7 @@ function EraseModal() {
         <div className="titleCloseBtn">
           <button
             onClick={() => {
-              modalEraseToggle(null);
+              modalEraseToggle(false);
             }}
           >
             X
@@ -36,7 +36,7 @@ function EraseModal() {
           <div className="footer">
             <button
               onClick={() => {
-                modalEraseToggle(null);
+                modalEraseToggle(false);
               }}
               id="cancelBtn">
               Cancel

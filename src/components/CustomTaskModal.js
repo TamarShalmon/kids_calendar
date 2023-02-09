@@ -1,18 +1,20 @@
 import React, { useState, useContext } from "react";
-import {BoardContext} from "../context/BoardContext";
+import { BoardContext } from "../context/BoardContext";
 import "./CustomTaskModal.css";
 
-function CustomTaskModal({ setModalPicOpen, onSubmit, eventItem }) {
+function CustomTaskModal({ eventItem }) {
 
-  const { setModalOpen } = useContext(BoardContext);
   const [inputTask, setInputTask] = useState("");
+
+  const { modalOpenToggle, addEvent } = useContext(BoardContext);
+
 
   function handleSubmit(e) {
     e.preventDefault();
-    const updatedEventItem = {...eventItem, note: inputTask};
-    onSubmit(updatedEventItem);
+    const updatedEventItem = { ...eventItem, note: inputTask };
+    addEvent(eventItem.day, updatedEventItem);
     setInputTask("");
-    setModalOpen(null); 
+    modalOpenToggle(null);
   }
 
   return (
@@ -21,7 +23,7 @@ function CustomTaskModal({ setModalPicOpen, onSubmit, eventItem }) {
         <div className="titleCloseBtn">
           <button
             onClick={() => {
-              setModalOpen(null);
+              modalOpenToggle(null);
             }}
           >
             X
@@ -45,7 +47,7 @@ function CustomTaskModal({ setModalPicOpen, onSubmit, eventItem }) {
           <div className="footer">
             <button
               onClick={() => {
-                setModalOpen(null);
+                modalOpenToggle(null);
               }}
               id="cancelBtn"
             >

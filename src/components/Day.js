@@ -20,7 +20,7 @@ function Day({ name, eventsList, style, currentDay }) {
     ///// Local Storage--------------------
     useEffect(() => {
         if (localStorage.getItem(`${name}-events`)) {
-            // setBoard([...JSON.parse(localStorage.getItem(`${title}-events`))])
+            // eventsList([...JSON.parse(localStorage.getItem(`${name}-events`))])
         }
         if (localStorage.getItem(`${name}-weather`)) {
             setWeatherBoard(JSON.parse(localStorage.getItem(`${name}-weather`)))

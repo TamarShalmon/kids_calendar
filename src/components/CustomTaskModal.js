@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import {BoardContext} from "../context/BoardContext";
 import "./CustomTaskModal.css";
 
-function CustomTaskModal({ setModalOpen, onSubmit, eventItem }) {
+function CustomTaskModal({ setModalPicOpen, onSubmit, eventItem }) {
+
+  const { setModalOpen } = useContext(BoardContext);
   const [inputTask, setInputTask] = useState("");
 
   function handleSubmit(e) {

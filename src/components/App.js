@@ -1,42 +1,30 @@
-
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
-
 import { useState, createContext } from "react";
 
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 import './App.css';
-import Header from './Header';
-import Week from './Week';
-import weatherIcon from '../weatherIcon';
-import days from '../days';
-import Events from './Events';
-import events from '../events';
 import Home from './Home'
+import Calender from "./Calender";
 
-
-export const ModalEraseContext = createContext();
+export const UsersContext = createContext("user");
 
 function App() {
-  
-  const [modalEraseOpen, setModalEraseOpen] = useState(false);
-  
 
+  const [inputUser, setInputUser] = useState("");
 
 
   return (
-    //<Home/>
-    <ModalEraseContext.Provider value={{modalEraseOpen, setModalEraseOpen}}>
-      <DndProvider backend={HTML5Backend}>
+    <UsersContext.Provider value={{ inputUser, setInputUser }}>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/calender" element={<Calender />} />
+          <Route path="*" element={<h1>Hi friend! The page was not found. </h1>} />
+        </Routes>
+      </Router>
+    </UsersContext.Provider>
 
-        <div className='container' >
-          <Header weatherIcon={weatherIcon} days={days} />
-          <Week days={days} events={events}  />
-          <Events className="event-show" events={events} />
-        </div>
 
-      </DndProvider>
-    </ModalEraseContext.Provider>
 
   );
 }

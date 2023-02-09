@@ -1,12 +1,15 @@
 import { useState } from 'react'
+
 import './Home.css';
 import User from './User';
 import UserModal from './UserModal';
+
 
 function Home() {
 
     const [modalOpen, setModalOpen] = useState(false);
     const [users, setUsers] = useState([]);
+
 
 
     const handleSubmit = (nameItem) => {
@@ -15,13 +18,13 @@ function Home() {
     };
 
     const addNameToUsers = (nameItem) => {
-
         if (nameItem) {
             setUsers((users) => [...users, nameItem]);
         }
     };
 
     return (
+
         <>
             {modalOpen && <UserModal setModalOpen={setModalOpen} onSubmit={handleSubmit} />}
 

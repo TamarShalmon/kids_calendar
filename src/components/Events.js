@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 import Event from './Event'
 import './Events.css'
@@ -6,11 +7,12 @@ import Slider from "react-slick";
 import EraseButtom from './EraseButtom'
 
 
-function Events({ events, title }) {
+function Events({ events, title}) {
 
 
     const [showEvents, setShowEvents] = useState(false);
 
+    let navigate = useNavigate();
 
     const settings = {
         dots: false,
@@ -31,7 +33,7 @@ function Events({ events, title }) {
                     <img src="https://cdn-icons-png.flaticon.com/512/3388/3388823.png" alt='Toggle Events' />
                 </button>
 
-                <button >
+                <button onClick={()=> {navigate("/")}}>
                     <img src='https://cdn-icons-png.flaticon.com/512/69/69524.png' />
                 </button>
                 <div className='events'>
@@ -44,7 +46,7 @@ function Events({ events, title }) {
                                 image={event.image} />)}
                     </Slider>
                 </div>
-                <EraseButtom />
+                <EraseButtom/>
             </div>
         </>
     )

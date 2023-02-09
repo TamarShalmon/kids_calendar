@@ -1,46 +1,44 @@
 import { useEffect, useState, useContext } from 'react';
+import { BoardContext } from "../context/BoardContext";
 import { useDrop } from 'react-dnd';
 import Event from './Event';
 import "./Day.css";
 import Weather from './Weather';
 import CustomTaskModal from './CustomTaskModal';
 import CustomPicModal from './CustomPicModal';
-import EraseModal from './EraseModal';
-import { ModalEraseContext } from './App'
 
 
-function Day({ title, style, currentDay }) {
+function Day({ name, eventsList, style, currentDay }) {
 
-    const [board, setBoard] = useState([]);
+    const { addEvent, setModalOpen, setModalPicOpen } = useContext(BoardContext);
+
     const [weatherBoard, setWeatherBoard] = useState();
-    const [modalOpen, setModalOpen] = useState(false);
-    const [modalPicOpen, setModalPicOpen] = useState(false);
+    // const [modalOpen, setModalOpen] = useState(false);
+    // const [modalPicOpen, setModalPicOpen] = useState(false);
 
 
     ///// Local Storage--------------------
     useEffect(() => {
-        if (localStorage.getItem(`${title}-events`)) {
-            setBoard([...JSON.parse(localStorage.getItem(`${title}-events`))])
+        if (localStorage.getItem(`${name}-events`)) {
+            // setBoard([...JSON.parse(localStorage.getItem(`${title}-events`))])
         }
-        if (localStorage.getItem(`${title}-weather`)) {
-            setWeatherBoard(JSON.parse(localStorage.getItem(`${title}-weather`)))
+        if (localStorage.getItem(`${name}-weather`)) {
+            setWeatherBoard(JSON.parse(localStorage.getItem(`${name}-weather`)))
         }
     }, []);
 
     useEffect(() => {
-        if (board.length) {
-            localStorage.setItem(`${title}-events`, JSON.stringify(board))
+        if (eventsList.length) {
+            localStorage.setItem(`${name}-events`, JSON.stringify(eventsList))
         } else {
-            localStorage.removeItem(`${title}-events`)
+            localStorage.removeItem(`${name}-events`)
         }
         if (weatherBoard) {
-            localStorage.setItem(`${title}-weather`, JSON.stringify(weatherBoard))
+            localStorage.setItem(`${name}-weather`, JSON.stringify(weatherBoard))
         } else {
-            localStorage.removeItem(`${title}-weather`)
+            localStorage.removeItem(`${name}-weather`)
         }
-        console.log('board', board)
-        console.log('weatherBoard', weatherBoard)
-    }, [board, weatherBoard]);
+    }, [eventsList, weatherBoard]);
     /////----------------------------------
 
     ///// Drag and drop Weather------------
@@ -61,16 +59,16 @@ function Day({ title, style, currentDay }) {
     /////----------------------------------
 
     ///// Drag and drop Event--------------
-    const handleSubmit = (eventItem) => {
-        addImageToBoard(eventItem);
-        setModalOpen(null)
-    };
+    // const handleSubmit = (eventItem) => {
+    //     addImageToBoard(eventItem);
+    //     setModalOpen(null)
+    // };
 
-    const handlePicSubmit = (eventItem) => {
-        console.log('event', eventItem)
-        addImageToBoard(eventItem);
-        setModalPicOpen(null)
-    };
+    // const handlePicSubmit = (eventItem) => {
+    //     console.log('event', eventItem)
+    //     addImageToBoard(eventItem);
+    //     setModalPicOpen(null)
+    // };
 
     const [{ isOver }, drop] = useDrop(() => ({
         accept: "button",
@@ -80,7 +78,7 @@ function Day({ title, style, currentDay }) {
             } else if (eventItem.id === 1) {
                 setModalPicOpen(eventItem)
             } else {
-                addImageToBoard(eventItem);
+                addImageToBoard(eventItem)
             }
         },
         collect: (monitor) => ({
@@ -89,39 +87,23 @@ function Day({ title, style, currentDay }) {
     }));
 
     const addImageToBoard = (eventItem) => {
-        //console.clear()
-        //console.log('Event ID', eventItem)
         if (eventItem.id && eventItem.type === 'event') {
-            setBoard((board) => [...board, eventItem]);
+            addEvent(name, eventItem);
         }
     };
     /////----------------------------------
 
-    // const removeBoardItemById = (eraseItemId) => {
-
-    //     console.log('board BEFORE remove', board, eraseItemId)
-    //     setBoard([...board.filter(item => item.id !== eraseItemId)])
-    //     console.log('board AFTER remove', board, eraseItemId)
-    // }
-
-    // const removeAllItem = () => {
-    //     // console.log('erase from day', eventItem)
-    //     setBoard([])
-    // }
-
-
 
     return (
         <>
-            {modalOpen && <CustomTaskModal eventItem={modalOpen} setModalOpen={setModalOpen} onSubmit={handleSubmit} />}
-            {modalPicOpen && <CustomPicModal eventItem={modalPicOpen} setModalPicOpen={setModalPicOpen} onSubmit={handlePicSubmit} />}
-            {/* {modalEraseOpen && <EraseModal eraseItem={modalEraseOpen} setModalEraseOpen={setModalEraseOpen} onSubmit={removeAllItem} />} */}
+            {/* {modalOpen && <CustomTaskModal eventItem={modalOpen} setModalOpen={setModalOpen} onSubmit={handleSubmit} />}
+            {modalPicOpen && <CustomPicModal eventItem={modalPicOpen} setModalPicOpen={setModalPicOpen} onSubmit={handlePicSubmit} />} */}
 
 
             <div className={`day ${currentDay ? "current-day-day" : ""}`} style={style}>
 
                 <div className={`day-title ${currentDay ? "current-day-title" : ""}`}>
-                    {title}</div>
+                    {name}</div>
 
                 <div ref={dropWeather} className="day-weather">
                     {weatherBoard && <Weather
@@ -130,18 +112,18 @@ function Day({ title, style, currentDay }) {
                 </div>
 
                 <div ref={drop} className="day-events">
-                    {board.map((event, index) =>
+                    {eventsList.map((event, index) =>
                         <Event
-                            setBoard={setBoard}
-                            board={[...board]}
                             index={index}
-                            id={board.length}
+                            day={name}
+                            id={event.id}
                             note={event.note}
                             pic={event.pic}
-                            title={event.title}
+                            name={event.name}
                             image={event.image} />
                     )}
                 </div>
+
             </div>
         </>
     )

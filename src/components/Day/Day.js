@@ -1,11 +1,9 @@
 import { useEffect, useState, useContext } from 'react';
-import { BoardContext } from "../context/BoardContext";
+import { BoardContext } from "../../context/BoardContext";
 import { useDrop } from 'react-dnd';
-import Event from './Event';
+import Event from '../../components/Event/Event';
 import "./Day.css";
-import Weather from './Weather';
-import CustomTaskModal from './CustomTaskModal';
-import CustomPicModal from './CustomPicModal';
+import Weather from '../Weather/Weather';
 
 
 function Day({ name, eventsList, style, currentDay }) {

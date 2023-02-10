@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-import Event from './Event'
+import Event from '../../../../components/Event/Event'
 import './Events.css'
 import Slider from "react-slick";
-import EraseButtom from './EraseButtom'
+import EraseButtom from '../../../../components/EraseButtom/EraseButtom'
 
 
 function Events({ events, title}) {

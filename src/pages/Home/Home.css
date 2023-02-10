@@ -1,5 +1,5 @@
 .container-home {
-    background: url("/public/img-background.png"), url("/public/sun-backgrond.png");
+    background: url("/src/assets/images/img-background.png"), url("/src/assets/images/sun-backgrond.png");
     background-repeat: no-repeat;
     background-color: #a2daf3;
     background-position: -0.5cm bottom, right top;

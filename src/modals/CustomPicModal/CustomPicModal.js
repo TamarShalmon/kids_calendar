@@ -1,7 +1,7 @@
 import Slider from '@mui/joy/Slider';
 import React, { useContext, useRef, useState } from "react";
 import AvatarEditor from 'react-avatar-editor'
-import { BoardContext } from '../context/BoardContext';
+import { BoardContext } from '../../context/BoardContext';
 import "./CustomPicModal.css";
 
 

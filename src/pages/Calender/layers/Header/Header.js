@@ -1,8 +1,6 @@
-import { useContext } from 'react'
-import { UsersContext } from './App'
 
 import "./Header.css";
-import Weather from './Weather';
+import Weather from '../../../../components/Weather/Weather';
 
 function Header({ weatherIcon, days }) {
 

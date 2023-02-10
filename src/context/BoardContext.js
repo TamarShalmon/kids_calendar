@@ -1,5 +1,5 @@
 import { createContext, useMemo, useState } from "react";
-import days from "../days";
+import days from '../assets/data/days'
 export const BoardContext = createContext({});
 
 export const BoardContextProvider = ({ children }) => {

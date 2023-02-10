@@ -1,6 +1,6 @@
 import { useDrop } from 'react-dnd';
 import { useContext } from 'react';
-import {BoardContext} from "../context/BoardContext";
+import {BoardContext} from "../../context/BoardContext";
 
 
 function EraseButtom() {

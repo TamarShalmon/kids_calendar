@@ -3,7 +3,7 @@ import { useState, createContext } from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 import './App.css';
-import Home from './pages/Home'
+import Home from './pages/Home/Home'
 import Calender from "./pages/Calender/Calender";
 
 export const UsersContext = createContext("user");

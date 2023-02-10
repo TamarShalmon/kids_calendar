@@ -1,8 +1,8 @@
 import { useState } from 'react'
 
 import './Home.css';
-import User from './User';
-import UserModal from './UserModal';
+import User from '../../components/User/User';
+import UserModal from '../../modals/UserModal/UserModal';
 
 
 function Home() {

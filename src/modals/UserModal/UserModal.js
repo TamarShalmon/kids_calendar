@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
-import { UsersContext } from './App'
+import { UsersContext } from '../../context/BoardContext'
 
 
-import "./CustomTaskModal.css";
+import "../CustomTaskModal/CustomTaskModal.css";
 
 function UserModal({ setModalOpen, onSubmit, eventItem }) {
  

@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { BoardContext } from "../context/BoardContext";
+import { BoardContext } from "../../context/BoardContext";
 import "./CustomTaskModal.css";
 
 function CustomTaskModal({ eventItem }) {

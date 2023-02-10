@@ -1,10 +1,10 @@
 import { useContext, createContext, useState, useEffect } from 'react';
-import { BoardContext } from "../context/BoardContext";
-import Day from './Day';
+import { BoardContext } from "../../../../context/BoardContext";
+import Day from '../../../../components/Day/Day';
 import './Week.css';
-import EraseModal from './EraseModal'
-import CustomTaskModal from './CustomTaskModal'
-import CustomPicModal from './CustomPicModal';
+import EraseModal from '../../../../modals/EraseModal/EraseModal'
+import CustomTaskModal from '../../../../modals/CustomTaskModal/CustomTaskModal'
+import CustomPicModal from '../../../../modals/CustomPicModal/CustomPicModal';
 
 
 function Week() {

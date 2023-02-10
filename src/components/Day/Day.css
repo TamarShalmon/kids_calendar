@@ -11,7 +11,7 @@
 
 .day-weather {
   height: 65px;
-  background: no-repeat center/3rem url("/public/2480626.png");
+  background: no-repeat center/3rem url("/src/assets/images/2480626.png");
   display: flex;
   justify-content: center;
 }
@@ -57,7 +57,7 @@
 }
 
 .current-day-day {
-  background: no-repeat center 33.2rem/6rem url("/public/733800.png");
+  background: no-repeat center 33.2rem/6rem url("/src/assets/images/733800.png");
   height: 555px;
   border: solid white 2px;
 }

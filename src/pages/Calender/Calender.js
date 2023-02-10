@@ -3,12 +3,13 @@ import { useState, createContext, useContext } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
-import Header from './Header';
-import Week from './Week';
-import weatherIcon from '../weatherIcon';
-import days from '../days';
-import Events from './Events';
-import events from '../events';
+import Header from './layers/Header'
+
+import Week from './layers/Week';
+import weatherIcon from '../../assets/data/weatherIcon';
+import days from '../../assets/data/days';
+import Events from './layers/Events/Events';
+import events from '../../events';
 
 
 

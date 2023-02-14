@@ -1,7 +1,8 @@
-import { useContext, createContext, useState, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { BoardContext } from "../../../../context/BoardContext";
-import Day from '../../../../components/Day/Day';
+
 import './Week.css';
+import Day from '../../../../components/Day/Day';
 import EraseModal from '../../../../modals/EraseModal/EraseModal'
 import CustomTaskModal from '../../../../modals/CustomTaskModal/CustomTaskModal'
 import CustomPicModal from '../../../../modals/CustomPicModal/CustomPicModal';
@@ -9,6 +10,7 @@ import CustomPicModal from '../../../../modals/CustomPicModal/CustomPicModal';
 
 function Week() {
     const { week, modalEraseOpen, modalOpen, modalPicOpen, } = useContext(BoardContext);
+
 
     const currentDay = new Date().getDay() + 1;
 
@@ -29,6 +31,7 @@ function Week() {
                     <Day
                         key={day.id}
                         eventsList={day.eventsList}
+                        weatherDay={day.weatherDay}
                         name={day.name}
                         style={day.style}
                         currentDay={currentDay === day.id}

@@ -1,33 +1,15 @@
 import { useEffect, useState, useContext } from 'react';
 import { BoardContext } from "../../context/BoardContext";
+
 import { useDrop } from 'react-dnd';
 import Event from '../../components/Event/Event';
 import "./Day.css";
 import Weather from '../Weather/Weather';
 
 
-function Day({ name, eventsList, style, currentDay }) {
+function Day({ name, eventsList, weatherDay, style, currentDay , setWeek}) {
 
-    const { addEvent, modalPicOpenToggle, modalOpenToggle } = useContext(BoardContext);
-
-    const [weatherBoard, setWeatherBoard] = useState();
-
-
-    ///// Local Storage--------------------
-    useEffect(() => {
-        if (localStorage.getItem(`${name}-weather`)) {
-            setWeatherBoard(JSON.parse(localStorage.getItem(`${name}-weather`)))
-        }
-    }, []);
-
-    useEffect(() => {
-        if (weatherBoard) {
-            localStorage.setItem(`${name}-weather`, JSON.stringify(weatherBoard))
-        } else {
-            localStorage.removeItem(`${name}-weather`)
-        }
-    }, [eventsList, weatherBoard]);
-    /////----------------------------------
+    const { addEvent, modalPicOpenToggle, modalOpenToggle, addWeather } = useContext(BoardContext);
 
     ///// Drag and drop Weather------------
     const [{ isOverWeather }, dropWeather] = useDrop(() => ({
@@ -40,7 +22,7 @@ function Day({ name, eventsList, style, currentDay }) {
 
     const addWeatherToBoard = (weatherItem) => {
         if (weatherItem.id && weatherItem.type === 'weather') {
-            setWeatherBoard(weatherItem);
+            addWeather(name, weatherItem);
         }
     };
     /////----------------------------------
@@ -78,9 +60,12 @@ function Day({ name, eventsList, style, currentDay }) {
                     {name}</div>
 
                 <div ref={dropWeather} className="day-weather">
-                    {weatherBoard && <Weather
-                        key={weatherBoard.id}
-                        image={weatherBoard.image} />}
+                    {weatherDay && <Weather
+                        id={weatherDay.id}
+                        day={name}
+                        key={weatherDay.id}
+                        name={weatherDay.name}
+                        image={weatherDay.image} />}
                 </div>
 
                 <div ref={drop} className="day-events">

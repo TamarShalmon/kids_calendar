@@ -9,6 +9,7 @@ export const BoardContextProvider = ({ children }) => {
 
     // Init App
     const initDays = localStorage.getItem('events') ? JSON.parse(localStorage.getItem('events')) : days;
+
     const [week, setWeek] = useState(initDays)
 
     const value = useMemo(() => ({
@@ -16,9 +17,41 @@ export const BoardContextProvider = ({ children }) => {
         modalEraseOpen,
         modalOpen,
         modalPicOpen,
+        
         modalEraseToggle: (newState) => setModalEraseOpen(newState),
         modalOpenToggle: (newState) => setModalOpen(newState),
         modalPicOpenToggle: (newState) => setModalPicOpen(newState),
+
+        addWeather: (dayName, weatherToAdd) => {
+            setWeek((currentWeek) => {
+                return currentWeek.map((day, index) => {
+                    if (day.name === dayName) {
+                        return {
+                            ...day,
+                            weatherDay: weatherToAdd
+                        }
+                    } else {
+                        return day
+                    }
+                });
+            });
+        },
+
+        deleteWeather: (dayName) => {
+            setWeek((currentWeek) => {
+                return currentWeek.map((day, index) => {
+                    if (day.name === dayName) {
+                        return {
+                            ...day,
+                            weatherDay: null
+                        }
+                    } else {
+                        return day
+                    }
+                });
+            });
+        },
+        
         addEvent: (dayName, newEventToAdd) => {
             setWeek((currentWeek) => {
                 return currentWeek.map((day, index) => {
@@ -33,6 +66,7 @@ export const BoardContextProvider = ({ children }) => {
                 });
             });
         },
+
         deleteEvent: (dayName, eventId) => {
             setWeek((currentWeek) => {
                 return currentWeek.map((day, index) => {
@@ -47,7 +81,8 @@ export const BoardContextProvider = ({ children }) => {
                 });
             });
         },
-        deleteAllEvents: () => setWeek(days)
+        deleteAllEvents: () => setWeek(days),
+
     }), [week, modalEraseOpen, modalOpen, modalPicOpen]);
 
     return (

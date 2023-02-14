@@ -3,11 +3,11 @@ import React from 'react'
 import { useDrag } from "react-dnd";
 import "./Weather.css";
 
-function Weather({ id, image, style }) {
+function Weather({ day, id, image, style }) {
 
     const [{ isDragging }, drag] = useDrag(() => ({
         type: "button",
-        item: { id, image, type: 'weather' },
+        item: { day, id, image, type: 'weather' },
         collect: (monitor) => ({
             isDragging: !!monitor.isDragging(),
         }),

@@ -1,10 +1,14 @@
+import { useState, useContext, useEffect } from 'react'
+import { UserContext } from "../../../../context/UserContext";
 
 import "./Header.css";
 import Weather from '../../../../components/Weather/Weather';
 
 function Header({ weatherIcon, days }) {
 
-   
+    const { users } = useContext(UserContext);
+    let userName = users.filter((user) => user.active)[0].name;
+    
     const dayOfWeek = new Date().getDay();
 
     return (
@@ -13,7 +17,7 @@ function Header({ weatherIcon, days }) {
             <div className='header'>
 
                 <div className='hello'>
-                    Hello user,<br />
+                    Hello {userName},<br />
                     L'ets plan your week!
                 </div>
 

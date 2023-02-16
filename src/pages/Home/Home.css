@@ -65,6 +65,7 @@ img {
 .bnt-flex img {
     width: 3rem;
     padding: 20px;
+    cursor: pointer;
 }
 
 .fill-home {

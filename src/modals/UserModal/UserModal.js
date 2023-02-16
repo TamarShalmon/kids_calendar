@@ -1,21 +1,21 @@
 import React, { useState, useContext } from "react";
-import { UsersContext } from '../../context/BoardContext'
+import { UserContext } from '../../context/UserContext'
 
 
 import "../CustomTaskModal/CustomTaskModal.css";
 
-function UserModal({ setModalOpen, onSubmit, eventItem }) {
- 
-  //const {inputUser, setInputUser} = useContext(UsersContext);
-    const [inputUser, setInputUser]= useState("")
+function UserModal({ userItem }) {
+
+  const { modalOpenToggle, addUser } = useContext(UserContext);
+
+  const [inputUser, setInputUser] = useState("")
 
 
   function handleSubmit(e) {
     e.preventDefault();
-    const updatedEventItem = {...eventItem, note: inputUser};
-    onSubmit(updatedEventItem);
+    addUser(inputUser);
     setInputUser("");
-    setModalOpen(null); 
+    modalOpenToggle(null);
   }
 
   return (
@@ -24,7 +24,7 @@ function UserModal({ setModalOpen, onSubmit, eventItem }) {
         <div className="titleCloseBtn">
           <button
             onClick={() => {
-              setModalOpen(null);
+              modalOpenToggle(null);
             }}
           >
             X
@@ -48,7 +48,7 @@ function UserModal({ setModalOpen, onSubmit, eventItem }) {
           <div className="footer">
             <button
               onClick={() => {
-                setModalOpen(null);
+                modalOpenToggle(null);
               }}
               id="cancelBtn"
             >

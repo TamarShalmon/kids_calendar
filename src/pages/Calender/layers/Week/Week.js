@@ -1,5 +1,6 @@
 import { useContext, useEffect } from 'react';
 import { BoardContext } from "../../../../context/BoardContext";
+import { UserContext } from "../../../../context/UserContext";
 
 import './Week.css';
 import Day from '../../../../components/Day/Day';
@@ -10,12 +11,14 @@ import CustomPicModal from '../../../../modals/CustomPicModal/CustomPicModal';
 
 function Week() {
     const { week, modalEraseOpen, modalOpen, modalPicOpen, } = useContext(BoardContext);
-
+    const { users } = useContext(UserContext);
+    let activeUserId = users.filter((user) => user.active)[0].id;
 
     const currentDay = new Date().getDay() + 1;
 
     useEffect(() => {
-        localStorage.setItem('events', JSON.stringify(week));
+        console.log('week', week)
+        localStorage.setItem(activeUserId, JSON.stringify(week));
     }, [week])
 
     return (

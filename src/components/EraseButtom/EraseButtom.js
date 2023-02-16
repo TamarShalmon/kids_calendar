@@ -25,19 +25,6 @@ function EraseButtom() {
         }),
     }));
 
-
-
-    // const EraseFromBoard = (eraseItem) => {
-    //     // console.log('Event Erase ID before', eraseItem)
-    //     if (eraseItem.id !== undefined && eraseItem.type === 'event') {
-    //         console.log('Even', eraseItem)
-    //         deleteEvent(eraseItem.day, eraseItem.id);
-    //     }
-        // else if (weatherItem.id !== undefined && weatherItem.type === 'weather') {
-        //     console.log('Weather', weatherItem)
-        //     deleteWeather(weatherItem.day, weatherItem.id);
-        // }
-//  };
     /////----------------------------------
 
 

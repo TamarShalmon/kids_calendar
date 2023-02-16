@@ -4,14 +4,17 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BoardContextProvider } from "./context/BoardContext";
+import { UserContextProvider } from './context/UserContext';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BoardContextProvider>
-      <App />
-    </BoardContextProvider>
+    <UserContextProvider>
+      <BoardContextProvider>
+        <App />
+      </BoardContextProvider>
+    </UserContextProvider>
 
   </React.StrictMode>
 );

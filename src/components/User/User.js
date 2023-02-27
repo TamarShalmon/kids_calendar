@@ -5,7 +5,7 @@ import "./User.css";
 import { UserContext } from "../../context/UserContext";
 import { BoardContext } from '../../context/BoardContext';
 
-function User({ id, name }) {
+function User({ userId, name }) {
     const { selectUser } = useContext(UserContext);
     const { setWeekbyUser } = useContext(BoardContext)
 
@@ -14,8 +14,8 @@ function User({ id, name }) {
     return (
 
         <button id='user' onClick={() => { 
-            selectUser(id)
-            setWeekbyUser(id)
+            selectUser(userId)
+            setWeekbyUser(userId)
             navigate("/calender")
             }}>
             {name}

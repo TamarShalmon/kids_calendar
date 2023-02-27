@@ -40,14 +40,14 @@ function Home() {
                         <div key={user.id} className='user-wrapper'>
                             <User
                                 key={user.id}
-                                id={user.id}
+                                userId={user.id}
                                 name={user.name}
                                 onDelete={handleUserDelete}
                                 showDeleteIcon={showDeleteIcons}
                             />
                             {showDeleteIcons && (
                                 <div className='delete-icon-wrapper' onClick={() => handleUserDelete(user.id)}>
-                                    <img src='https://cdn-icons-png.flaticon.com/512/753/753345.png' alt='Delete' />
+                                    <img src='https://cdn-icons-png.flaticon.com/512/1828/1828843.png' alt='Delete' />
                                 </div>
                             )}
                         </div>

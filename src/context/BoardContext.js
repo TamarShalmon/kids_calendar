@@ -1,5 +1,6 @@
 import { createContext, useMemo, useState } from "react";
 import days from '../assets/data/days'
+import update from "immutability-helper";
 export const BoardContext = createContext({});
 
 export const BoardContextProvider = ({ children }) => {
@@ -11,10 +12,11 @@ export const BoardContextProvider = ({ children }) => {
 
     const value = useMemo(() => ({
         week,
+        setWeek,
         modalEraseOpen,
         modalOpen,
         modalPicOpen,
-        
+
         modalEraseToggle: (newState) => setModalEraseOpen(newState),
         modalOpenToggle: (newState) => setModalOpen(newState),
         modalPicOpenToggle: (newState) => setModalPicOpen(newState),
@@ -23,6 +25,26 @@ export const BoardContextProvider = ({ children }) => {
             // Init App
             const initDays = localStorage.getItem(userId) ? JSON.parse(localStorage.getItem(userId)) : days;
             setWeek(initDays)
+        },
+
+        setEventsOfDay: (name, dragIndex, hoverIndex) => {
+            setWeek((currentWeek) => {
+                return currentWeek.map((day) => {
+                    if (day.name === name) {
+                        return {
+                            ...day,
+                            eventsList: update(day.eventsList, {
+                                $splice: [
+                                    [dragIndex, 1],
+                                    [hoverIndex, 0, day.eventsList[dragIndex]],
+                                ],
+                            })
+                        }
+                    } else {
+                        return day
+                    }
+                })
+            })
         },
 
         addWeather: (dayName, weatherToAdd) => {
@@ -54,14 +76,14 @@ export const BoardContextProvider = ({ children }) => {
                 });
             });
         },
-        
+
         addEvent: (dayName, newEventToAdd) => {
             setWeek((currentWeek) => {
                 return currentWeek.map((day, index) => {
                     if (day.name === dayName) {
                         return {
                             ...day,
-                            eventsList: [...day.eventsList, { ...newEventToAdd, day: dayName, id: day.eventsList.length }]
+                            eventsList: [...day.eventsList, { ...newEventToAdd, day: dayName, id: day.eventsList.length + 100 }]
                         }
                     } else {
                         return day
@@ -84,6 +106,7 @@ export const BoardContextProvider = ({ children }) => {
                 });
             });
         },
+        
         deleteAllEvents: () => setWeek(days),
 
     }), [week, modalEraseOpen, modalOpen, modalPicOpen]);

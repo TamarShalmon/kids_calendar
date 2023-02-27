@@ -18,43 +18,32 @@ export const UserContextProvider = ({ children }) => {
         users,
         modalOpen,
         showDeleteIcons,
-        modalOpenToggle: (newState) => setModalOpen(newState),
-        deleteIconsToggle: (newState) => setShowDeleteIcons(newState),
-        addUser: (newUserToAdd) => {
-            console.log(newUserToAdd)
 
+        modalOpenToggle: (newState) => setModalOpen(newState),
+
+        deleteIconsToggle: (newState) => setShowDeleteIcons(newState),
+
+        addUser: (newUserToAdd) => {
             if (newUserToAdd) {
-                setUsers((users) => [...users, { name: newUserToAdd, id: users.length, week: days }]);
+                setUsers((users) => [
+                    ...users,
+                    { name: newUserToAdd, id: users.length, active: false }
+                ]);
             }
         },
+
         selectUser: (userId) => {
-            setUsers((users) => users.map((user) => {
-                if (user.id === userId) {
-                    return {
-                        ...user,
-                        active: true
-                    }
-                } else {
-                    return {
-                        ...user,
-                        active: false
-                    }
-                }
-            }))
-        },
-        logoutUser: () => {
             setUsers((users) => users.map((user) => {
                 return {
                     ...user,
-                    active: false
+                    active: user.id === userId
                 }
             }))
         },
+
         deleteUser: (userId) => {
             setUsers((users) => users.filter((user) => user.id !== userId));
-        }
-
-
+        },
 
     }), [users, modalOpen, showDeleteIcons]);
 

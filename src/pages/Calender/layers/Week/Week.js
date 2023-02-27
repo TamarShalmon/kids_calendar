@@ -17,7 +17,11 @@ function Week() {
     const currentDay = new Date().getDay() + 1;
 
     useEffect(() => {
-        console.log('week', week)
+        localStorage.setItem('users', JSON.stringify(users));
+    }, [users])
+
+    useEffect(() => {
+        console.log('###')
         localStorage.setItem(activeUserId, JSON.stringify(week));
     }, [week])
 

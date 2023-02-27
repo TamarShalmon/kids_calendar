@@ -1,4 +1,4 @@
-import { useEffect, useContext } from 'react'
+import { useEffect, useContext, useState } from 'react'
 import { UserContext } from "../../context/UserContext";
 
 import './Home.css';
@@ -7,11 +7,17 @@ import UserModal from '../../modals/UserModal/UserModal';
 
 function Home() {
 
-    const { modalOpen, modalOpenToggle, users } = useContext(UserContext);
+    const { modalOpen, modalOpenToggle, users, showDeleteIcons, deleteIconsToggle, deleteUser } = useContext(UserContext);
 
     useEffect(() => {
         localStorage.setItem('users', JSON.stringify(users));
     }, [users])
+
+
+    const handleUserDelete = (userId) => {
+        deleteUser(userId);
+        deleteIconsToggle(false);
+    }
 
     return (
 
@@ -30,18 +36,27 @@ function Home() {
                 <h1 className='h1-home'>My week planner</h1>
                 <h3 className='h3-home'>This is my name:</h3>
                 <div className='container-name'>
-                    {users.map((user, index) =>
-                        <User
-                            key={user.id}
-                            id={user.id}
-                            name={user.name}
-                        />
+                    {users.slice(0, 4).map((user, index) =>
+                        <div key={user.id} className='user-wrapper'>
+                            <User
+                                key={user.id}
+                                id={user.id}
+                                name={user.name}
+                                onDelete={handleUserDelete}
+                                showDeleteIcon={showDeleteIcons}
+                            />
+                            {showDeleteIcons && (
+                                <div className='delete-icon-wrapper' onClick={() => handleUserDelete(user.id)}>
+                                    <img src='https://cdn-icons-png.flaticon.com/512/753/753345.png' alt='Delete' />
+                                </div>
+                            )}
+                        </div>
                     )}
                 </div>
                 <div className='bnt-flex'>
-                    <img src="/add.png" alt='pic-home' onClick={(userItem) => modalOpenToggle({ ...userItem })} />
-                    <img src="/recycle-bin.png" alt='pic-home' />
-                    <img src="/settings.png" alt='pic-home' />
+                    <img src={`/images/add.png`} alt='pic-home' onClick={(userItem) => modalOpenToggle({ ...userItem })} />
+                    <img src={`/images/recycle-bin.png`} alt='pic-home' onClick={() => deleteIconsToggle(!showDeleteIcons)} />
+                    <img src={`/images/settings.png`} alt='pic-home' />
                 </div>
 
             </div >

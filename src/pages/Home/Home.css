@@ -71,3 +71,19 @@ img {
 .fill-home {
     height: 100vh;
 }
+
+
+.user-wrapper {
+    position: relative;
+}
+
+.delete-icon-wrapper {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+}
+
+.delete-icon-wrapper img {
+    width: 1.5rem;    
+    cursor: pointer;
+}

@@ -1,5 +1,7 @@
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState, useContext, useCallback } from 'react';
 import { BoardContext } from "../../context/BoardContext";
+import update from 'immutability-helper'
+
 
 import { useDrop } from 'react-dnd';
 import Event from '../../components/Event/Event';
@@ -7,9 +9,9 @@ import "./Day.css";
 import Weather from '../Weather/Weather';
 
 
-function Day({ name, eventsList, weatherDay, style, currentDay , setWeek}) {
+function Day({ name, eventsList, weatherDay, style, currentDay, }) {
 
-    const { addEvent, modalPicOpenToggle, modalOpenToggle, addWeather } = useContext(BoardContext);
+    const { addEvent, modalPicOpenToggle, modalOpenToggle, addWeather, setEventsOfDay } = useContext(BoardContext);
 
     ///// Drag and drop Weather------------
     const [{ isOverWeather }, dropWeather] = useDrop(() => ({
@@ -32,6 +34,7 @@ function Day({ name, eventsList, weatherDay, style, currentDay , setWeek}) {
     const [{ isOver }, drop] = useDrop(() => ({
         accept: "button",
         drop: (eventItem) => {
+            if (eventItem.type !== 'event' || eventItem.id > 99) return;
             if (eventItem.id === 2) {
                 modalOpenToggle({ ...eventItem, day: name })
             } else if (eventItem.id === 1) {
@@ -51,6 +54,13 @@ function Day({ name, eventsList, weatherDay, style, currentDay , setWeek}) {
         }
     };
     /////----------------------------------
+
+    ///// Move Drag and drop Event---------
+    const moveCard = useCallback((dragIndex, hoverIndex) => {
+        setEventsOfDay(name, dragIndex, hoverIndex);
+    }, [])
+    /////----------------------------------
+
 
 
     return (
@@ -72,6 +82,7 @@ function Day({ name, eventsList, weatherDay, style, currentDay , setWeek}) {
                 <div ref={drop} className="day-events">
                     {eventsList.map((event, index) =>
                         <Event
+                            moveCard={moveCard}
                             index={index}
                             day={name}
                             id={event.id}

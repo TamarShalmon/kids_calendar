@@ -96,3 +96,7 @@ h1 {
   width: 50px;
   cursor: pointer;
 }
+
+#font-file{
+  font-family: 'Rubik', sans-serif;
+}

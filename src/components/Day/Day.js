@@ -28,6 +28,7 @@ function Day({ name, eventsList, weatherDay, style, currentDay , setWeek}) {
     /////----------------------------------
 
 
+    ///// Drag and drop Event------------
     const [{ isOver }, drop] = useDrop(() => ({
         accept: "button",
         drop: (eventItem) => {
@@ -36,7 +37,7 @@ function Day({ name, eventsList, weatherDay, style, currentDay , setWeek}) {
             } else if (eventItem.id === 1) {
                 modalPicOpenToggle({ ...eventItem, day: name })
             } else {
-                addImageToBoard(eventItem)
+                addEventImageToBoard(eventItem)
             }
         },
         collect: (monitor) => ({
@@ -44,7 +45,7 @@ function Day({ name, eventsList, weatherDay, style, currentDay , setWeek}) {
         }),
     }));
 
-    const addImageToBoard = (eventItem) => {
+    const addEventImageToBoard = (eventItem) => {
         if (eventItem.id && eventItem.type === 'event') {
             addEvent(name, eventItem);
         }

@@ -1,7 +1,8 @@
 #user{
-    width: 190px;
+    width: 150px;
     height: 70px;
     font-size: 30px;
+    cursor: pointer;
 }
 
 p {

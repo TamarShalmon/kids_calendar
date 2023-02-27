@@ -7,7 +7,7 @@ import Slider from "react-slick";
 import EraseButtom from '../../../../components/EraseButtom/EraseButtom'
 
 
-function Events({ events, title}) {
+function Events({ events, title }) {
 
 
     const [showEvents, setShowEvents] = useState(false);
@@ -29,11 +29,12 @@ function Events({ events, title}) {
                 <button
                     className='toggle-button'
                     onClick={() => setShowEvents(!showEvents)}>
-                    {/* Toggle Events */}
-                    <img src="https://cdn-icons-png.flaticon.com/512/3388/3388823.png" alt='Toggle Events' />
+                    <img src={showEvents ? 'https://cdn-icons-png.flaticon.com/512/3416/3416079.png' : 'https://cdn-icons-png.flaticon.com/512/3388/3388823.png'}
+                        alt='Toggle Events' />
+
                 </button>
 
-                <button onClick={()=> {navigate("/")}}>
+                <button onClick={() => { navigate("/") }}>
                     <img src='https://cdn-icons-png.flaticon.com/512/69/69524.png' />
                 </button>
                 <div className='events'>
@@ -46,7 +47,7 @@ function Events({ events, title}) {
                                 image={event.image} />)}
                     </Slider>
                 </div>
-                <EraseButtom/>
+                <EraseButtom />
             </div>
         </>
     )

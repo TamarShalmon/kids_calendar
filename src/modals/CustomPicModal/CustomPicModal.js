@@ -43,8 +43,10 @@ const CustomPicModal = ({ eventItem }) => {
         <form onSubmit={handlePicSubmit}>
           <div className="PICbody">
             <input
-              type="file"
               required
+              type="file"
+              accept=".jpg, .jpeg, .png"
+              id='font-file'
               onChange={handleImageChange}
             />
             <div className="PICdiv-image-preview">
@@ -67,7 +69,7 @@ const CustomPicModal = ({ eventItem }) => {
               <img
                 className="rotate-img"
                 onClick={() => setRotate(rotate + 90)}
-                src="/refresh.png" />
+                src={`/images/refresh.png`} /> 
               {/* <Slider 
                 min={1}
                 max={2}

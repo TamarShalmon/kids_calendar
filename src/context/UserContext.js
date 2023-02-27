@@ -5,6 +5,8 @@ export const UserContext = createContext({});
 
 export const UserContextProvider = ({ children }) => {
     const [modalOpen, setModalOpen] = useState(false);
+    const [showDeleteIcons, setShowDeleteIcons] = useState(false);
+
 
 
     // InitApp
@@ -15,7 +17,9 @@ export const UserContextProvider = ({ children }) => {
     const value = useMemo(() => ({
         users,
         modalOpen,
+        showDeleteIcons,
         modalOpenToggle: (newState) => setModalOpen(newState),
+        deleteIconsToggle: (newState) => setShowDeleteIcons(newState),
         addUser: (newUserToAdd) => {
             console.log(newUserToAdd)
 
@@ -45,11 +49,14 @@ export const UserContextProvider = ({ children }) => {
                     active: false
                 }
             }))
+        },
+        deleteUser: (userId) => {
+            setUsers((users) => users.filter((user) => user.id !== userId));
         }
 
 
 
-    }), [users, modalOpen,]);
+    }), [users, modalOpen, showDeleteIcons]);
 
     return (
         <UserContext.Provider value={value}>

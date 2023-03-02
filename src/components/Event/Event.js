@@ -1,11 +1,11 @@
-import { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { useDrag, useDrop } from "react-dnd";
 import "./Event.css";
 
 function Event({ id, day, name, image, note, pic, moveCard, index }) {
 
-
     const ref = useRef(null)
+
     const [{ handlerId }, drop] = useDrop({
         accept: "button",
         collect(monitor) {
@@ -14,8 +14,9 @@ function Event({ id, day, name, image, note, pic, moveCard, index }) {
             }
         },
         hover(item, monitor) {
-            if (!ref.current) {
-                return
+            console.log('item', item)
+            if (!ref.current || item.id < 100) {
+                return;
             }
             const dragIndex = item.index
             const hoverIndex = index
@@ -24,7 +25,9 @@ function Event({ id, day, name, image, note, pic, moveCard, index }) {
                 return
             }
             // Determine rectangle on screen
-            const hoverBoundingRect = ref.current?.getBoundingClientRect()
+            // const hoverBoundingRect = ref.current?.getBoundingClientRect()
+            const hoverBoundingRect = ref.current ? ref.current.getBoundingClientRect() : null;
+
             // Get vertical middle
             const hoverMiddleY =
                 (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
@@ -52,6 +55,7 @@ function Event({ id, day, name, image, note, pic, moveCard, index }) {
             // to avoid expensive index searches.
             item.index = hoverIndex
         },
+
     })
     const [{ isDragging }, drag] = useDrag(() => ({
         type: "button",
@@ -61,9 +65,10 @@ function Event({ id, day, name, image, note, pic, moveCard, index }) {
         collect: (monitor) => ({
             isDragging: !!monitor.isDragging(),
         }),
+
+
     }));
 
-    // const opacity = isDragging && id > 99 ? 0.5 : 1;
 
     drag(drop(ref))
 
@@ -72,7 +77,6 @@ function Event({ id, day, name, image, note, pic, moveCard, index }) {
         <button
             className='event'
             ref={ref}
-            // style={{ opacity }}
             data-handler-id={handlerId}>
             {note ? <p>{note}</p> : <img className='event-image' src={pic ? pic : image} />}
         </button>

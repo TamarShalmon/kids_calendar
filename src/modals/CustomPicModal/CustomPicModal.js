@@ -1,4 +1,5 @@
-import Slider from '@mui/joy/Slider';
+import Box from '@mui/material/Box';
+import Slider from '@mui/material/Slider';
 import React, { useContext, useRef, useState } from "react";
 import AvatarEditor from 'react-avatar-editor'
 import { BoardContext } from '../../context/BoardContext';
@@ -70,13 +71,17 @@ const CustomPicModal = ({ eventItem }) => {
                 className="rotate-img"
                 onClick={() => setRotate(rotate + 90)}
                 src={`/images/refresh.png`} /> 
-              {/* <Slider 
+                <Box sx={{ width: 300 }}>
+              <Slider 
                 min={1}
                 max={2}
                 step={0.1}
                 value={scale}
-                onChange={(e, newValue) => setScale(newValue)} /> */}
-              <input type="range" min="1" max="2" step="0.1" value={scale} onChange={e => setScale(+e.target.value)} />
+                onChange={(e, newValue) => setScale(newValue)}
+                color="secondary"
+                 />
+                </Box>
+              {/* <input type="range" min="1" max="2" step="0.1" value={scale} onChange={e => setScale(+e.target.value)} /> */}
             </div>
           </div>
 

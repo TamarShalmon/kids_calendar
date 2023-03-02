@@ -8,15 +8,33 @@
 }
 
 .container {
-    background: url("/src/assets/images/img-background.png"), url("/src/assets/images/sun-backgrond.png");
+    background: url("../src/assets/images/img-background.png"), url("../src/assets/images/sun-backgrond.png");
     background-repeat: no-repeat;
     background-color: #a2daf3;
     background-position: -0.5cm bottom, center top;
 
 }
 
-
-
-.fill{
+.fill {
     height: 100vh;
+}
+
+.MobileOnly {
+    display: none;
+}
+
+@media only screen and (max-width: 600px) {
+    .App {
+        display: none;
+    }
+
+    .MobileOnly {
+        display: flex;
+        flex-direction: column;
+    }
+
+    h1 {
+        padding: 5px;
+        margin: auto 0;
+    }
 }

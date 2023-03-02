@@ -1,5 +1,5 @@
 import { useDrop } from 'react-dnd';
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { BoardContext } from "../../context/BoardContext";
 
 

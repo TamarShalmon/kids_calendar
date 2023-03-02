@@ -1,4 +1,4 @@
-import { useEffect, useContext, useState } from 'react'
+import React, { useEffect, useContext, useState } from 'react'
 import { UserContext } from "../../context/UserContext";
 
 import './Home.css';
@@ -36,10 +36,9 @@ function Home() {
                 <h1 className='h1-home'>My week planner</h1>
                 <h3 className='h3-home'>This is my name:</h3>
                 <div className='container-name'>
-                    {users.slice(0, 4).map((user, index) =>
+                    {users.map((user, index) =>
                         <div key={user.id} className='user-wrapper'>
                             <User
-                                key={user.id}
                                 userId={user.id}
                                 name={user.name}
                                 onDelete={handleUserDelete}

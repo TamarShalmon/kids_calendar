@@ -1,4 +1,4 @@
-import { createContext, useMemo, useState } from "react";
+import React, { createContext, useMemo, useState } from "react";
 import days from '../assets/data/days'
 
 export const UserContext = createContext({});

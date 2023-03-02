@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext, useCallback } from 'react';
+import React, { useEffect, useState, useContext, useCallback } from 'react';
 import { BoardContext } from "../../context/BoardContext";
 import update from 'immutability-helper'
 
@@ -12,6 +12,12 @@ import Weather from '../Weather/Weather';
 function Day({ name, eventsList, weatherDay, style, currentDay, }) {
 
     const { addEvent, modalPicOpenToggle, modalOpenToggle, addWeather, setEventsOfDay } = useContext(BoardContext);
+
+
+    useEffect(() => {
+       console.log('Day has been updated', eventsList)
+    }, [eventsList])
+
 
     ///// Drag and drop Weather------------
     const [{ isOverWeather }, dropWeather] = useDrop(() => ({
@@ -35,6 +41,7 @@ function Day({ name, eventsList, weatherDay, style, currentDay, }) {
         accept: "button",
         drop: (eventItem) => {
             if (eventItem.type !== 'event' || eventItem.id > 99) return;
+
             if (eventItem.id === 2) {
                 modalOpenToggle({ ...eventItem, day: name })
             } else if (eventItem.id === 1) {
@@ -59,6 +66,8 @@ function Day({ name, eventsList, weatherDay, style, currentDay, }) {
     const moveCard = useCallback((dragIndex, hoverIndex) => {
         setEventsOfDay(name, dragIndex, hoverIndex);
     }, [])
+
+    
     /////----------------------------------
 
 

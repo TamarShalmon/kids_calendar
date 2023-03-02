@@ -11,7 +11,7 @@
 
 .day-weather {
   height: 65px;
-  background: no-repeat center/3rem url("/src/assets/images/2480626.png");
+  background: no-repeat center/3rem url("../../../src/assets/images/2480626.png");
   display: flex;
   justify-content: center;
 }

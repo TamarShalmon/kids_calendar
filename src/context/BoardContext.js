@@ -1,4 +1,4 @@
-import { createContext, useMemo, useState } from "react";
+import React, { createContext, useMemo, useState } from "react";
 import days from '../assets/data/days'
 import update from "immutability-helper";
 export const BoardContext = createContext({});
@@ -81,10 +81,17 @@ export const BoardContextProvider = ({ children }) => {
             setWeek((currentWeek) => {
                 return currentWeek.map((day, index) => {
                     if (day.name === dayName) {
+                        
+                        if (day.eventsList.length === 6) {
+                            alert('Max events for this day')
+                            return day
+                        }
+                        
                         return {
                             ...day,
                             eventsList: [...day.eventsList, { ...newEventToAdd, day: dayName, id: day.eventsList.length + 100 }]
                         }
+
                     } else {
                         return day
                     }
@@ -106,7 +113,7 @@ export const BoardContextProvider = ({ children }) => {
                 });
             });
         },
-        
+
         deleteAllEvents: () => setWeek(days),
 
     }), [week, modalEraseOpen, modalOpen, modalPicOpen]);

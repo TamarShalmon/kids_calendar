@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { BoardContext } from "../../../../context/BoardContext";
 import { UserContext } from "../../../../context/UserContext";
 
@@ -21,7 +21,7 @@ function Week() {
     }, [users])
 
     useEffect(() => {
-        console.log('###')
+        console.log('Week updated')
         localStorage.setItem(activeUserId, JSON.stringify(week));
     }, [week])
 

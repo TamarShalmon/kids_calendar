@@ -14,7 +14,6 @@ function Event({ id, day, name, image, note, pic, moveCard, index }) {
             }
         },
         hover(item, monitor) {
-            console.log('item', item)
             if (!ref.current || item.id < 100) {
                 return;
             }
@@ -68,7 +67,7 @@ function Event({ id, day, name, image, note, pic, moveCard, index }) {
 
 
     }));
-
+    const opacity = isDragging ? 0 : 1
 
     drag(drop(ref))
 

@@ -13,10 +13,13 @@ function User({ userId, name }) {
 
     return (
 
-        <button id='user' onClick={() => { 
-            selectUser(userId)
-            setWeekbyUser(userId)
-            navigate("/calender")
+        <button
+            id='user'
+            style={{ fontFamily: 'Neucha, Rubik' }}
+            onClick={() => {
+                selectUser(userId)
+                setWeekbyUser(userId)
+                navigate("/calender")
             }}>
             {name}
         </button>

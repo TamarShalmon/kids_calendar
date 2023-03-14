@@ -43,6 +43,7 @@ export const UserContextProvider = ({ children }) => {
 
         deleteUser: (userId) => {
             setUsers((users) => users.filter((user) => user.id !== userId));
+            localStorage.removeItem(userId)
         },
 
     }), [users, modalOpen, showDeleteIcons]);

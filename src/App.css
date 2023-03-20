@@ -8,11 +8,11 @@
 }
 
 .container {
-    background: url("../src/assets/images/img-background.png"), url("../src/assets/images/sun-backgrond.png");
+    background: url("../src/assets/images/moon.png"), url("../src/assets/images/sun.png");
     background-repeat: no-repeat;
     background-color: #a2daf3;
-    background-position: -0.5cm bottom, center top;
-
+    background-position: -0.1cm bottom, center -3.5cm;
+    background-size: 122rem, 16rem;
 }
 
 .fill {

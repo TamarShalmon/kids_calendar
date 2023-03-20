@@ -13,9 +13,8 @@
 .weatherIcon-btn {
     display: flex;
     background: white;
-    border: thick double white;
     border-radius: 5px;
-    padding: 1px;
+    padding: 5px;
     cursor: grab;
     justify-content: center;
     width: 50px;

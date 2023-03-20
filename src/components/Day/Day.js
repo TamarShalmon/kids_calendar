@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext, useCallback } from 'react';
 import { BoardContext } from "../../context/BoardContext";
-import update from 'immutability-helper'
 
 
 import { useDrop } from 'react-dnd';
@@ -15,7 +14,7 @@ function Day({ name, eventsList, weatherDay, style, currentDay, }) {
 
 
     useEffect(() => {
-       console.log('Day has been updated', eventsList)
+        console.log('Day has been updated', eventsList)
     }, [eventsList])
 
 
@@ -67,7 +66,7 @@ function Day({ name, eventsList, weatherDay, style, currentDay, }) {
         setEventsOfDay(name, dragIndex, hoverIndex);
     }, [])
 
-    
+
     /////----------------------------------
 
 
@@ -79,7 +78,7 @@ function Day({ name, eventsList, weatherDay, style, currentDay, }) {
                 <div className={`day-title ${currentDay ? "current-day-title" : ""}`}>
                     {name}</div>
 
-                <div ref={dropWeather} className="day-weather">
+                <div ref={dropWeather} className={`day-weather ${currentDay ? "day-current-weather" : ""}`}>
                     {weatherDay && <Weather
                         id={weatherDay.id}
                         day={name}

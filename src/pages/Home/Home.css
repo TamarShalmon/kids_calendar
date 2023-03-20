@@ -1,17 +1,15 @@
 .container-home {
-    background: url("../../assets/images/img-background.png"), url("../../assets/images/sun-backgrond.png");
+    background: url("../../assets/images/moon.png"), url("../../assets/images/sun\ and\ clouds.png");
     background-repeat: no-repeat;
     background-color: #a2daf3;
-    background-position: -0.5cm bottom, right top;
-    background-size: 180rem, 14rem;
+    background-position: -0.1cm bottom, right -2cm;
+    background-size: 122rem, 39rem;
 }
-
-
 
 .h1-home {
     font-size: 140px;
     color: white;
-    padding: 10px;
+    padding: 165px 10px 10px 10px;
     margin: 0 auto;
     text-shadow: 0 3px 3px hsl(0deg 0% 0% / 35%);
 }
@@ -34,12 +32,9 @@ img {
     padding: 10px 0 20px 0;
 }
 
-.pics-flex {
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-end;
-    padding: 20px 0 0 35px;
-
+.animals {
+    width: 32rem;
+    padding: 0;
 }
 
 .container-name {
@@ -57,18 +52,23 @@ img {
     overflow-x: auto;
     padding: 0 20px;
 }
+
 .container-name::-webkit-scrollbar {
-    height: 6px;               /* width of the entire scrollbar */
-  }
-  
-  .container-name::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0);        /* color of the tracking area */
-  }
-  
-  .container-name::-webkit-scrollbar-thumb {
-    background-color: #314961cf;    /* color of the scroll thumb */
-    border-radius: 5px;       /* roundness of the scroll thumb */
-  }
+    height: 6px;
+    /* width of the entire scrollbar */
+}
+
+.container-name::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0);
+    /* color of the tracking area */
+}
+
+.container-name::-webkit-scrollbar-thumb {
+    background-color: #314961cf;
+    /* color of the scroll thumb */
+    border-radius: 5px;
+    /* roundness of the scroll thumb */
+}
 
 .bnt-flex {
     display: flex;
@@ -99,6 +99,6 @@ img {
 }
 
 .delete-icon-wrapper img {
-    width: 1.5rem;    
+    width: 1.5rem;
     cursor: pointer;
 }

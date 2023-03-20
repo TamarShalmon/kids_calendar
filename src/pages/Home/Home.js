@@ -5,6 +5,7 @@ import './Home.css';
 import User from '../../components/User/User';
 import UserModal from '../../modals/UserModal/UserModal';
 
+
 function Home() {
 
     const { modalOpen, modalOpenToggle, users, showDeleteIcons, deleteIconsToggle, deleteUser } = useContext(UserContext);
@@ -19,20 +20,13 @@ function Home() {
         deleteIconsToggle(false);
     }
 
+
     return (
 
         <>
             {modalOpen && <UserModal eventItem={modalOpen} />}
 
-
             <div className='container-home fill-home'>
-
-                <div className='pics-flex'>
-                    <img src={`/images/kids1.png`} />
-                    <img src={`/images/kids2.png`} />
-                    <img src={`/images/kids3.png`} />
-                    <p>For kids!</p>
-                </div>
                 <h1 className='h1-home'>My week planner</h1>
                 <h3 className='h3-home'>This is my name:</h3>
                 <div className='container-name'>
@@ -55,7 +49,7 @@ function Home() {
                 <div className='bnt-flex'>
                     <img src={`/images/add.png`} alt='pic-home' onClick={(userItem) => modalOpenToggle({ ...userItem })} />
                     <img src={`/images/recycle-bin.png`} alt='pic-home' onClick={() => deleteIconsToggle(!showDeleteIcons)} />
-                    <img src={`/images/settings.png`} alt='pic-home' />
+                    {/* <img src={`/images/settings.png`} alt='pic-home' /> */}
                 </div>
 
             </div >

@@ -83,7 +83,7 @@ export const BoardContextProvider = ({ children }) => {
                     if (day.name === dayName) {
                         
                         if (day.eventsList.length === 6) {
-                            alert('Max events for this day')
+                            // alert('Max events for this day')
                             return day
                         }
                         

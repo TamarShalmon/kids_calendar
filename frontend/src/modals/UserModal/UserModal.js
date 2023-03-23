@@ -37,6 +37,7 @@ function UserModal({ userItem }) {
         <form onSubmit={handleSubmit}>
           <div className="body">
             <input
+              className="input"
               type="text"
               required
               minlength="3"

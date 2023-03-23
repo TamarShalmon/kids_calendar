@@ -14,6 +14,79 @@
     text-shadow: 0 3px 3px hsl(0deg 0% 0% / 35%);
 }
 
+
+.auth {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f2f2f2;
+}
+
+.auth-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 85px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-weight: bold;
+}
+
+.input-auth {
+    width: 200px;
+    height: 40px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+
+}
+
+.btn-flex {
+    display: flex;
+    flex-direction: column;
+    margin: 16px 0 0 0
+}
+
+
+.submit-login {
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #feba55;
+    width: 205px;
+    margin: 8px 0 0 0;
+    padding: 3px;
+    cursor: pointer;
+}
+
+.submit-register {
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #feba55;
+    width: 205px;
+    margin: 8px 0 0 0;
+    padding: 3px;
+    cursor: pointer;
+}
+
+.yellow {
+    background-color: #f5ec87;
+}
+
+.login {
+    font-size: 25px;
+}
+
+
+
+
 .pics-flex p {
     font-size: 40px;
     color: black;
@@ -32,10 +105,6 @@ img {
     padding: 10px 0 20px 0;
 }
 
-.animals {
-    width: 32rem;
-    padding: 0;
-}
 
 .container-name {
     height: 100px;

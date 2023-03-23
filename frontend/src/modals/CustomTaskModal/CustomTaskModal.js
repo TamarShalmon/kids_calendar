@@ -36,6 +36,7 @@ function CustomTaskModal({ eventItem }) {
         <form onSubmit={handleSubmit}>
           <div className="body">
             <input
+              className="input-modal"
               type="text"
               required
               minlength="3"

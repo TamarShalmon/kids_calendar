@@ -4,5 +4,10 @@
   flex-wrap: nowrap;
   justify-content: space-evenly;
   gap: 20px;
+  height: calc(100% - 180px);
+  transition: height 120ms;
 }
 
+.week.events-menu-open {
+  height: calc(100% - 280px);
+}

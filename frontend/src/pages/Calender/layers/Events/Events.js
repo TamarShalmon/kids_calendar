@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react';
+import { BoardContext } from "../../../../context/BoardContext";
 import { useNavigate } from 'react-router-dom';
 
 import Event from '../../../../components/Event/Event'
@@ -8,7 +9,7 @@ import EraseButtom from '../../../../components/EraseButtom/EraseButtom'
 
 
 function Events({ events, title }) {
-
+    const { eventsMenuOpenToggle } = useContext(BoardContext);
 
     const [showEvents, setShowEvents] = useState(false);
 
@@ -16,8 +17,6 @@ function Events({ events, title }) {
 
     const welcome = () => {
         navigate("/")
-        // setshowWelcome(true) .... context
-
     }
 
     const settings = {
@@ -34,7 +33,10 @@ function Events({ events, title }) {
             <div className={showEvents ? 'flex-events visible' : 'flex-events'}>
                 <button
                     className='toggle-button'
-                    onClick={() => setShowEvents(!showEvents)}>
+                    onClick={() => {
+                        setShowEvents(!showEvents)
+                        eventsMenuOpenToggle(!showEvents)
+                    }}>
                     <img src={showEvents ? 'https://cdn-icons-png.flaticon.com/512/3416/3416079.png' : 'https://cdn-icons-png.flaticon.com/512/3388/3388823.png'}
                         alt='Toggle Events' />
 

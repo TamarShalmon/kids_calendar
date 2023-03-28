@@ -5,16 +5,19 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BoardContextProvider } from "./context/BoardContext";
 import { UserContextProvider } from './context/UserContext';
+import { AuthContextProvider } from './context/AuthContext';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <UserContextProvider>
-      <BoardContextProvider>
-        <App />
-      </BoardContextProvider>
-    </UserContextProvider>
+    <AuthContextProvider>
+      <UserContextProvider>
+        <BoardContextProvider>
+          <App />
+        </BoardContextProvider>
+      </UserContextProvider>
+    </AuthContextProvider>
 
   </React.StrictMode>
 );

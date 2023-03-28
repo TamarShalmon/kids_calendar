@@ -10,7 +10,7 @@ import CustomPicModal from '../../../../modals/CustomPicModal/CustomPicModal';
 
 
 function Week() {
-    const { week, modalEraseOpen, modalOpen, modalPicOpen, } = useContext(BoardContext);
+    const { week, modalEraseOpen, modalOpen, modalPicOpen, eventsMenuOpened } = useContext(BoardContext);
     const { users } = useContext(UserContext);
     let activeUserId = users.filter((user) => user.active)[0].id;
 
@@ -33,7 +33,7 @@ function Week() {
             {modalPicOpen && <CustomPicModal eventItem={modalPicOpen} />}
 
 
-            <div className="week">
+            <div className={`week ${eventsMenuOpened && 'events-menu-open'}`}>
                 {week.map((day) => (
                     <Day
                         key={day.id}

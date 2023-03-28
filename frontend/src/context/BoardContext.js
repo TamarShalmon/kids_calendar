@@ -7,7 +7,7 @@ export const BoardContextProvider = ({ children }) => {
     const [modalEraseOpen, setModalEraseOpen] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
     const [modalPicOpen, setModalPicOpen] = useState(false);
-
+    const [eventsMenuOpened, setEventsMenuOpened] = useState(false);
     const [week, setWeek] = useState(days)
 
     const value = useMemo(() => ({
@@ -16,10 +16,12 @@ export const BoardContextProvider = ({ children }) => {
         modalEraseOpen,
         modalOpen,
         modalPicOpen,
+        eventsMenuOpened,
 
         modalEraseToggle: (newState) => setModalEraseOpen(newState),
         modalOpenToggle: (newState) => setModalOpen(newState),
         modalPicOpenToggle: (newState) => setModalPicOpen(newState),
+        eventsMenuOpenToggle: (newState) => setEventsMenuOpened(newState),
 
         setWeekbyUser: (userId) => {
             // Init App
@@ -116,7 +118,7 @@ export const BoardContextProvider = ({ children }) => {
 
         deleteAllEvents: () => setWeek(days),
 
-    }), [week, modalEraseOpen, modalOpen, modalPicOpen]);
+    }), [week, modalEraseOpen, modalOpen, modalPicOpen, eventsMenuOpened]);
 
     return (
         <BoardContext.Provider value={value}>

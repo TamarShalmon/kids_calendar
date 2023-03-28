@@ -12,7 +12,13 @@ function Events({ events, title }) {
 
     const [showEvents, setShowEvents] = useState(false);
 
-    let navigate = useNavigate();
+    const navigate = useNavigate();
+
+    const welcome = () => {
+        navigate("/")
+        // setshowWelcome(true) .... context
+
+    }
 
     const settings = {
         dots: false,
@@ -34,7 +40,7 @@ function Events({ events, title }) {
 
                 </button>
 
-                <button onClick={() => { navigate("/") }}>
+                <button onClick={welcome}>
                     <img src='https://cdn-icons-png.flaticon.com/512/69/69524.png' />
                 </button>
                 <div className='events'>

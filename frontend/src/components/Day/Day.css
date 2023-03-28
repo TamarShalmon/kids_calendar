@@ -1,6 +1,6 @@
 .day {
   width: 200px;
-  height: 520px;
+  height: 100%;
   padding: 15px 10px 5px 10px;
   border-radius: 25px;
   text-align: center;
@@ -26,13 +26,15 @@
 .day-events {
   display: grid;
   grid-gap: 10px;
-  width: 100%;
+  width: 100px;
   height: 100%;
   grid-auto-rows: 60px;
   grid-template-rows: 60px;
   align-content: stretch;
   justify-content: center;
-
+  margin: 0 auto 4px auto;
+  overflow: auto;
+  border-radius: 0 0 18px 18px;
 }
 
 .product-image {
@@ -64,10 +66,13 @@
 }
 
 .current-day-day {
-  background: no-repeat center 32.6rem/6.5rem url("/src/assets/images/sunflower-today.gif");
-  height: 555px;
+  background: no-repeat center bottom url("/src/assets/images/sunflower-today.gif");
+  background-size: 6.5rem;
   width: 250px;
   box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 10px;
-  
-  
+}
+
+
+.current-day-day .day-events {
+  height: calc(100% - 155px);
 }

@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 
 import './Home.css';
 
+
+
 function Home() {
 
 
@@ -23,6 +25,9 @@ function Home() {
         </>
     )
 }
+
+
+
 
 const Login = () => {
     const [_, setCookies] = useCookies(["access_token"]);
@@ -48,6 +53,7 @@ const Login = () => {
             window.localStorage.setItem("userID", result.data.userID);
             setshowWelcome(true)
         } catch (error) {
+            alert("Username or password is incorrect.");
             console.error(error);
         }
     };
@@ -81,7 +87,7 @@ const Login = () => {
                             <div className='btn-flex'>
                                 <button className='submit-login login' type="submit">Login</button>
                                 <button className='submit-login yellow' onClick={() => setshowRegister(true)}>Create an account</button>
-                                <button className='submit-login yellow'>Login as a guest</button>
+                                <button type="button" className='submit-login yellow'>Login as a guest</button>
                             </div>
                         </form>
                     </>
@@ -150,7 +156,18 @@ const Register = () => {
 
 function Welcome() {
 
+
     const { modalOpen, modalOpenToggle, users, showDeleteIcons, deleteIconsToggle, deleteUser } = useContext(UserContext);
+
+    const [cookies, setCookies] = useCookies(["access_token"]);
+
+
+    const logout = () => {
+        setCookies("access_token", "");
+        window.localStorage.clear();
+    };
+
+
 
     useEffect(() => {
         localStorage.setItem('users', JSON.stringify(users));
@@ -167,29 +184,34 @@ function Welcome() {
 
             {modalOpen && <UserModal eventItem={modalOpen} />}
 
-            <h3 className='h3-home'>This is my name:</h3>
-            <div className='container-name'>
-                {users.map((user, index) =>
-                    <div key={user.id} className='user-wrapper'>
-                        <User
-                            userId={user.id}
-                            name={user.name}
-                            onDelete={handleUserDelete}
-                            showDeleteIcon={showDeleteIcons}
-                        />
-                        {showDeleteIcons && (
-                            <div className='delete-icon-wrapper' onClick={() => handleUserDelete(user.id)}>
-                                <img src='https://cdn-icons-png.flaticon.com/512/1828/1828843.png' alt='Delete' />
+            {!cookies.access_token ? (<Login />) : (
+                <>
+                    <h3 className='h3-home'>This is my name:</h3>
+                    <div className='container-name'>
+                        {users.map((user, index) =>
+                            <div key={user.id} className='user-wrapper'>
+                                <User
+                                    userId={user.id}
+                                    name={user.name}
+                                    onDelete={handleUserDelete}
+                                    showDeleteIcon={showDeleteIcons}
+                                />
+                                {showDeleteIcons && (
+                                    <div className='delete-icon-wrapper' onClick={() => handleUserDelete(user.id)}>
+                                        <img src='https://cdn-icons-png.flaticon.com/512/1828/1828843.png' alt='Delete' />
+                                    </div>
+                                )}
                             </div>
                         )}
                     </div>
-                )}
-            </div>
-            <div className='bnt-flex'>
-                <img src={`/images/add.png`} alt='pic-home' onClick={(userItem) => modalOpenToggle({ ...userItem })} />
-                <img src={`/images/recycle-bin.png`} alt='pic-home' onClick={() => deleteIconsToggle(!showDeleteIcons)} />
-                {/* <img src={`/images/settings.png`} alt='pic-home' /> */}
-            </div>
+                    <div className='bnt-flex'>
+                        <img src={`/images/add.png`} alt='pic-home' onClick={(userItem) => modalOpenToggle({ ...userItem })} />
+                        <img src={`/images/recycle-bin.png`} alt='pic-home' onClick={() => deleteIconsToggle(!showDeleteIcons)} />
+                        <img src={`/images/logout.png`} alt='pic-home' onClick={logout} />
+                        {/* <img src={`/images/settings.png`} alt='pic-home' /> */}
+                    </div>
+                </>
+            )}
         </>
     )
 }

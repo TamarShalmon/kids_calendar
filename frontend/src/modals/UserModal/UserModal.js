@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { UserContext } from '../../context/UserContext'
 
 
-import "../CustomTaskModal/CustomTaskModal.css";
+import "../UserModal/UserModal.css";
 
 function UserModal({ userItem }) {
 

@@ -1,27 +1,24 @@
 import React, { useEffect, useContext } from 'react'
-import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../../context/UserContext";
+import { AuthContext } from "../../../context/AuthContext";
+
 import User from '../../../components/User/User';
 import UserModal from '../../../modals/UserModal/UserModal';
-import { useCookies } from "react-cookie";
 import Login from './Login';
 
 import '../Home.css';
 
 function Welcome() {
 
-
+    const { showWelcomeToggle, showRegisterToggle, cookiesToggle, cookies } = useContext(AuthContext);
     const { modalOpen, modalOpenToggle, users, showDeleteIcons, deleteIconsToggle, deleteUser } = useContext(UserContext);
 
-    const [cookies, setCookies] = useCookies(["access_token"]);
-
-    const navigate = useNavigate();
 
     const logout = () => {
-        setCookies("access_token", "");
-        window.localStorage.clear();
-        navigate("/");
-
+        showRegisterToggle(false);
+        showWelcomeToggle(false);
+        cookiesToggle("access_token", "");
+        localStorage.clear();
     };
 
 

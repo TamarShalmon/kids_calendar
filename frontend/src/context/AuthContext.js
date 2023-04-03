@@ -1,21 +1,35 @@
-import React, { createContext, useMemo, useState } from "react";
+import React, { createContext, useMemo, useState, useEffect } from "react";
+import { useCookies } from "react-cookie";
+
 export const AuthContext = createContext({});
 
 export const AuthContextProvider = ({ children }) => {
-    const [showWwlcome, setshowWelcome] = useState(false);
+    const [showWelcome, setshowWelcome] = useState(false);
     const [showRegister, setshowRegister] = useState(false);
     const [showLogin, setShowLogin] = useState(false);
+    const [cookies, setCookies] = useCookies(["access_token"]);
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+
 
     const value = useMemo(() => ({
-        showWwlcome,
+        showWelcome,
         showRegister,
         showLogin,
+        cookies,
+        username,
+        password,
 
-        showWwlcomeToggle: (newState) => setshowWelcome(newState),
+        showWelcomeToggle: (newState) => setshowWelcome(newState),
         showRegisterToggle: (newState) => setshowRegister(newState),
         showLoginToggle: (newState) => setShowLogin(newState),
+        cookiesToggle: (newState) => setCookies(newState),
+        usernameToggle: (newState) => setUsername(newState),
+        passwordToggle: (newState) => setPassword(newState),
 
-    }), [showWwlcome, showRegister, showLogin]);
+
+
+    }), [showWelcome, showRegister, showLogin, cookies, username, password]);
 
     return (
         <AuthContext.Provider value={value}>

@@ -1,20 +1,14 @@
 import React, { useContext, useState } from 'react'
 import { AuthContext } from "../../../context/AuthContext";
 import axios from "axios";
-import { useCookies } from "react-cookie";
 import Register from './Register';
 import Welcome from './Welcome';
 
 import '../Home.css';
 
 const Login = () => {
-    const [_, setCookies] = useCookies(["access_token"]);
 
-    const { showWwlcome, showRegister, showWwlcomeToggle, showRegisterToggle } = useContext(AuthContext);
-
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-
+    const { showWelcome, showRegister, showWelcomeToggle, showRegisterToggle, cookiesToggle, username, password, usernameToggle, passwordToggle } = useContext(AuthContext);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -25,9 +19,9 @@ const Login = () => {
                 password,
             });
 
-            setCookies("access_token", result.data.token);
-            window.localStorage.setItem("userID", result.data.userID);
-            showWwlcomeToggle(true)
+            cookiesToggle("access_token", result.data.token);
+            localStorage.setItem("userID", result.data.userID);
+            showWelcomeToggle(true)
         } catch (error) {
             alert("Username or password is incorrect.");
             console.error(error);
@@ -37,7 +31,7 @@ const Login = () => {
     return (
         <div className="login-container">
             {showRegister ? <Register /> : (
-                showWwlcome ? <Welcome /> : (
+                showWelcome ? <Welcome /> : (
                     <>
                         <form onSubmit={handleSubmit}>
                             <div className="form-group">
@@ -47,7 +41,7 @@ const Login = () => {
                                     type="text"
                                     id="username"
                                     value={username}
-                                    onChange={(event) => setUsername(event.target.value)}
+                                    onChange={(event) => usernameToggle(event.target.value)}
                                 />
                             </div>
                             <div className="form-group">
@@ -57,7 +51,7 @@ const Login = () => {
                                     type="password"
                                     id="password"
                                     value={password}
-                                    onChange={(event) => setPassword(event.target.value)}
+                                    onChange={(event) => passwordToggle(event.target.value)}
                                 />
                             </div>
                             <div className='btn-flex'>

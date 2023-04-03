@@ -1,13 +1,15 @@
 import { useNavigate } from 'react-router-dom';
 import React, { useContext } from 'react'
 
-import "./User.css";
 import { UserContext } from "../../context/UserContext";
 import { BoardContext } from '../../context/BoardContext';
 
+import "./User.css";
+
 function User({ userId, name }) {
     const { selectUser } = useContext(UserContext);
-    const { setWeekbyUser } = useContext(BoardContext)
+    const { setWeekbyUser, eventsMenuOpenToggle } = useContext(BoardContext)
+
 
     let navigate = useNavigate();
 
@@ -19,6 +21,7 @@ function User({ userId, name }) {
             onClick={() => {
                 selectUser(userId)
                 setWeekbyUser(userId)
+                eventsMenuOpenToggle(false)
                 navigate("/calender")
             }}>
             {name}

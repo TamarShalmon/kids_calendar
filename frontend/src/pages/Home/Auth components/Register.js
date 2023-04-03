@@ -1,20 +1,16 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { AuthContext } from "../../../context/AuthContext";
 import axios from "axios";
-import { useCookies } from "react-cookie";
+import { useNavigate } from 'react-router-dom';
 import Login from './Login';
 
 import '../Home.css';
 
 
 const Register = () => {
-    const { showLogin, showLoginToggle } = useContext(AuthContext);
+    const { showLogin, showLoginToggle, username, password, usernameToggle, passwordToggle} = useContext(AuthContext);
 
-
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-
-    const [_, setCookies] = useCookies(["access_token"]);
+    let navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -24,10 +20,12 @@ const Register = () => {
                 password,
             });
             alert("Registration Completed! Now login.");
+            navigate("/")
             showLoginToggle(true);
 
-        } catch (error) {
-            console.error(error);
+        } catch (err) {
+            console.error(err);
+            //  alert("Missing Registration Details!");
         }
     };
 
@@ -42,7 +40,7 @@ const Register = () => {
                             type="text"
                             id="username"
                             value={username}
-                            onChange={(event) => setUsername(event.target.value)}
+                            onChange={(event) => usernameToggle(event.target.value)}
                         />
                     </div>
                     <div className="form-group">
@@ -52,12 +50,12 @@ const Register = () => {
                             type="password"
                             id="password"
                             value={password}
-                            onChange={(event) => setPassword(event.target.value)}
+                            onChange={(event) => passwordToggle(event.target.value)}
                         />
                     </div>
                     <div className='btn-flex'>
                         <button className="submit-register" type="submit">Register</button>
-                        <button className="submit-register yellow" onClick={() => showLoginToggle(false)} >Back</button>
+                        <button className="submit-register yellow" onClick={() => showLoginToggle(true)} >Back</button>
                     </div>
                 </form>
             )}

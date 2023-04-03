@@ -84,10 +84,10 @@ export const BoardContextProvider = ({ children }) => {
                 return currentWeek.map((day, index) => {
                     if (day.name === dayName) {
                         
-                        if (day.eventsList.length === 6) {
-                            // alert('Max events for this day')
-                            return day
-                        }
+                        // if (day.eventsList.length === 6) {
+                        //     // alert('Max events for this day')
+                        //     return day
+                        // }
                         
                         return {
                             ...day,

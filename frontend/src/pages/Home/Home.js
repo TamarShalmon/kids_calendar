@@ -32,7 +32,7 @@ function Home() {
 const Login = () => {
     const [_, setCookies] = useCookies(["access_token"]);
 
-    const [showWwlcome, setshowWelcome] = useState(false);
+    const [showWelcome, setshowWelcome] = useState(false);
     const [showRegister, setshowRegister] = useState(false);
 
 
@@ -61,7 +61,7 @@ const Login = () => {
     return (
         <div className="login-container">
             {showRegister ? <Register /> : (
-                showWwlcome ? <Welcome /> : (
+                showWelcome ? <Welcome /> : (
                     <>
                         <form onSubmit={handleSubmit}>
                             <div className="form-group">
@@ -164,7 +164,7 @@ function Welcome() {
 
     const logout = () => {
         setCookies("access_token", "");
-        window.localStorage.clear();
+        localStorage.clear();
     };
 
 
@@ -218,3 +218,33 @@ function Welcome() {
 
 
 export default Home
+
+
+
+// import Login from './Auth components/Login';
+// import './Home.css';
+
+
+
+// function Home() {
+
+
+//     return (
+
+//         <>
+//             <div className='container-home fill-home'>
+//                 <h1 className='h1-home'>My week planner</h1>
+//                 <div className='auth-container'>
+//                     <Login />
+//                 </div>
+//             </div >
+//         </>
+//     )
+// }
+
+
+
+
+
+
+// export default Home

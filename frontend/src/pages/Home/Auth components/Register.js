@@ -1,16 +1,19 @@
 import React, { useContext, useEffect } from 'react'
-import { AuthContext } from "../../../context/AuthContext";
-import axios from "axios";
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from "../../../context/AuthContext";
+import { useCookies } from "react-cookie";
+import axios from "axios";
 import Login from './Login';
 
 import '../Home.css';
 
 
 const Register = () => {
-    const { showLogin, showLoginToggle, username, password, usernameToggle, passwordToggle} = useContext(AuthContext);
+    const { showLogin, showLoginToggle, showRegisterToggle, username, password, usernameToggle, passwordToggle, cookiesToggle } = useContext(AuthContext);
 
-    let navigate = useNavigate();
+    const [_, setCookies] = useCookies(["access_token"]);
+    const navigate = useNavigate();
+
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -21,11 +24,12 @@ const Register = () => {
             });
             alert("Registration Completed! Now login.");
             navigate("/")
+            showRegisterToggle(false);
             showLoginToggle(true);
 
         } catch (err) {
             console.error(err);
-            //  alert("Missing Registration Details!");
+            alert("Username already exists or registration details are missing.!");
         }
     };
 

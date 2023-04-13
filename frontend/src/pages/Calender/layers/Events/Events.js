@@ -1,5 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { BoardContext } from "../../../../context/BoardContext";
+import { AuthContext } from "../../../../context/AuthContext";
+
 import { useNavigate } from 'react-router-dom';
 
 import Event from '../../../../components/Event/Event'
@@ -10,6 +12,7 @@ import EraseButtom from '../../../../components/EraseButtom/EraseButtom'
 
 function Events({ events, title }) {
     const { eventsMenuOpenToggle } = useContext(BoardContext);
+    const { showWelcomeToggle } = useContext(AuthContext);
 
     const [showEvents, setShowEvents] = useState(false);
 
@@ -17,6 +20,8 @@ function Events({ events, title }) {
 
     const welcome = () => {
         navigate("/")
+        showWelcomeToggle(true);
+
     }
 
     const settings = {

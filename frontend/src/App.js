@@ -1,4 +1,4 @@
-import { useState, createContext } from "react";
+import { useState } from "react";
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
@@ -7,17 +7,13 @@ import Home from './pages/Home/Home'
 import Calender from "./pages/Calender/Calender";
 import MobileOnly from "./pages/MobileOnly/MobileOnly";
 
-export const UsersContext = createContext("user");
-
 
 
 function App() {
 
-  const [inputUser, setInputUser] = useState("");
-
 
   return (
-    <UsersContext.Provider value={{ inputUser, setInputUser }}>
+    <>
       <MobileOnly />
       <Router>
         <div className="App">
@@ -28,7 +24,7 @@ function App() {
           </Routes>
         </div>
       </Router>
-    </UsersContext.Provider>
+    </>
 
 
 

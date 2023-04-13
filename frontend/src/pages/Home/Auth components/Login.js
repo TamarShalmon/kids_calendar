@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { AuthContext } from "../../../context/AuthContext";
 import axios from "axios";
+import { useCookies } from "react-cookie";
 import Register from './Register';
 import Welcome from './Welcome';
 
@@ -9,6 +10,8 @@ import '../Home.css';
 const Login = () => {
 
     const { showWelcome, showRegister, showWelcomeToggle, showRegisterToggle, cookiesToggle, username, password, usernameToggle, passwordToggle } = useContext(AuthContext);
+
+    const [_, setCookies] = useCookies(["access_token"]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -19,7 +22,7 @@ const Login = () => {
                 password,
             });
 
-            cookiesToggle("access_token", result.data.token);
+            setCookies("access_token", result.data.token);
             localStorage.setItem("userID", result.data.userID);
             showWelcomeToggle(true)
         } catch (error) {

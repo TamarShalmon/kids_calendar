@@ -12,9 +12,9 @@ function EraseButtom() {
     const [{ isOverErase }, dropErase] = useDrop(() => ({
         accept: "button",
         drop: (eraseItem) => {
-            console.log({eraseItem})
+            console.log('item', { eraseItem })
             if (eraseItem.id !== undefined && eraseItem.type === 'event') {
-                deleteEvent(eraseItem.day, eraseItem.id);
+                deleteEvent(eraseItem.day, eraseItem.id, eraseItem.image);
             } else if (eraseItem.id !== undefined && eraseItem.type === 'weather') {
                 console.log("ikiki")
                 deleteWeather(eraseItem.day);

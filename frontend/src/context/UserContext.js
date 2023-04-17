@@ -1,5 +1,8 @@
 import React, { createContext, useMemo, useState } from "react";
 import days from '../assets/data/days'
+import { useCookies } from "react-cookie";
+
+
 
 export const UserContext = createContext({});
 
@@ -13,8 +16,14 @@ export const UserContextProvider = ({ children }) => {
     const savedUsers = localStorage.getItem('users') ? JSON.parse(localStorage.getItem('users')) : [];
     const [users, setUsers] = useState(savedUsers);
 
+    const savedMainUser = localStorage.getItem('mainUser') ? JSON.parse(localStorage.getItem('mainUser')) : null;
+    const [mainUser, setMainUser] = useState(savedMainUser);
+
+    const [cookies, setCookies] = useCookies(["access_token"]);
+
 
     const value = useMemo(() => ({
+        mainUser,
         users,
         modalOpen,
         showDeleteIcons,
@@ -22,6 +31,14 @@ export const UserContextProvider = ({ children }) => {
         modalOpenToggle: (newState) => setModalOpen(newState),
 
         deleteIconsToggle: (newState) => setShowDeleteIcons(newState),
+
+        login: (newMainUserToAdd) => setMainUser(newMainUserToAdd),
+
+        logout: () => {
+            setCookies("access_token", "");
+            setMainUser();
+            localStorage.clear()
+        },
 
         addUser: (newUserToAdd) => {
             if (newUserToAdd) {
@@ -46,7 +63,7 @@ export const UserContextProvider = ({ children }) => {
             localStorage.removeItem(userId)
         },
 
-    }), [users, modalOpen, showDeleteIcons]);
+    }), [mainUser, users, modalOpen, showDeleteIcons]);
 
     return (
         <UserContext.Provider value={value}>

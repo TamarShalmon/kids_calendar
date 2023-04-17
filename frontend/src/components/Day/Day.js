@@ -39,6 +39,7 @@ function Day({ name, eventsList, weatherDay, style, currentDay, }) {
     const [{ isOver }, drop] = useDrop(() => ({
         accept: "button",
         drop: (eventItem) => {
+            console.log(eventItem);
             if (eventItem.type !== 'event' || eventItem.id > 99) return;
 
             if (eventItem.id === 2) {
@@ -62,9 +63,9 @@ function Day({ name, eventsList, weatherDay, style, currentDay, }) {
     /////----------------------------------
 
     ///// Move Drag and drop Event---------
-    const moveCard = useCallback((dragIndex, hoverIndex) => {
-        setEventsOfDay(name, dragIndex, hoverIndex);
-    }, [])
+    // const moveCard = useCallback((dragIndex, hoverIndex) => {
+    //     setEventsOfDay(name, dragIndex, hoverIndex);
+    // }, [])
 
 
     /////----------------------------------
@@ -90,11 +91,13 @@ function Day({ name, eventsList, weatherDay, style, currentDay, }) {
                 <div ref={drop} className="day-events">
                     {eventsList.map((event, index) =>
                         <Event
-                            moveCard={moveCard}
+                            key={`${event.id} ${index}`}
+                            // moveCard={moveCard}
                             index={index}
                             day={name}
                             id={event.id}
                             note={event.note}
+                            type='day'
                             pic={event.pic}
                             name={event.name}
                             image={event.image} />

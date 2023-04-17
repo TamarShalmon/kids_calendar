@@ -6,19 +6,19 @@ import reportWebVitals from './reportWebVitals';
 import { BoardContextProvider } from "./context/BoardContext";
 import { UserContextProvider } from './context/UserContext';
 import { AuthContextProvider } from './context/AuthContext';
+import { Router } from 'react-router-dom';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <AuthContextProvider>
-      <UserContextProvider>
-        <BoardContextProvider>
-          <App />
-        </BoardContextProvider>
-      </UserContextProvider>
-    </AuthContextProvider>
-
+      <AuthContextProvider>
+        <UserContextProvider>
+          <BoardContextProvider>
+            <App />
+          </BoardContextProvider>
+        </UserContextProvider>
+      </AuthContextProvider>
   </React.StrictMode>
 );
 

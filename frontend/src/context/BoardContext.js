@@ -1,6 +1,7 @@
 import React, { createContext, useMemo, useState } from "react";
 import days from '../assets/data/days'
-import update from "immutability-helper";
+import { v4 as uuidv4 } from 'uuid';
+
 export const BoardContext = createContext({});
 
 export const BoardContextProvider = ({ children }) => {
@@ -29,25 +30,25 @@ export const BoardContextProvider = ({ children }) => {
             setWeek(initDays)
         },
 
-        setEventsOfDay: (name, dragIndex, hoverIndex) => {
-            setWeek((currentWeek) => {
-                return currentWeek.map((day) => {
-                    if (day.name === name) {
-                        return {
-                            ...day,
-                            eventsList: update(day.eventsList, {
-                                $splice: [
-                                    [dragIndex, 1],
-                                    [hoverIndex, 0, day.eventsList[dragIndex]],
-                                ],
-                            })
-                        }
-                    } else {
-                        return day
-                    }
-                })
-            })
-        },
+        // setEventsOfDay: (name, dragIndex, hoverIndex) => {
+        //     setWeek((currentWeek) => {
+        //         return currentWeek.map((day) => {
+        //             if (day.name === name) {
+        //                 return {
+        //                     ...day,
+        //                     eventsList: update(day.eventsList, {
+        //                         $splice: [
+        //                             [dragIndex, 1],
+        //                             [hoverIndex, 0, day.eventsList[dragIndex]],
+        //                         ],
+        //                     })
+        //                 }
+        //             } else {
+        //                 return day
+        //             }
+        //         })
+        //     })
+        // },
 
         addWeather: (dayName, weatherToAdd) => {
             setWeek((currentWeek) => {
@@ -83,15 +84,11 @@ export const BoardContextProvider = ({ children }) => {
             setWeek((currentWeek) => {
                 return currentWeek.map((day, index) => {
                     if (day.name === dayName) {
-                        
-                        // if (day.eventsList.length === 6) {
-                        //     // alert('Max events for this day')
-                        //     return day
-                        // }
-                        
+
                         return {
                             ...day,
-                            eventsList: [...day.eventsList, { ...newEventToAdd, day: dayName, id: day.eventsList.length + 100 }]
+                            eventsList: [...day.eventsList, { ...newEventToAdd, name: day.name, day: dayName, id: uuidv4() }]
+                            // eventsList: [...day.eventsList, { ...newEventToAdd, name: day.name, day: dayName, id: day.eventsList.length + 100 }]
                         }
 
                     } else {
@@ -102,6 +99,7 @@ export const BoardContextProvider = ({ children }) => {
         },
 
         deleteEvent: (dayName, eventId) => {
+
             setWeek((currentWeek) => {
                 return currentWeek.map((day, index) => {
                     if (day.name === dayName) {
@@ -113,6 +111,23 @@ export const BoardContextProvider = ({ children }) => {
                         return day
                     }
                 });
+            });
+        },
+
+        sortEvents: (dragIndex, hoverIndex, dayName) => {
+            setWeek((currentWeek) => {
+                return currentWeek.map(day => {
+                    if (day.name === dayName) {
+                        const newItems = [...day.eventsList]
+                        const draggedItem = newItems[dragIndex];
+                        console.log(draggedItem, "dragIndex", dragIndex, "hoverIndex", hoverIndex);
+                        newItems.splice(dragIndex, 1);
+                        newItems.splice(hoverIndex, 0, draggedItem);
+                        return { ...day, eventsList: newItems };
+                    } else {
+                        return day
+                    }
+                })
             });
         },
 

@@ -12,7 +12,6 @@ import EraseButtom from '../../../../components/EraseButtom/EraseButtom'
 
 function Events({ events, title }) {
     const { eventsMenuOpenToggle } = useContext(BoardContext);
-    const { showWelcomeToggle } = useContext(AuthContext);
 
     const [showEvents, setShowEvents] = useState(false);
 
@@ -20,8 +19,6 @@ function Events({ events, title }) {
 
     const welcome = () => {
         navigate("/")
-        showWelcomeToggle(true);
-
     }
 
     const settings = {

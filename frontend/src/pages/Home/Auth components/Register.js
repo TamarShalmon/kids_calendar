@@ -1,19 +1,23 @@
-import React, { useContext, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom';
-import { AuthContext } from "../../../context/AuthContext";
-import { useCookies } from "react-cookie";
+import { useState } from "react";
 import axios from "axios";
-import Login from './Login';
-
+import { toast } from 'react-toastify';
 import '../Home.css';
 
+const REGISTER_TOAST_CONFIG = {
+    position: "top-left",
+    autoClose: 5000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+};
 
-const Register = () => {
-    const { showLogin, showLoginToggle, showRegisterToggle, username, password, usernameToggle, passwordToggle, cookiesToggle } = useContext(AuthContext);
+const Register = ({ setshowRegister }) => {
 
-    const [_, setCookies] = useCookies(["access_token"]);
-    const navigate = useNavigate();
-
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -22,47 +26,43 @@ const Register = () => {
                 username,
                 password,
             });
-            alert("Registration Completed! Now login.");
-            navigate("/")
-            showRegisterToggle(false);
-            showLoginToggle(true);
+            toast.success("Registration Completed! Now login.", REGISTER_TOAST_CONFIG);
+            setshowRegister(false);
 
-        } catch (err) {
-            console.error(err);
-            alert("Username already exists or registration details are missing.!");
+        } catch (error) {
+            console.error(error);
+            toast.error("Username already exists or registration details are missing!", REGISTER_TOAST_CONFIG);
         }
     };
 
     return (
         <div className="register-container">
-            {showLogin ? (<Login />) : (
-                <form onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <label htmlFor="username">Username:</label>
-                        <input
-                            className='input-auth'
-                            type="text"
-                            id="username"
-                            value={username}
-                            onChange={(event) => usernameToggle(event.target.value)}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="password">Password:</label>
-                        <input
-                            className='input-auth'
-                            type="password"
-                            id="password"
-                            value={password}
-                            onChange={(event) => passwordToggle(event.target.value)}
-                        />
-                    </div>
-                    <div className='btn-flex'>
-                        <button className="submit-register" type="submit">Register</button>
-                        <button className="submit-register yellow" onClick={() => showLoginToggle(true)} >Back</button>
-                    </div>
-                </form>
-            )}
+            <form onSubmit={handleSubmit}>
+                <div className="form-group">
+                    <label htmlFor="username">Username:</label>
+                    <input
+                        className='input-auth'
+                        type="text"
+                        id="username"
+                        value={username}
+                        onChange={(event) => setUsername(event.target.value)}
+                    />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="password">Password:</label>
+                    <input
+                        className='input-auth'
+                        type="password"
+                        id="password"
+                        value={password}
+                        onChange={(event) => setPassword(event.target.value)}
+                    />
+                </div>
+                <div className='btn-flex'>
+                    <button className="submit-register" type="submit">Register</button>
+                    <button className="submit-register yellow" onClick={() => setshowRegister(false)} >Back</button>
+                </div>
+            </form>
         </div>
     );
 };

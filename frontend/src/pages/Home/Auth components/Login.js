@@ -1,17 +1,17 @@
 import React, { useContext, useState } from 'react'
-import { AuthContext } from "../../../context/AuthContext";
 import axios from "axios";
 import { useCookies } from "react-cookie";
-import Register from './Register';
-import Welcome from './Welcome';
-
+import { UserContext } from "../../../context/UserContext";
+import { toast } from 'react-toastify';
 import '../Home.css';
 
-const Login = () => {
-
-    const { showWelcome, showRegister, showWelcomeToggle, showRegisterToggle, cookiesToggle, username, password, usernameToggle, passwordToggle } = useContext(AuthContext);
-
+const Login = ({ setshowRegister }) => {
+    const { login } = useContext(UserContext);
     const [_, setCookies] = useCookies(["access_token"]);
+
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -21,53 +21,58 @@ const Login = () => {
                 username,
                 password,
             });
-
+            login(result.data)
             setCookies("access_token", result.data.token);
             localStorage.setItem("userID", result.data.userID);
-            showWelcomeToggle(true)
+            localStorage.setItem("mainUser", JSON.stringify(result.data));
         } catch (error) {
-            alert("Username or password is incorrect.");
+            toast.error("Username or password is incorrect!", {
+                position: "top-left",
+                autoClose: 5000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
             console.error(error);
         }
     };
 
     return (
         <div className="login-container">
-            {showRegister ? <Register /> : (
-                showWelcome ? <Welcome /> : (
-                    <>
-                        <form onSubmit={handleSubmit}>
-                            <div className="form-group">
-                                <label htmlFor="username">Username:</label>
-                                <input
-                                    className='input-auth'
-                                    type="text"
-                                    id="username"
-                                    value={username}
-                                    onChange={(event) => usernameToggle(event.target.value)}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="password">Password:</label>
-                                <input
-                                    className='input-auth'
-                                    type="password"
-                                    id="password"
-                                    value={password}
-                                    onChange={(event) => passwordToggle(event.target.value)}
-                                />
-                            </div>
-                            <div className='btn-flex'>
-                                <button className='submit-login login' type="submit">Login</button>
-                                <button className='submit-login yellow' onClick={() => showRegisterToggle(true)}>Create an account</button>
-                                <button type="button" className='submit-login yellow'>Login as a guest</button>
-                            </div>
-                        </form>
-                    </>
-                ))}
+            <>
+                <form onSubmit={handleSubmit}>
+                    <div className="form-group">
+                        <label htmlFor="username">Username:</label>
+                        <input
+                            className='input-auth'
+                            type="text"
+                            id="username"
+                            value={username}
+                            onChange={(event) => setUsername(event.target.value)}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="password">Password:</label>
+                        <input
+                            className='input-auth'
+                            type="password"
+                            id="password"
+                            value={password}
+                            onChange={(event) => setPassword(event.target.value)}
+                        />
+                    </div>
+                    <div className='btn-flex'>
+                        <button className='submit-login login' type="submit">Login</button>
+                        <button className='submit-login yellow' onClick={() => setshowRegister(true)}>Create an account</button>
+                        <button type="button" className='submit-login yellow'>Login as a guest</button>
+                    </div>
+                </form>
+            </>
         </div>
     );
 };
-
 
 export default Login

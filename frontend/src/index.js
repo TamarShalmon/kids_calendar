@@ -5,20 +5,20 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BoardContextProvider } from "./context/BoardContext";
 import { UserContextProvider } from './context/UserContext';
-import { AuthContextProvider } from './context/AuthContext';
-import { Router } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-      <AuthContextProvider>
-        <UserContextProvider>
-          <BoardContextProvider>
-            <App />
-          </BoardContextProvider>
-        </UserContextProvider>
-      </AuthContextProvider>
+    <UserContextProvider>
+      <BoardContextProvider>
+        <ToastContainer />
+        <App />
+      </BoardContextProvider>
+    </UserContextProvider>
   </React.StrictMode>
 );
 

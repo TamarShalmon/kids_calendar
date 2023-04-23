@@ -10,7 +10,7 @@ import Weather from '../Weather/Weather';
 
 function Day({ name, eventsList, weatherDay, style, currentDay, }) {
 
-    const { addEvent, modalPicOpenToggle, modalOpenToggle, addWeather, setEventsOfDay } = useContext(BoardContext);
+    const { addEvent, modalPicOpenToggle, modalOpenToggle, addWeather, sortEvents } = useContext(BoardContext);
 
 
     useEffect(() => {
@@ -39,8 +39,7 @@ function Day({ name, eventsList, weatherDay, style, currentDay, }) {
     const [{ isOver }, drop] = useDrop(() => ({
         accept: "button",
         drop: (eventItem) => {
-            console.log(eventItem);
-            if (eventItem.type !== 'event' || eventItem.id > 99) return;
+            if (eventItem.from === 'day' || eventItem.type !== 'event') return;
 
             if (eventItem.id === 2) {
                 modalOpenToggle({ ...eventItem, day: name })
@@ -62,13 +61,13 @@ function Day({ name, eventsList, weatherDay, style, currentDay, }) {
     };
     /////----------------------------------
 
-    ///// Move Drag and drop Event---------
-    // const moveCard = useCallback((dragIndex, hoverIndex) => {
-    //     setEventsOfDay(name, dragIndex, hoverIndex);
-    // }, [])
+    /// Move Drag and drop Event---------
+    const moveCard = useCallback((dragIndex, hoverIndex) => {
+        sortEvents(dragIndex, hoverIndex, name);
+    }, [])
 
 
-    /////----------------------------------
+    ///----------------------------------
 
 
 
@@ -91,8 +90,8 @@ function Day({ name, eventsList, weatherDay, style, currentDay, }) {
                 <div ref={drop} className="day-events">
                     {eventsList.map((event, index) =>
                         <Event
-                            key={`${event.id} ${index}`}
-                            // moveCard={moveCard}
+                            key={`${event.id}`}
+                            moveCard={moveCard}
                             index={index}
                             day={name}
                             id={event.id}

@@ -39,8 +39,8 @@ function CustomTaskModal({ eventItem }) {
               className="input-modal"
               type="text"
               required
-              minlength="3"
-              maxlength="8"
+              minLength="3"
+              maxLength="8"
               value={inputTask}
               onChange={(e) => setInputTask(e.target.value)}
             />

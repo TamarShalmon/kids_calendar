@@ -16,6 +16,7 @@ function Welcome() {
 
 
     const handleUserDelete = (userId) => {
+        // api req - del user >> update Context
         deleteUser(userId);
         deleteIconsToggle(false);
     }
@@ -28,9 +29,9 @@ function Welcome() {
                 <h3 className='h3-home'>This is my name:</h3>
                 <div className='container-name'>
                     {users.map((user, index) =>
-                        <div key={user.id} className='user-wrapper'>
+                        <div key={user._id} className='user-wrapper'>
                             <User
-                                userId={user.id}
+                                userId={user._id}
                                 name={user.name}
                                 onDelete={handleUserDelete}
                                 showDeleteIcon={showDeleteIcons}

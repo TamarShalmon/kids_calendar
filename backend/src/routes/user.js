@@ -2,6 +2,7 @@ import express from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { UserModel } from "../models/Users.js";
+import { SmallUserModel } from "../models/SmallUsers.js";
 
 const router = express.Router();
 
@@ -27,29 +28,41 @@ router.post("/login", async (req, res) => {
     if (!user) {
         return res
             .status(400)
-            .json({ message: "Username or password is incorrect" });
+            .json({ message: "There is no user" });
     }
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
         return res
             .status(400)
-            .json({ message: "Username or password is incorrect" });
+            .json({ message: "Password is not valid" });
     }
-    const token = jwt.sign({ id: user._id }, "secret");
-    res.json({ token, userID: user._id, username });
+    const token = jwt.sign({ id: user._id }, process.env.SECRET_STRING);
+    const smallUsers = await SmallUserModel.find({ userOwner: user._id })
+    res.json({ token, userID: user._id, username, smallUsers });
 });
 
 export { router as userRouter };
 
-export const verifyToken = (req, res, next) => {
+export const verifyToken = async (req, res, next) => {
     const authHeader = req.headers.authorization;
     if (authHeader) {
-        jwt.verify(authHeader, "secret", (err) => {
-            if (err) {
-                return res.sendStatus(403);
+        try {
+            // Bearer kjbkjbsdfkbsjkfd
+            const t = authHeader.split(" ")[1]
+            console.log(t);
+            const decode = await jwt.verify(t, process.env.SECRET_STRING) //TODO -ENV
+            const user = await UserModel.findById(decode.id)
+            // TODO - if no user - throw
+            if (!user) {
+                console.log(error)
+            } else {
+                req.user = user
+                next();
             }
-            next();
-        });
+        } catch (error) {
+            console.log('token ', error);
+            return res.sendStatus(403);
+        }
     } else {
         res.sendStatus(401);
     }

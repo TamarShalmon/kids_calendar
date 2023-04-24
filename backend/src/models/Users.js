@@ -6,4 +6,5 @@ const UserSchema = new mongoose.Schema({
   savedRecipes: [{ type: mongoose.Schema.Types.ObjectId, ref: "Recipe" }],
 });
 
+// TODO- syntax savedRecipes
 export const UserModel = mongoose.model("users", UserSchema);

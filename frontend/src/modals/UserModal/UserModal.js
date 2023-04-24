@@ -3,17 +3,22 @@ import { UserContext } from '../../context/UserContext'
 
 
 import "../UserModal/UserModal.css";
+import { useCookies } from "react-cookie";
+import apiReq from "../../global/apiReq";
 
 function UserModal({ userItem }) {
+  const [cookies] = useCookies(["access_token"])
 
   const { modalOpenToggle, addUser } = useContext(UserContext);
 
   const [inputUser, setInputUser] = useState("")
 
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    addUser(inputUser);
+    const token =cookies.access_token
+    const newUser = await apiReq({url: 'small-user/create-user' ,data : {name: inputUser}, method :"POST", token})
+    addUser(newUser);
     setInputUser("");
     modalOpenToggle(null);
   }
@@ -40,8 +45,8 @@ function UserModal({ userItem }) {
               className="input"
               type="text"
               required
-              minlength="3"
-              maxlength="8"
+              minLength="3"
+              maxLength="8"
               value={inputUser}
               onChange={(e) => setInputUser(e.target.value)}
             />

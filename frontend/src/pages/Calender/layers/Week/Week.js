@@ -41,7 +41,7 @@ function Week() {
                         weatherDay={day.weatherDay}
                         name={day.name}
                         style={day.style}
-                        currentDay={currentDay === day.id}
+                        currentDay={String(currentDay) === day.id}
                     />
                 ))}
             </div>

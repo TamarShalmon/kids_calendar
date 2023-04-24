@@ -1,6 +1,7 @@
 import React, { createContext, useMemo, useState } from "react";
 import days from '../assets/data/days'
 import { useCookies } from "react-cookie";
+import { useEffect } from "react";
 
 
 
@@ -21,6 +22,13 @@ export const UserContextProvider = ({ children }) => {
 
     const [cookies, setCookies] = useCookies(["access_token"]);
 
+    useEffect(() => {
+        if (localStorage.mainUser) {
+            setCookies("access_token", savedMainUser.token);
+        }
+    }, [])
+
+
 
     const value = useMemo(() => ({
         mainUser,
@@ -32,7 +40,10 @@ export const UserContextProvider = ({ children }) => {
 
         deleteIconsToggle: (newState) => setShowDeleteIcons(newState),
 
-        login: (newMainUserToAdd) => setMainUser(newMainUserToAdd),
+        login: (newMainUserToAdd) => {
+            setMainUser(newMainUserToAdd)
+            setUsers(newMainUserToAdd.smallUsers)
+        },
 
         logout: () => {
             setCookies("access_token", "");
@@ -44,7 +55,7 @@ export const UserContextProvider = ({ children }) => {
             if (newUserToAdd) {
                 setUsers((users) => [
                     ...users,
-                    { name: newUserToAdd, id: users.length, active: false }
+                    { ...newUserToAdd, active: false }
                 ]);
             }
         },
@@ -53,7 +64,7 @@ export const UserContextProvider = ({ children }) => {
             setUsers((users) => users.map((user) => {
                 return {
                     ...user,
-                    active: user.id === userId
+                    active: user._id === userId
                 }
             }))
         },

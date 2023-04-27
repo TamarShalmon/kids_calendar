@@ -16,21 +16,21 @@ function User({ userId, name }) {
 
     const [cookies] = useCookies(["access_token"])
 
-    
+
     let navigate = useNavigate();
-    
+
     async function onClickUser() {
-        setLoading(true)
+        setLoading(true) //TODO = show loader fix css
         try {
             const token = cookies.access_token
             // api
             // get user by id >> 
             // update context - week
             // update context - current user
-            const currentSmallUser = await apiReq({url: `small-user/read-one/${userId}`, method: "GET", token }) 
+            const currentSmallUser = await apiReq({ url: `small-user/read-one/${userId}`, method: "GET", token })
             console.log(currentSmallUser);
             selectUser(userId)
-            setWeekbyUser(userId, currentSmallUser.week )
+            setWeekbyUser(userId, currentSmallUser.week)
             eventsMenuOpenToggle(false)
             navigate("/calender")
         } catch (error) {
@@ -41,14 +41,15 @@ function User({ userId, name }) {
     }
 
     return (
-
-        <button
-            id='user'
-            style={{ fontFamily: 'Neucha, Rubik' }}
-            onClick={onClickUser}>
-            {name}
-        </button>
-
+        <>
+            <button
+                id='user'
+                style={{ fontFamily: 'Neucha, Rubik' }}
+                onClick={onClickUser}>
+                {name}
+            </button>
+            {loading && null}
+        </>
     )
 }
 

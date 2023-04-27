@@ -17,28 +17,26 @@ export const BoardContextProvider = ({ children }) => {
     const [cookies] = useCookies(["access_token"])
     const { users, mainUser } = useContext(UserContext)
 
-    async function updateWeek(id, week) {
-        try {
-            const token = cookies.access_token
-            const user = await apiReq({ url: `small-user/update/${id}`, data: { week }, token, method: "PUT" })
-            console.log(user);
-        } catch (error) {
+    const curr = users?.find(u => u.active)
 
-        }
+    async function updateWeek(id, week) {
+        const token = cookies.access_token
+        const user = await apiReq({ url: `small-user/update/${id}`, data: { week }, token, method: "PUT" })
+        console.log('server update week', week, user);
     }
 
     useEffect(() => {
-        const curr = users.find(u => u.active)   
-        console.log(mainUser?.token , curr , week.length);
-        if (mainUser?.token && curr && week.length){
-            updateWeek(curr?._id, week)
+        console.log('Use Effect ran')
+        async function getUser() {
+            const token = cookies.access_token
+
+            if (curr?._id && token) {
+                const currentSmallUser = await apiReq({ url: `small-user/read-one/${curr?._id}`, method: "GET", token })
+                //console.log('refresh', currentSmallUser);
+                setWeek(currentSmallUser.week)
+            }
         }
-    }, [week])
-    
-    // TODO- onrefresh bring the current
-    useEffect(() => {
-        const curr = users.find(u => u.active)   
-        console.log("refresh", curr );
+        getUser()
     }, [])
 
 
@@ -55,20 +53,15 @@ export const BoardContextProvider = ({ children }) => {
         modalPicOpenToggle: (newState) => setModalPicOpen(newState),
         eventsMenuOpenToggle: (newState) => setEventsMenuOpened(newState),
 
-        setWeekbyUser: (userId, initDays ) => {
+        setWeekbyUser: (userId, initDays) => {
             // Init App
-            if (userId = '643f06ffec4c3f7fa44d9d3a'){ //TODO - guest
-                 initDays = localStorage.getItem(userId) ? JSON.parse(localStorage.getItem(userId)) : days;
-            } 
-            if (!initDays?.length){
-                initDays =  days
-            }
+            initDays = localStorage.getItem(userId) ? JSON.parse(localStorage.getItem(userId)) : days;
             setWeek(initDays)
         },
 
         addWeather: (dayName, weatherToAdd) => {
-            setWeek((currentWeek) => {
-                return currentWeek.map((day, index) => {
+            setWeek(tempWeek => {
+                const temp = tempWeek.map((day, index) => {
                     if (day.name === dayName) {
                         return {
                             ...day,
@@ -78,12 +71,14 @@ export const BoardContextProvider = ({ children }) => {
                         return day
                     }
                 });
+                updateWeek(curr?._id, temp)
+                return temp
             });
         },
 
         deleteWeather: (dayName) => {
-            setWeek((currentWeek) => {
-                return currentWeek.map((day, index) => {
+            setWeek(tempWeek => {
+                const temp = tempWeek.map((day, index) => {
                     if (day.name === dayName) {
                         return {
                             ...day,
@@ -93,14 +88,15 @@ export const BoardContextProvider = ({ children }) => {
                         return day
                     }
                 });
+                updateWeek(curr?._id, temp)
+                return temp
             });
         },
 
         addEvent: (dayName, newEventToAdd) => {
-            setWeek((currentWeek) => {
-                return currentWeek.map((day, index) => {
+            setWeek(tempWeek => {
+                const temp = tempWeek.map((day, index) => {
                     if (day.name === dayName) {
-
                         return {
                             ...day,
                             eventsList: [...day.eventsList, { ...newEventToAdd, name: day.name, day: dayName, id: uuidv4() }]
@@ -110,13 +106,14 @@ export const BoardContextProvider = ({ children }) => {
                         return day
                     }
                 });
-            });
+                updateWeek(curr?._id, temp)
+                return temp
+            })
         },
 
         deleteEvent: (dayName, eventId) => {
-
-            setWeek((currentWeek) => {
-                return currentWeek.map((day, index) => {
+            setWeek(tempWeek => {
+                const temp = tempWeek.map((day, index) => {
                     if (day.name === dayName) {
                         return {
                             ...day,
@@ -126,14 +123,19 @@ export const BoardContextProvider = ({ children }) => {
                         return day
                     }
                 });
+                updateWeek(curr?._id, temp)
+                return temp
             });
         },
 
-        sortEvents: (dragIndex, hoverIndex, dayName) => {
-            setWeek((currentWeek) => {
-                return currentWeek.map(day => {
+        sortEvents: (dragId, hoverId, dayName) => {
+            setWeek(tempWeek => {
+                const temp = tempWeek.map(day => {
                     if (day.name === dayName) {
                         const newItems = [...day.eventsList]
+                        const dragIndex = newItems.findIndex(it => it.id === dragId)
+                        const hoverIndex = newItems.findIndex(it => it.id === hoverId)
+                        // console.log(dragIndex, hoverIndex);
                         const draggedItem = newItems[dragIndex];
                         newItems.splice(dragIndex, 1);
                         newItems.splice(hoverIndex, 0, draggedItem);
@@ -141,7 +143,9 @@ export const BoardContextProvider = ({ children }) => {
                     } else {
                         return day
                     }
-                })
+                });
+                updateWeek(curr?._id, temp)
+                return temp
             });
         },
 

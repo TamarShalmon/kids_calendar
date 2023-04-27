@@ -10,7 +10,7 @@ router.post('/create-user', [verifyToken], async (req, res) => {
         res.send(newUser)
     } catch (error) {
         console.log(error);
-        res.status(400).json(error);} //TODO- להשקיע הודעות?
+        res.status(400).json({message: "can't create this user"});} 
 })
 
 router.put('/update/:id', [verifyToken], async (req, res) => {
@@ -22,7 +22,7 @@ router.put('/update/:id', [verifyToken], async (req, res) => {
         res.send(updatedUser)
     } catch (error) {
         console.log(error);
-        res.status(400).json(error);
+        res.status(400).json({message: "can't update this user"});
     }
 })
 
@@ -35,7 +35,7 @@ router.get('/read-one/:id', [verifyToken], async (req, res) => {
         res.send(foundUser)
     } catch (error) {
         console.log(error);
-        res.status(400).json(error);
+        res.status(400).json({message: "can't found this user"});
     }
 })
 

@@ -12,7 +12,7 @@ import CustomPicModal from '../../../../modals/CustomPicModal/CustomPicModal';
 function Week() {
     const { week, modalEraseOpen, modalOpen, modalPicOpen, eventsMenuOpened } = useContext(BoardContext);
     const { users } = useContext(UserContext);
-    let activeUserId = users.filter((user) => user.active)[0].id;
+    let activeUserId = users.filter((user) => user.active)[0]._id;
 
     const currentDay = new Date().getDay() + 1;
 
@@ -21,7 +21,7 @@ function Week() {
     }, [users])
 
     useEffect(() => {
-        console.log('Week updated')
+        console.log('Week updated', week)
         localStorage.setItem(activeUserId, JSON.stringify(week));
     }, [week])
 
@@ -41,9 +41,9 @@ function Week() {
                         weatherDay={day.weatherDay}
                         name={day.name}
                         style={day.style}
-                        currentDay={String(currentDay) === day.id}
-                    />
-                ))}
+                        currentDay={String(currentDay) === String(day.id)}
+                    />)
+                )}
             </div>
         </>
     );

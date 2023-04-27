@@ -17,16 +17,7 @@ const apiReq = async ({ url, method, data, token }) => {
         return res
     } catch (error) {
         console.log(error);
-        toast.error(error.message || 'something went wrong', {
-            position: "top-left",
-            autoClose: 5000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-        })
+        toast.error(error?.response?.data?.message || error.message || 'something went wrong')
     }
 }
 

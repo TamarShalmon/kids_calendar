@@ -3,17 +3,6 @@ import axios from "axios";
 import { toast } from 'react-toastify';
 import '../Home.css';
 
-const REGISTER_TOAST_CONFIG = {
-    position: "top-left",
-    autoClose: 5000,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "dark",
-};
-
 const Register = ({ setshowRegister }) => {
 
     const [username, setUsername] = useState("");
@@ -26,12 +15,12 @@ const Register = ({ setshowRegister }) => {
                 username,
                 password,
             });
-            toast.success("Registration Completed! Now login.", REGISTER_TOAST_CONFIG);
+            toast.success("Registration Completed! Now login.");
             setshowRegister(false);
 
         } catch (error) {
             console.error(error);
-            toast.error("Username already exists or registration details are missing!", REGISTER_TOAST_CONFIG);
+            toast.error("Username already exists or registration details are missing!");
         }
     };
 

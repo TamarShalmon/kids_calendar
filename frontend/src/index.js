@@ -15,7 +15,16 @@ root.render(
   <React.StrictMode>
     <UserContextProvider>
       <BoardContextProvider>
-        <ToastContainer />
+        <ToastContainer
+          position="top-left"
+          autoClose={5000}
+          hideProgressBar={true}
+          closeOnClick={true}
+          pauseOnHover={true}
+          draggable={true}
+          progress={undefined}
+          theme="dark"
+        />
         <App />
       </BoardContextProvider>
     </UserContextProvider>

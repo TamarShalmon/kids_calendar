@@ -18,40 +18,23 @@ const Login = ({ setshowRegister }) => {
         handleLogin({ username, password });
     };
 
+    const handleGuestLogin = () => {
+        handleLogin()
+    };
+
     const handleLogin = async (data) => {
         try {
-            const result = await apiReq({ url: 'auth/login', data, method: "POST" });
+            const result = await apiReq({ url: data ? 'auth/login' : 'auth/connect-as-guest', data, method: "POST" });
             console.log(result);
             login(result)
             setCookies("access_token", result.token);
             localStorage.setItem("userID", result.userID);
             localStorage.setItem("mainUser", JSON.stringify(result));
-            // const result = await axios.post("http://localhost:3001/auth/login", items);
-            // login(result.data)
-            // setCookies("access_token", result.data.token);
-            // localStorage.setItem("userID", result.data.userID);
-            // localStorage.setItem("mainUser", JSON.stringify(result.data));
         } catch (error) {
-            // toast.error("Username or password is incorrect!", {
-            //     position: "top-left",
-            //     autoClose: 5000,
-            //     hideProgressBar: true,
-            //     closeOnClick: true,
-            //     pauseOnHover: true,
-            //     draggable: true,
-            //     progress: undefined,
-            //     theme: "dark",
-            // });
-            // console.error(error);
+            console.error(error);
         }
     };
 
-    const handleGuestLogin = () => {
-        handleLogin({
-            username: "guest",
-            password: "guest"
-        });
-    };
 
     return (
         <div className="login-container">

@@ -19,6 +19,7 @@ app.use("/small-user", SmallUserRouter);
 
 const connectToDataBase = async () => {
   try {
+    console.log("going to mongo connect");
     await mongoose.connect(process.env.CONECTION_STRING)
     console.log("mongo connect");
   } catch (error) {

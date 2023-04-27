@@ -19,7 +19,7 @@ function Event({ id, day, name, image, note, pic, type, index }) {
         drop: (item) => {
             if (item.from === 'day') {
                 console.log('drag:', item.index, item.image, 'drop', index, image);
-                sortEvents(item.index, index, day)
+                sortEvents(item.id, id, day)
             }
         },
         collect: (monitor) => ({

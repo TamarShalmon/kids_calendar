@@ -35,7 +35,7 @@ button {
 button.toggle-button {
   color: white;
   position: absolute;
-  top: -3px;
+  top: -2px;
   right: 40px;
   transform: translateY(-100%);
   white-space: nowrap;

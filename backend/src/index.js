@@ -23,6 +23,7 @@ const connectToDataBase = async () => {
     await mongoose.connect(process.env.CONECTION_STRING)
     console.log("mongo connect");
   } catch (error) {
+    console.log(error);
     console.log("mongo not connect");
   }
 };

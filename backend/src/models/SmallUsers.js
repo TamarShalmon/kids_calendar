@@ -4,6 +4,7 @@ const EventSchema = new mongoose.Schema({
   id: { type: String, required: true },
   title: { type: String },
   image: { type: String },
+  note: { type: String },
 });
 
 const WeatherSchema = new mongoose.Schema({

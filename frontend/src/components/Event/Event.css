@@ -1,6 +1,5 @@
 .event-image {
   width: 3rem;
-  margin: 0 auto;
   pointer-events: none;
 }
 
@@ -9,7 +8,10 @@ img[src*="blob"] {
   height: 3.5rem;
 }
 
-.div-dropable{
+.div-dropable {
   width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

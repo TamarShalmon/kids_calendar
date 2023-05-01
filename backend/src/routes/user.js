@@ -32,7 +32,7 @@ async function login(username, password) {
     if (!user) throw 'The Username is not valid'
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) throw 'The Password is not valid'
-
+    
     const token = jwt.sign({ id: user._id }, process.env.SECRET_STRING);
     const smallUsers = await SmallUserModel.find({ userOwner: user._id })
 

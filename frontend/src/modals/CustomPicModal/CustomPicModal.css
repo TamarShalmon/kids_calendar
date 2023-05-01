@@ -1,4 +1,4 @@
-.PICmodalBackground {
+.PIC-modalBackground {
   width: 100vw;
   height: 100vh;
   background-color: rgba(200, 200, 200, 0.50);
@@ -10,7 +10,7 @@
   z-index: 100;
 }
 
-.PICmodalContainer {
+.PIC-modalContainer {
   width: 555px;
   height: 590px;
   border-radius: 12px;
@@ -21,38 +21,45 @@
   padding: 20px;
 }
 
-.PICmodalContainer .title {
+.PIC-modalContainer .title {
   display: inline-block;
   text-align: center;
 }
 
-.PICtitleCloseBtn {
+.PIC-titleCloseBtn {
   display: flex;
   justify-content: flex-end;
 }
 
-.PICtitleCloseBtn button {
+.PIC-titleCloseBtn button {
   background-color: transparent;
   border: none;
   font-size: 25px;
   cursor: pointer;
 }
 
-.PICmodalContainer .PICbody {
+.PIC-modalContainer .PIC-body {
 
   font-size: 1.7rem;
   text-align: center;
   padding: 5px;
 }
 
-.PICmodalContainer .PICfooter {
+.PIC-input-modal {
+  width: 235px;
+  height: 30px;
+  font-size: 20px;
+  margin: 10px 0;
+}
+
+.PIC-modalContainer .PIC-footer {
   flex: 20%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.PICmodalContainer .PICfooter button {
+.PIC-modalContainer .PIC-footer button {
   width: 150px;
   height: 45px;
   margin: 10px 10px;
@@ -72,7 +79,7 @@ h1 {
   text-align: center;
 }
 
-.PICdiv-image-preview {
+.PIC-div-image-preview {
   display: flex;
   border: dashed 2px #353535;
   height: 250px;

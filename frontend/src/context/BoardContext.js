@@ -5,6 +5,8 @@ import update from "immutability-helper";
 import { UserContext } from "./UserContext";
 import apiReq from "../global/apiReq";
 import { useCookies } from "react-cookie";
+import "../components/User/User.css";
+
 
 export const BoardContext = createContext({});
 
@@ -14,7 +16,9 @@ export const BoardContextProvider = ({ children }) => {
     const [modalPicOpen, setModalPicOpen] = useState(false);
     const [eventsMenuOpened, setEventsMenuOpened] = useState(false);
     const [week, setWeek] = useState(days)
+    const [isRefreshing, setIsRefreshing] = useState(false);
     const [cookies] = useCookies(["access_token"])
+
     const { users, mainUser } = useContext(UserContext)
 
     const curr = users?.find(u => u.active)
@@ -24,17 +28,20 @@ export const BoardContextProvider = ({ children }) => {
         const user = await apiReq({ url: `small-user/update/${id}`, data: { week }, token, method: "PUT" })
         console.log('server update week', week, user);
     }
-
     useEffect(() => {
-        console.log('Use Effect ran')
+
         async function getUser() {
+            setIsRefreshing(true);
+
             const token = cookies.access_token
 
             if (curr?._id && token) {
                 const currentSmallUser = await apiReq({ url: `small-user/read-one/${curr?._id}`, method: "GET", token })
-                //console.log('refresh', currentSmallUser);
+                // console.log('refresh', currentSmallUser);
                 setWeek(currentSmallUser.week)
             }
+
+            setIsRefreshing(false);
         }
         getUser()
     }, [])
@@ -55,7 +62,7 @@ export const BoardContextProvider = ({ children }) => {
 
         setWeekbyUser: (userId, initDays) => {
             // Init App
-            initDays = localStorage.getItem(userId) ? JSON.parse(localStorage.getItem(userId)) : days;
+            // initDays = localStorage.getItem(userId) ? JSON.parse(localStorage.getItem(userId)) : days;
             setWeek(initDays)
         },
 
@@ -111,23 +118,6 @@ export const BoardContextProvider = ({ children }) => {
             })
         },
 
-        deleteEvent: (dayName, eventId) => {
-            setWeek(tempWeek => {
-                const temp = tempWeek.map((day, index) => {
-                    if (day.name === dayName) {
-                        return {
-                            ...day,
-                            eventsList: day.eventsList.filter((event) => event.id !== eventId)
-                        }
-                    } else {
-                        return day
-                    }
-                });
-                updateWeek(curr?._id, temp)
-                return temp
-            });
-        },
-
         sortEvents: (dragId, hoverId, dayName) => {
             setWeek(tempWeek => {
                 const temp = tempWeek.map(day => {
@@ -149,12 +139,34 @@ export const BoardContextProvider = ({ children }) => {
             });
         },
 
-        deleteAllEvents: () => setWeek(days),
+        deleteEvent: (dayName, eventId) => {
+            setWeek(tempWeek => {
+                const temp = tempWeek.map((day, index) => {
+                    if (day.name === dayName) {
+                        return {
+                            ...day,
+                            eventsList: day.eventsList.filter((event) => event.id !== eventId)
+                        }
+                    } else {
+                        return day
+                    }
+                });
+                updateWeek(curr?._id, temp)
+                return temp
+            });
+        },
+
+        deleteAllEvents: () => {
+            updateWeek(curr?._id, days);
+            setWeek(days);
+        },
+
 
     }), [week, modalEraseOpen, modalOpen, modalPicOpen, eventsMenuOpened]);
 
     return (
         <BoardContext.Provider value={value}>
+            {isRefreshing && <div className="loader"><div className="lds-ripple"><div></div><div></div></div></div>}
             {children}
         </BoardContext.Provider>
     );

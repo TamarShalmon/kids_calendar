@@ -31,31 +31,31 @@ const CustomPicModal = ({ eventItem }) => {
 
 
   return (
-    <div className="PICmodalBackground">
-      <div className="PICmodalContainer">
-        <div className="PICtitleCloseBtn">
+    <div className="PIC-modalBackground">
+      <div className="PIC-modalContainer">
+        <div className="PIC-titleCloseBtn">
           <button onClick={() => modalPicOpenToggle(null)}>
             X
           </button>
         </div>
-        <div className="PICtitle">
+        <div className="PIC-title">
           <h1>Choose a photo from your gallery</h1>
         </div>
         <form onSubmit={handlePicSubmit}>
-          <div className="PICbody">
+          <div className="PIC-body">
             <input
+              className="PIC-input-modal"
               required
               type="file"
               accept=".jpg, .jpeg, .png"
               id='font-file'
               onChange={handleImageChange}
             />
-            <div className="PICdiv-image-preview">
-
+            <div className="PIC-div-image-preview">
               {imagePreviewUrl && (
                 <AvatarEditor
                   ref={editor}
-                  className="PICimage-preview"
+                  className="PIC-image-preview"
                   image={imagePreviewUrl}
                   width={200}
                   height={180}
@@ -71,22 +71,22 @@ const CustomPicModal = ({ eventItem }) => {
                 className="rotate-img"
                 onClick={() => setRotate(rotate + 90)}
                 src={`/images/refresh.png`} />
-                <Slider sx={{ width: 250, color: "#313131" }}
-                  min={1}
-                  max={5}
-                  step={0.1}
-                  value={scale}
-                  onChange={(e, newValue) => setScale(newValue)}
-                />
+              <Slider sx={{ width: 250, color: "#313131" }}
+                min={1}
+                max={5}
+                step={0.1}
+                value={scale}
+                onChange={(e, newValue) => setScale(newValue)}
+              />
               {/* <input type="range" min="1" max="5" step="0.1" value={scale} onChange={e => setScale(+e.target.value)} /> */}
             </div>
           </div>
 
-          <div className="PICfooter">
-            <button onClick={() => modalPicOpenToggle(null)} id="cancelBtn">
+          <div className="PIC-footer">
+            <button className='PIC-button' onClick={() => modalPicOpenToggle(null)} id="cancelBtn">
               Cancel
             </button>
-            <button type="submit">Submit</button>
+            <button className='PIC-button' type="submit">Submit</button>
           </div>
         </form>
       </div>

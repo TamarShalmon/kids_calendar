@@ -16,7 +16,7 @@ export const BoardContextProvider = ({ children }) => {
     const [modalPicOpen, setModalPicOpen] = useState(false);
     const [eventsMenuOpened, setEventsMenuOpened] = useState(false);
     const [week, setWeek] = useState(days)
-    const [isRefreshing, setIsRefreshing] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [cookies] = useCookies(["access_token"])
 
     const { users, mainUser } = useContext(UserContext)
@@ -31,7 +31,7 @@ export const BoardContextProvider = ({ children }) => {
     useEffect(() => {
 
         async function getUser() {
-            setIsRefreshing(true);
+            setLoading(true);
 
             const token = cookies.access_token
 
@@ -41,7 +41,7 @@ export const BoardContextProvider = ({ children }) => {
                 setWeek(currentSmallUser.week)
             }
 
-            setIsRefreshing(false);
+            setLoading(false);
         }
         getUser()
     }, [])
@@ -61,9 +61,7 @@ export const BoardContextProvider = ({ children }) => {
         eventsMenuOpenToggle: (newState) => setEventsMenuOpened(newState),
 
         setWeekbyUser: (userId, initDays) => {
-            // Init App
-            // initDays = localStorage.getItem(userId) ? JSON.parse(localStorage.getItem(userId)) : days;
-            setWeek(initDays)
+            setWeek(initDays?.length ? initDays : days)
         },
 
         addWeather: (dayName, weatherToAdd) => {
@@ -166,7 +164,7 @@ export const BoardContextProvider = ({ children }) => {
 
     return (
         <BoardContext.Provider value={value}>
-            {isRefreshing && <div className="loader"><div className="lds-ripple"><div></div><div></div></div></div>}
+            {loading && <div className="loader"><div className="lds-ripple"><div></div><div></div></div></div>}
             {children}
         </BoardContext.Provider>
     );

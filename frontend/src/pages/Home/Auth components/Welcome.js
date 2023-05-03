@@ -10,13 +10,7 @@ function Welcome() {
     const { modalOpen, modalOpenToggle, users, showDeleteIcons, deleteIconsToggle, deleteUser } = useContext(UserContext);
     const { logout } = useContext(UserContext);
 
-    useEffect(() => {
-        localStorage.setItem('users', JSON.stringify(users));
-    }, [users.length])
-
-
     const handleUserDelete = (userId) => {
-        // api req - del user >> update Context
         deleteUser(userId);
         deleteIconsToggle(false);
     }
@@ -37,7 +31,7 @@ function Welcome() {
                                 showDeleteIcon={showDeleteIcons}
                             />
                             {showDeleteIcons && (
-                                <div className='delete-icon-wrapper' onClick={() => handleUserDelete(user.id)}>
+                                <div className='delete-icon-wrapper' onClick={() => handleUserDelete(user._id)}>
                                     <img src='https://cdn-icons-png.flaticon.com/512/1828/1828843.png' alt='Delete' />
                                 </div>
                             )}

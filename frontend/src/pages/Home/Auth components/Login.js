@@ -8,6 +8,7 @@ import apiReq from '../../../global/apiReq';
 
 const Login = ({ setshowRegister }) => {
     const { login } = useContext(UserContext);
+    const [loading, setLoading] = useState()
     const [_, setCookies] = useCookies(["access_token"]);
 
     const [username, setUsername] = useState("");
@@ -23,6 +24,7 @@ const Login = ({ setshowRegister }) => {
     };
 
     const handleLogin = async (data) => {
+        setLoading(true)
         try {
             const result = await apiReq({ url: data ? 'auth/login' : 'auth/connect-as-guest', data, method: "POST" });
             console.log(result);
@@ -32,13 +34,17 @@ const Login = ({ setshowRegister }) => {
             localStorage.setItem("mainUser", JSON.stringify(result));
         } catch (error) {
             console.error(error);
+        } finally {
+            setLoading()
         }
     };
 
 
     return (
-        <div className="login-container">
-            <>
+        <>
+            {loading && <div className="loader"><div className="lds-ripple"><div></div><div></div></div></div>}
+
+            <div className="login-container">
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
                         <label htmlFor="username">Username:</label>
@@ -66,8 +72,8 @@ const Login = ({ setshowRegister }) => {
                         <button type="button" className='submit-login yellow' onClick={handleGuestLogin}>Login as a guest</button>
                     </div>
                 </form>
-            </>
-        </div>
+            </div>
+        </>
     );
 };
 

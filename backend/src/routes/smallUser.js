@@ -39,6 +39,20 @@ router.get('/read-one/:id', [verifyToken], async (req, res) => {
     }
 })
 
+router.delete('/delete-one/:id', [verifyToken], async (req, res) => {
+    const id = req.params.id
+
+    try {
+         await SmallUserModel.findByIdAndDelete(id)
+         const smallUsers = await SmallUserModel.find({ userOwner: req.user?._id })
+
+        res.send(smallUsers)
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({message: "can't delete this user"});
+    }
+})
+
 
 export { router as SmallUserRouter };
 

@@ -20,7 +20,7 @@ function User({ userId, name }) {
     let navigate = useNavigate();
 
     async function onClickUser() {
-        setLoading(true) 
+        setLoading(true)
         try {
             const token = cookies.access_token
             const currentSmallUser = await apiReq({ url: `small-user/read-one/${userId}`, method: "GET", token })
@@ -30,7 +30,7 @@ function User({ userId, name }) {
             eventsMenuOpenToggle(false)
             navigate("/calender")
         } catch (error) {
-
+            console.error(error);
         } finally {
             setLoading()
         }

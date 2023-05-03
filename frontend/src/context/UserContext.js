@@ -2,6 +2,9 @@ import React, { createContext, useMemo, useState } from "react";
 import days from '../assets/data/days'
 import { useCookies } from "react-cookie";
 import { useEffect } from "react";
+import apiReq from "../global/apiReq";
+import "../components/User/User.css";
+
 
 
 
@@ -10,7 +13,7 @@ export const UserContext = createContext({});
 export const UserContextProvider = ({ children }) => {
     const [modalOpen, setModalOpen] = useState(false);
     const [showDeleteIcons, setShowDeleteIcons] = useState(false);
-
+    const [loading, setLoading] = useState(false);
 
 
     // InitApp
@@ -69,15 +72,28 @@ export const UserContextProvider = ({ children }) => {
             }))
         },
 
-        deleteUser: (userId) => {
-            setUsers((users) => users.filter((user) => user.id !== userId));
-            localStorage.removeItem(userId)
+        deleteUser: async (userId) => {
+            setLoading(true);
+
+            const token = cookies.access_token
+
+            const newSmallUsers = await apiReq({
+                url: `small-user/delete-one/${userId}`,
+                method: "DELETE", token
+            })
+            localStorage.users = JSON.stringify(newSmallUsers)
+            setUsers(newSmallUsers)
+
+            setLoading(false);
+
         },
 
     }), [mainUser, users, modalOpen, showDeleteIcons]);
 
     return (
         <UserContext.Provider value={value}>
+            {loading && <div className="loader"><div className="lds-ripple"><div></div><div></div></div></div>}
+
             {children}
         </UserContext.Provider>
     );

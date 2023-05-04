@@ -26,16 +26,17 @@
 .day-events {
   display: grid;
   grid-gap: 10px;
-  width: 100px;
+  width: 100%;
   height: 100%;
   grid-auto-rows: 60px;
   grid-template-rows: 60px;
   align-content: stretch;
   justify-content: center;
-  margin: 0 auto 4px auto;
+  margin: 0 auto 5px auto;
   overflow-y: auto;
   overflow-x: hidden;
   border-radius: 0 0 18px 18px;
+  /* padding-right: 5%; */
 }
 
 .day-events::-webkit-scrollbar {
@@ -91,3 +92,6 @@
   height: 100%;
 }
 
+.current-day-events {
+  margin: 0 auto 45px auto;
+}

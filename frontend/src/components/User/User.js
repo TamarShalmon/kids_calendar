@@ -19,26 +19,18 @@ function User({ userId, name }) {
 
     let navigate = useNavigate();
 
-    async function onClickUser() {
-        setLoading(true)
-        try {
-            const token = cookies.access_token
-            const currentSmallUser = await apiReq({ url: `small-user/read-one/${userId}`, method: "GET", token })
-            console.log(currentSmallUser);
-            selectUser(userId)
-            setWeekbyUser(userId, currentSmallUser.week)
-            eventsMenuOpenToggle(false)
-            navigate("/calender")
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setLoading()
-        }
+    function onClickUser(e) {
+        e.stopPropagation();
+        selectUser(userId)
+        // setWeekbyUser(userId, currentSmallUser.week)
+        // eventsMenuOpenToggle(false)
+        navigate("/calender")
     }
+
 
     return (
         <>
-            {loading && <div className="loader"><div className="lds-ripple"><div></div><div></div></div></div>}
+            {/* {loading && <div className="loader"><div className="lds-ripple"><div></div><div></div></div></div>} */}
             <button
                 id='user'
                 style={{ fontFamily: 'Neucha, Rubik' }}

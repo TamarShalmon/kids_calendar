@@ -4,7 +4,6 @@ import mongoose from "mongoose";
 import { config } from "dotenv";
 
 import { userRouter } from "./routes/user.js";
-import { eventsListRouter } from "./routes/eventsList.js";
 import { SmallUserRouter } from "./routes/smallUser.js";
 config();
 
@@ -15,7 +14,7 @@ app.use(cors());
 
 app.use("/auth", userRouter);
 app.use("/small-user", SmallUserRouter);
-// app.use("/eventsList", eventsListRouter);
+
 
 const connectToDataBase = async () => {
   try {

@@ -37,6 +37,7 @@ function CustomTaskModal({ eventItem }) {
           <div className="body">
             <input
               className="input-modal"
+              style={{ fontFamily: 'Neucha, Rubik' }}
               type="text"
               required
               minLength="3"

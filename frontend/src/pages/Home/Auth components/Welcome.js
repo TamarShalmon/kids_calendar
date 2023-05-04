@@ -21,7 +21,7 @@ function Welcome() {
 
             <div className="login-container">
                 <h3 className='h3-home'>This is my name:</h3>
-                <div className='container-name'>
+                <div className='container-name' onClick={(userItem) => modalOpenToggle({ ...userItem })}>
                     {users.map((user, index) =>
                         <div key={user._id} className='user-wrapper'>
                             <User
@@ -31,7 +31,7 @@ function Welcome() {
                                 showDeleteIcon={showDeleteIcons}
                             />
                             {showDeleteIcons && (
-                                <div className='delete-icon-wrapper' onClick={() => handleUserDelete(user._id)}>
+                                <div className='delete-icon-wrapper' onClick={(e) => { e.stopPropagation(); handleUserDelete(user._id) }}>
                                     <img src='https://cdn-icons-png.flaticon.com/512/1828/1828843.png' alt='Delete' />
                                 </div>
                             )}

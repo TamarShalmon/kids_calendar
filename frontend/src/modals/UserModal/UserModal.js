@@ -1,24 +1,16 @@
 import React, { useState, useContext } from "react";
 import { UserContext } from '../../context/UserContext'
-
-
 import "../UserModal/UserModal.css";
-import { useCookies } from "react-cookie";
-import apiReq from "../../global/apiReq";
+
 
 function UserModal({ userItem }) {
-  const [cookies] = useCookies(["access_token"])
 
   const { modalOpenToggle, addUser } = useContext(UserContext);
-
   const [inputUser, setInputUser] = useState("")
-
 
   async function handleSubmit(e) {
     e.preventDefault();
-    const token =cookies.access_token
-    const newUser = await apiReq({url: 'small-user/create-user' ,data : {name: inputUser}, method :"POST", token})
-    addUser(newUser);
+    addUser({ name: inputUser });
     setInputUser("");
     modalOpenToggle(null);
   }

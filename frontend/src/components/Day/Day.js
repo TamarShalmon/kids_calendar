@@ -87,7 +87,7 @@ function Day({ name, eventsList, weatherDay, style, currentDay, }) {
                         image={weatherDay.image} />}
                 </div>
 
-                <div ref={drop} className="day-events">
+                <div ref={drop} className={`day-events ${currentDay ? "current-day-events" : ""}`}>
                     {eventsList.map((event, index) =>
                         <Event
                             key={`${event.id}`}

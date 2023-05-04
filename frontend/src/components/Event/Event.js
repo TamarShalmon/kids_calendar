@@ -28,15 +28,15 @@ function Event({ id, day, name, image, note, pic, type, index }) {
         }),
     });
 
-    const opacity = isDragging ? 0 : 1
+    const opacity = isOver ? 0.5 : 1 && isDragging ? 0 : 1
 
     return (
         <button
-            ref={drag} 
+            ref={drag}
             className='event'
             style={{ opacity }}>
             <div ref={drop} className='div-dropable' >
-                {note ? <p>{note}</p> : <img className='event-image' src={pic ? pic : image} />}
+                {note ? <p style={{ fontFamily: 'Neucha, Rubik' }}>{note}</p> : <img className='event-image' src={pic ? pic : image} />}
             </div>
         </button>
     )

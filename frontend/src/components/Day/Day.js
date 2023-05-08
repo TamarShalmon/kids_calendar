@@ -1,7 +1,5 @@
-import React, { useEffect, useState, useContext, useCallback } from 'react';
+import React, { useEffect, useContext, useCallback } from 'react';
 import { BoardContext } from "../../context/BoardContext";
-
-
 import { useDrop } from 'react-dnd';
 import Event from '../../components/Event/Event';
 import "./Day.css";
@@ -12,14 +10,12 @@ function Day({ name, eventsList, weatherDay, style, currentDay, }) {
 
     const { addEvent, modalPicOpenToggle, modalOpenToggle, addWeather, sortEvents } = useContext(BoardContext);
 
-
     useEffect(() => {
         console.log('Day has been updated', eventsList)
     }, [eventsList])
 
-
     ///// Drag and drop Weather------------
-    const [{ isOverWeather }, dropWeather] = useDrop(() => ({
+    const [, dropWeather] = useDrop(() => ({
         accept: "button",
         drop: (weatherItem) => addWeatherToBoard(weatherItem),
         collect: (monitor) => ({
@@ -36,7 +32,7 @@ function Day({ name, eventsList, weatherDay, style, currentDay, }) {
 
 
     ///// Drag and drop Event------------
-    const [{ isOver }, drop] = useDrop(() => ({
+    const [, drop] = useDrop(() => ({
         accept: "button",
         drop: (eventItem) => {
             if (eventItem.from === 'day' || eventItem.type !== 'event') return;
@@ -61,15 +57,12 @@ function Day({ name, eventsList, weatherDay, style, currentDay, }) {
     };
     /////----------------------------------
 
-    /// Move Drag and drop Event---------
+
+    ///// Move Drag and drop Event---------
     const moveCard = useCallback((dragIndex, hoverIndex) => {
         sortEvents(dragIndex, hoverIndex, name);
     }, [])
-
-
-    ///----------------------------------
-
-
+    /////----------------------------------
 
     return (
         <>

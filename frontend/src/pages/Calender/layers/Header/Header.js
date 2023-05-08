@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import { UserContext } from "../../../../context/UserContext";
 
 import "./Header.css";
@@ -17,7 +17,7 @@ function Header({ weatherIcon, days }) {
             <div className='header'>
 
                 <div className='hello'>
-                    Hello <span style={{ fontFamily: 'Neucha, Rubik' }}>{userName}</span>,<br />
+                    Hello <span>{userName}</span>,<br />
                     L'ets plan your week!
                 </div>
 

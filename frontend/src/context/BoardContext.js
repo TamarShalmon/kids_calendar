@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
 import days from '../assets/data/days'
 import { v4 as uuidv4 } from 'uuid';
-import update from "immutability-helper";
 import { UserContext } from "./UserContext";
 import apiReq from "../global/apiReq";
 import { useCookies } from "react-cookie";
@@ -11,40 +10,39 @@ import "../components/User/User.css";
 export const BoardContext = createContext({});
 
 export const BoardContextProvider = ({ children }) => {
-    const [modalEraseOpen, setModalEraseOpen] = useState(false)
+    const [modalEraseOpen, setModalEraseOpen] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
     const [modalPicOpen, setModalPicOpen] = useState(false);
     const [eventsMenuOpened, setEventsMenuOpened] = useState(false);
-    const [week, setWeek] = useState(days)
+    const [week, setWeek] = useState(days);
     const [loading, setLoading] = useState(false);
-    const [cookies] = useCookies(["access_token"])
+    const [cookies] = useCookies(["access_token"]);
 
-    const { users, mainUser } = useContext(UserContext)
+    const { users } = useContext(UserContext);
 
-    const curr = users?.find(u => u.active)
+    const curr = users?.find(u => u.active);
 
     async function updateWeek(id, week) {
-        const token = cookies.access_token
-        const user = await apiReq({ url: `small-user/update/${id}`, data: { week }, token, method: "PUT" })
+        const token = cookies.access_token;
+        const user = await apiReq({ url: `small-user/update/${id}`, data: { week }, token, method: "PUT" });
         console.log('server update week', week, user);
-    }
-    useEffect(() => {
+    };
 
+    useEffect(() => {
         async function getUser() {
             setLoading(true);
-
-            const token = cookies.access_token
-
+            const token = cookies.access_token;
             if (curr?._id && token) {
-                const currentSmallUser = await apiReq({ url: `small-user/read-one/${curr?._id}`, method: "GET", token })
+                const currentSmallUser = await apiReq({ 
+                    url: `small-user/read-one/${curr?._id}`, 
+                    method: "GET", token });
                 // console.log('refresh', currentSmallUser);
-                setWeek(currentSmallUser.week)
-            }
-
+                setWeek(currentSmallUser.week);
+            };
             setLoading(false);
-        }
-        getUser()
-    }, [])
+        };
+        getUser();
+    }, []);
 
 
     const value = useMemo(() => ({
@@ -60,7 +58,7 @@ export const BoardContextProvider = ({ children }) => {
         modalPicOpenToggle: (newState) => setModalPicOpen(newState),
         eventsMenuOpenToggle: (newState) => setEventsMenuOpened(newState),
 
-        setWeekbyUser: (userId, initDays) => {
+        setWeekbyUser: (initDays) => {
             setWeek(initDays?.length ? initDays : days)
         },
 

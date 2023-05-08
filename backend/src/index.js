@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import { config } from "dotenv";
 
 import { userRouter } from "./routes/user.js";
+import { eventsListRouter } from "./routes/eventsList.js";
 import { SmallUserRouter } from "./routes/smallUser.js";
 config();
 

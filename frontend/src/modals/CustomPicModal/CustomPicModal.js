@@ -48,7 +48,6 @@ const CustomPicModal = ({ eventItem }) => {
               required
               type="file"
               accept=".jpg, .jpeg, .png"
-              id='font-file'
               onChange={handleImageChange}
             />
             <div className="PIC-div-image-preview">
@@ -70,7 +69,8 @@ const CustomPicModal = ({ eventItem }) => {
               <img
                 className="rotate-img"
                 onClick={() => setRotate(rotate + 90)}
-                src={`/images/refresh.png`} />
+                src={`/images/refresh.png`}
+                alt='rotate-img' />
               <Slider sx={{ width: 250, color: "#313131" }}
                 min={1}
                 max={5}

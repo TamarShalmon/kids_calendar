@@ -14,7 +14,7 @@ function Event({ id, day, name, image, note, pic, type, index }) {
         }),
     }));
 
-    const [{ canDrop, isOver }, drop] = useDrop({
+    const [{ isOver }, drop] = useDrop({
         accept: "button",
         drop: (item) => {
             if (item.from === 'day') {
@@ -36,7 +36,7 @@ function Event({ id, day, name, image, note, pic, type, index }) {
             className='event'
             style={{ opacity }}>
             <div ref={drop} className='div-dropable' >
-                {note ? <p style={{ fontFamily: 'Neucha, Rubik' }}>{note}</p> : <img className='event-image' src={pic ? pic : image} />}
+                {note ? <p>{note}</p> : <img className='event-image' src={pic ? pic : image} alt='event' />}
             </div>
         </button>
     )

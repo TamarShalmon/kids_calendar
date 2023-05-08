@@ -1,18 +1,27 @@
 import React, { useState, useContext } from "react";
 import { UserContext } from '../../context/UserContext'
+import { BoardContext } from '../../context/BoardContext';
+import { useNavigate } from "react-router-dom";
 import "../UserModal/UserModal.css";
 
 
-function UserModal({ userItem }) {
+function UserModal() {
 
-  const { modalOpenToggle, addUser } = useContext(UserContext);
+  const { modalOpenToggle, addUser, selectUser } = useContext(UserContext);
+  const { setWeekbyUser, eventsMenuOpenToggle } = useContext(BoardContext)
   const [inputUser, setInputUser] = useState("")
+
+  let navigate = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();
-    addUser({ name: inputUser });
     setInputUser("");
     modalOpenToggle(null);
+    const userId = await addUser({ name: inputUser })
+    const currentSmallUserWeek = await selectUser(userId);
+    setWeekbyUser(currentSmallUserWeek.week);
+    eventsMenuOpenToggle(null)
+    navigate("/calender")
   }
 
   return (
@@ -20,10 +29,7 @@ function UserModal({ userItem }) {
       <div className="modalContainer">
         <div className="titleCloseBtn">
           <button
-            onClick={() => {
-              modalOpenToggle(null);
-            }}
-          >
+            onClick={() => { modalOpenToggle(null) }}>
             X
           </button>
         </div>
@@ -40,16 +46,12 @@ function UserModal({ userItem }) {
               minLength="3"
               maxLength="8"
               value={inputUser}
-              onChange={(e) => setInputUser(e.target.value)}
-            />
+              onChange={(e) => setInputUser(e.target.value)} />
           </div>
           <div className="footer">
             <button
-              onClick={() => {
-                modalOpenToggle(null);
-              }}
-              id="cancelBtn"
-            >
+              onClick={() => { modalOpenToggle(null) }}
+              id="cancelBtn" >
               Cancel
             </button>
             <button type="submit">Submit</button>

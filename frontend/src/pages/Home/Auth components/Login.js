@@ -1,15 +1,13 @@
 import React, { useContext, useState } from 'react'
-import axios from "axios";
 import { useCookies } from "react-cookie";
 import { UserContext } from "../../../context/UserContext";
-import { toast } from 'react-toastify';
 import '../Home.css';
 import apiReq from '../../../global/apiReq';
 
 const Login = ({ setshowRegister }) => {
     const { login } = useContext(UserContext);
     const [loading, setLoading] = useState()
-    const [_, setCookies] = useCookies(["access_token"]);
+    const [, setCookies] = useCookies(["access_token"]);
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");

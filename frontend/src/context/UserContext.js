@@ -1,16 +1,12 @@
-import React, { createContext, useContext, useMemo, useState } from "react";
-import days from '../assets/data/days'
-import { BoardContext } from "./BoardContext";
+import React, { createContext, useMemo, useState } from "react";
 import { useCookies } from "react-cookie";
 import { useEffect } from "react";
 import apiReq from "../global/apiReq";
 import "../components/User/User.css";
-// import { useNavigate } from "react-router-dom";
 
 export const UserContext = createContext({});
 
 export const UserContextProvider = ({ children }) => {
-    const { setWeekbyUser, eventsMenuOpenToggle } = useContext(BoardContext);
     const [modalOpen, setModalOpen] = useState(false);
     const [showDeleteIcons, setShowDeleteIcons] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -24,7 +20,6 @@ export const UserContextProvider = ({ children }) => {
 
     const [cookies, setCookies] = useCookies(["access_token"]);
 
-    // let navigate = useNavigate();
 
     useEffect(() => {
         if (localStorage.mainUser) {
@@ -60,37 +55,31 @@ export const UserContextProvider = ({ children }) => {
             const newSmallUser = await apiReq({
                 url: "small-user/create-user",
                 data: { name: newUserToAdd.name },
-                method: "POST",
-                token,
+                method: "POST", token,
             });
             if (newSmallUser) {
                 setUsers((users) => [...users, { ...newSmallUser, active: false }]);
             }
             setLoading(false);
+            return newSmallUser._id;
         },
 
         selectUser: async (userId) => {
             setLoading(true);
-            try {
-                const token = cookies.access_token
-                const currentSmallUser = await apiReq({
-                    url: `small-user/read-one/${userId}`,
-                    method: "GET", token
-                })
-                setUsers((users) => users.map((user) => {
-                    return {
-                        ...user,
-                        active: user._id === userId
-                    }
-                }))
-                setWeekbyUser(userId, currentSmallUser.week)
-                eventsMenuOpenToggle(false)
-                // navigate("/calender")
-            } catch (error) {
-                console.error(error);
-            } finally {
-                setLoading()
-            }
+            const token = cookies.access_token
+            const currentSmallUser = await apiReq({
+                url: `small-user/read-one/${userId}`, 
+                method: "GET", token
+            })
+            console.log(currentSmallUser);
+            setUsers((users) => users.map((user) => {
+                return {
+                    ...user,
+                    active: user._id === userId
+                }
+            }))
+            setLoading(false);
+            return currentSmallUser.week;
         },
 
         deleteUser: async (userId) => {
@@ -110,7 +99,6 @@ export const UserContextProvider = ({ children }) => {
     return (
         <UserContext.Provider value={value}>
             {loading && <div className="loader"><div className="lds-ripple"><div></div><div></div></div></div>}
-
             {children}
         </UserContext.Provider>
     );

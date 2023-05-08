@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useContext } from 'react'
 import { UserContext } from "../../../context/UserContext";
 
 import User from '../../../components/User/User';
@@ -31,7 +31,11 @@ function Welcome() {
                                 showDeleteIcon={showDeleteIcons}
                             />
                             {showDeleteIcons && (
-                                <div className='delete-icon-wrapper' onClick={(e) => { e.stopPropagation(); handleUserDelete(user._id) }}>
+                                <div className='delete-icon-wrapper'
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleUserDelete(user._id);
+                                    }}>
                                     <img src='https://cdn-icons-png.flaticon.com/512/1828/1828843.png' alt='Delete' />
                                 </div>
                             )}

@@ -16,9 +16,9 @@ router.post('/create-user', [verifyToken], async (req, res) => {
 router.put('/update/:id', [verifyToken], async (req, res) => {
     try {
         const { params, body } = req
-        // console.log(params, body.week[6]);
+        console.log(params, body.week[6]);
         const updatedUser = await SmallUserModel.findByIdAndUpdate(params.id, body, { new: true })
-        // console.log(updatedUser.week[6]);
+        console.log(updatedUser.week[6]);
         res.send(updatedUser)
     } catch (error) {
         console.log(error);

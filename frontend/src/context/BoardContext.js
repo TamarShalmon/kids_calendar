@@ -25,7 +25,7 @@ export const BoardContextProvider = ({ children }) => {
     async function updateWeek(id, week) {
         const token = cookies.access_token;
         const user = await apiReq({ url: `small-user/update/${id}`, data: { week }, token, method: "PUT" });
-        console.log('server update week', week, user);
+        // console.log('server update week', week, user);
     };
 
     useEffect(() => {
@@ -33,9 +33,10 @@ export const BoardContextProvider = ({ children }) => {
             setLoading(true);
             const token = cookies.access_token;
             if (curr?._id && token) {
-                const currentSmallUser = await apiReq({ 
-                    url: `small-user/read-one/${curr?._id}`, 
-                    method: "GET", token });
+                const currentSmallUser = await apiReq({
+                    url: `small-user/read-one/${curr?._id}`,
+                    method: "GET", token
+                });
                 // console.log('refresh', currentSmallUser);
                 setWeek(currentSmallUser.week);
             };

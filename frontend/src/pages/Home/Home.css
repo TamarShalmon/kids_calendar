@@ -123,6 +123,11 @@ img {
     cursor: pointer;
 }
 
+.container-name--wide {
+    justify-content: flex-start;
+
+}
+
 .container-name::-webkit-scrollbar {
     height: 6px;
     /* width of the entire scrollbar */

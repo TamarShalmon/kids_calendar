@@ -16,7 +16,7 @@ const apiReq = async ({ url, method, data, token }) => {
 
         return res
     } catch (error) {
-        console.log(error);
+        console.error(error);
         toast.error(error?.response?.data?.message || error.message || 'something went wrong')
     }
 }

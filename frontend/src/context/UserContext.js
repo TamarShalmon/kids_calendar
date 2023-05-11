@@ -71,7 +71,7 @@ export const UserContextProvider = ({ children }) => {
                 url: `small-user/read-one/${userId}`, 
                 method: "GET", token
             })
-            console.log(currentSmallUser);
+            // console.log(currentSmallUser);
             setUsers((users) => users.map((user) => {
                 return {
                     ...user,

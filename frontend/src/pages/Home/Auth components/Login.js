@@ -25,7 +25,7 @@ const Login = ({ setshowRegister }) => {
         setLoading(true)
         try {
             const result = await apiReq({ url: data ? 'auth/login' : 'auth/connect-as-guest', data, method: "POST" });
-            console.log(result);
+            // console.log(result);
             login(result)
             setCookies("access_token", result.token);
             localStorage.setItem("userID", result.userID);

@@ -3,6 +3,10 @@ import axios from "axios";
 import { toast } from 'react-toastify';
 import '../Home.css';
 
+
+//const baseUrl = 'http://localhost:3001'
+const baseUrl = 'https://kids-calender-server.onrender.com';
+
 const Register = ({ setshowRegister }) => {
 
     const [username, setUsername] = useState("");
@@ -11,7 +15,7 @@ const Register = ({ setshowRegister }) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            await axios.post("http://localhost:3001/auth/register", {
+            await axios.post(`${baseUrl}/auth/register`, {
                 username,
                 password,
             });

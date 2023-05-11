@@ -10,7 +10,7 @@ function EraseModal() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log("tamar");
+    // console.log("tamar");
     deleteAllEvents();
     modalEraseToggle(false);
   }

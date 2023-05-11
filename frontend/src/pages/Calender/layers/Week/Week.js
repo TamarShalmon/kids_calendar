@@ -21,7 +21,7 @@ function Week() {
     }, [users])
 
     useEffect(() => {
-        console.log('Week updated', week)
+        // console.log('Week updated', week)
         localStorage.setItem(activeUserId, JSON.stringify(week));
     }, [week])
 

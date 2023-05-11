@@ -11,7 +11,7 @@ function Day({ name, eventsList, weatherDay, style, currentDay, }) {
     const { addEvent, modalPicOpenToggle, modalOpenToggle, addWeather, sortEvents } = useContext(BoardContext);
 
     useEffect(() => {
-        console.log('Day has been updated', eventsList)
+        // console.log('Day has been updated', eventsList)
     }, [eventsList])
 
     ///// Drag and drop Weather------------

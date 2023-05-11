@@ -15,7 +15,7 @@ function User({ userId, name }) {
         e.stopPropagation();
         try {
             const currentSmallUserWeek = await selectUser(userId);
-            console.log("currentSmallUserWeek", currentSmallUserWeek);
+            // console.log("currentSmallUserWeek", currentSmallUserWeek);
             setWeekbyUser(currentSmallUserWeek)
             eventsMenuOpenToggle(false)
             navigate("/calender")

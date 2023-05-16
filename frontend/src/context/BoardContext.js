@@ -5,6 +5,7 @@ import { UserContext } from "./UserContext";
 import apiReq from "../global/apiReq";
 import { useCookies } from "react-cookie";
 import "../components/User/User.css";
+import events from "../assets/data/events";
 
 
 export const BoardContext = createContext({});
@@ -25,7 +26,7 @@ export const BoardContextProvider = ({ children }) => {
     async function updateWeek(id, week) {
         const token = cookies.access_token;
         const user = await apiReq({ url: `small-user/update/${id}`, data: { week }, token, method: "PUT" });
-        // console.log('server update week', week, user);
+        console.log('server update week', week, user);
     };
 
     useEffect(() => {
@@ -122,7 +123,7 @@ export const BoardContextProvider = ({ children }) => {
                         const newItems = [...day.eventsList]
                         const dragIndex = newItems.findIndex(it => it.id === dragId)
                         const hoverIndex = newItems.findIndex(it => it.id === hoverId)
-                        // console.log(dragIndex, hoverIndex);
+                        console.log(dragIndex, hoverIndex);
                         const draggedItem = newItems[dragIndex];
                         newItems.splice(dragIndex, 1);
                         newItems.splice(hoverIndex, 0, draggedItem);
@@ -135,6 +136,28 @@ export const BoardContextProvider = ({ children }) => {
                 return temp
             });
         },
+
+        duplicateEvent: (dayName, image) => {
+            setWeek((tempWeek) => {
+                const temp = tempWeek.map((day) => {
+                    if (day.name === dayName) {
+                        const eventToDuplicate = events.find(event => event.image === image);
+                        if (!eventToDuplicate) return day;
+
+                        const duplicatedEvent = { ...eventToDuplicate, id: uuidv4() };
+                        return {
+                            ...day,
+                            eventsList: [...day.eventsList, duplicatedEvent],
+                        };
+                    } else {
+                        return day;
+                    }
+                });
+                updateWeek(curr?._id, temp);
+                return temp;
+            });
+        },
+
 
         deleteEvent: (dayName, eventId) => {
             setWeek(tempWeek => {

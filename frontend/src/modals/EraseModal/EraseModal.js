@@ -1,6 +1,6 @@
 import "./EraseModal.css";
 import React, { useContext } from "react";
-import {BoardContext} from "../../context/BoardContext";
+import { BoardContext } from "../../context/BoardContext";
 
 
 function EraseModal() {
@@ -10,7 +10,6 @@ function EraseModal() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    // console.log("tamar");
     deleteAllEvents();
     modalEraseToggle(false);
   }

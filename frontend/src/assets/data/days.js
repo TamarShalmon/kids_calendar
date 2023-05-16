@@ -2,7 +2,7 @@ export default [
     {
         id: 1,
         name: "Sunday",
-        style:{ backgroundColor: '#9fc6cd'},
+        style:{ backgroundColor: '#799398'},
         eventsList: [],
         weatherDay: null,
     },

@@ -8,11 +8,11 @@ import Weather from '../Weather/Weather';
 
 function Day({ name, eventsList, weatherDay, style, currentDay, }) {
 
-    const { addEvent, modalPicOpenToggle, modalOpenToggle, addWeather, sortEvents } = useContext(BoardContext);
+    const { addEvent, modalPicOpenToggle, modalOpenToggle, addWeather, sortEvents, duplicateEvent } = useContext(BoardContext);
 
-    useEffect(() => {
-        // console.log('Day has been updated', eventsList)
-    }, [eventsList])
+    // useEffect(() => {
+    //     console.log('Day has been updated', eventsList)
+    // }, [eventsList])
 
     ///// Drag and drop Weather------------
     const [, dropWeather] = useDrop(() => ({
@@ -28,16 +28,15 @@ function Day({ name, eventsList, weatherDay, style, currentDay, }) {
             addWeather(name, weatherItem);
         }
     };
-    /////----------------------------------
-
 
     ///// Drag and drop Event------------
     const [, drop] = useDrop(() => ({
         accept: "button",
         drop: (eventItem) => {
-            if (eventItem.from === 'day' || eventItem.type !== 'event') return;
-
-            if (eventItem.id === 2) {
+            if (eventItem.type !== 'event' || eventItem.from === name) return;
+            if (eventItem.from) {
+                duplicateEvent(name, eventItem.image)
+            } else if (eventItem.id === 2) {
                 modalOpenToggle({ ...eventItem, day: name })
             } else if (eventItem.id === 1) {
                 modalPicOpenToggle({ ...eventItem, day: name })
@@ -55,14 +54,12 @@ function Day({ name, eventsList, weatherDay, style, currentDay, }) {
             addEvent(name, eventItem);
         }
     };
-    /////----------------------------------
-
 
     ///// Move Drag and drop Event---------
     const moveCard = useCallback((dragIndex, hoverIndex) => {
         sortEvents(dragIndex, hoverIndex, name);
     }, [])
-    /////----------------------------------
+
 
     return (
         <>
@@ -89,10 +86,11 @@ function Day({ name, eventsList, weatherDay, style, currentDay, }) {
                             day={name}
                             id={event.id}
                             note={event.note}
-                            type='day'
+                            from={name}
                             pic={event.pic}
                             name={event.name}
-                            image={event.image} />
+                            image={event.image}
+                            title={event.title} />
                     )}
                 </div>
 

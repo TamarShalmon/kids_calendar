@@ -3,12 +3,12 @@ import { useDrag, useDrop } from "react-dnd";
 import { BoardContext } from '../../context/BoardContext';
 import "./Event.css";
 
-function Event({ id, day, name, image, note, pic, type, index }) {
+function Event({ id, day, name, image, note, pic, from, index }) {
     const { sortEvents } = useContext(BoardContext)
 
     const [{ isDragging }, drag] = useDrag(() => ({
         type: "button",
-        item: { id, day, name, image, score: 0, type: 'event', from: type, index },
+        item: { id, day, name, image, score: 0, type: 'event', from, index },
         collect: (monitor) => ({
             isDragging: !!monitor.isDragging(),
         }),
@@ -17,7 +17,7 @@ function Event({ id, day, name, image, note, pic, type, index }) {
     const [{ isOver }, drop] = useDrop({
         accept: "button",
         drop: (item) => {
-            if (item.from === 'day') {
+            if (item.from && item.from === day) {
                 // console.log('drag:', item.index, item.image, 'drop', index, image);
                 sortEvents(item.id, id, day)
             }

@@ -11,9 +11,10 @@ function App() {
   return (
     <>
       <MobileOnly />
-      <div className="tamar"> Ⓒ developed & designed by Tamar Shalmon  
+      <div className="tamar">Developed & Designed by Tamar Shalmon
         <a href="https://www.linkedin.com/in/tamar-shalmon-318ab01a0" target="_blank">
-          <img className="tamar-linkdin" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/900px-LinkedIn_logo_initials.png" />
+          <img className="tamar-linkdin"
+            src="https://cdn-icons-png.flaticon.com/512/61/61109.png?w=360" />
         </a>
       </div>
       <Router>

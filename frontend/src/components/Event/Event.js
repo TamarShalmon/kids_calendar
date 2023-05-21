@@ -8,7 +8,7 @@ function Event({ id, day, name, image, note, pic, from, index }) {
 
     const [{ isDragging }, drag] = useDrag(() => ({
         type: "button",
-        item: { id, day, name, image, score: 0, type: 'event', from, index, note, pic },
+        item: { id, day, name, image, type: 'event', from, index, note, pic },
         collect: (monitor) => ({
             isDragging: !!monitor.isDragging(),
         }),

@@ -137,14 +137,14 @@ export const BoardContextProvider = ({ children }) => {
             });
         },
 
-        duplicateEvent: (dayName, image) => {
+        duplicateEvent: (dayName, image, note, pic) => {
             setWeek((tempWeek) => {
                 const temp = tempWeek.map((day) => {
                     if (day.name === dayName) {
                         const eventToDuplicate = events.find(event => event.image === image);
                         if (!eventToDuplicate) return day;
 
-                        const duplicatedEvent = { ...eventToDuplicate, id: uuidv4() };
+                        const duplicatedEvent = { ...eventToDuplicate, id: uuidv4(), note, pic };
                         return {
                             ...day,
                             eventsList: [...day.eventsList, duplicatedEvent],

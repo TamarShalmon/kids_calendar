@@ -35,7 +35,7 @@ function Day({ name, eventsList, weatherDay, style, currentDay, }) {
         drop: (eventItem) => {
             if (eventItem.type !== 'event' || eventItem.from === name) return;
             if (eventItem.from) {
-                duplicateEvent(name, eventItem.image)
+                duplicateEvent(name, eventItem.image, eventItem.note, eventItem.pic)
             } else if (eventItem.id === 2) {
                 modalOpenToggle({ ...eventItem, day: name })
             } else if (eventItem.id === 1) {

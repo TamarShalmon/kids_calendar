@@ -22,7 +22,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/calender" element={<Calender />} />
-            <Route path="*" element={<h1>Hi friend! The page was not found. </h1>} />
+            <Route path="*" element={<h1>Hey friend! The page was not found. </h1>} />
           </Routes>
         </div>
       </Router>

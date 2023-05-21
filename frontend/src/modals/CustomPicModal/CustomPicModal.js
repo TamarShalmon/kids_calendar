@@ -2,11 +2,13 @@ import Slider from '@mui/material/Slider';
 import React, { useContext, useRef, useState } from "react";
 import AvatarEditor from 'react-avatar-editor'
 import { BoardContext } from '../../context/BoardContext';
+import axios from 'axios';
 import "./CustomPicModal.css";
 
 
 const CustomPicModal = ({ eventItem }) => {
   const [imagePreviewUrl, setImagePreviewUrl] = useState("");
+  const [file, setFile] = useState("")
   const [scale, setScale] = useState(1);
   const [rotate, setRotate] = useState(0);
 
@@ -15,8 +17,8 @@ const CustomPicModal = ({ eventItem }) => {
   const editor = useRef()
 
   const handleImageChange = (e) => {
-    e.preventDefault();
-    const file = e.target.files[0];
+    let file = e.target.files[0];
+    setFile(file);
     setImagePreviewUrl(URL.createObjectURL(file));
   };
 
@@ -25,6 +27,16 @@ const CustomPicModal = ({ eventItem }) => {
     let canvas = editor.current.getImageScaledToCanvas().toDataURL();
     let blob = await fetch(canvas).then(r => r.blob());
     let imgUrl = URL.createObjectURL(blob);
+
+    const fromData = new FormData();
+    fromData.append("file", file);
+    fromData.append("upload_preset", "z2uknpel1");
+
+    axios.post(
+      "https://api.cloudinary.com/v1_1/dnfqzyh4r/image/upload", fromData
+    ).then((res) => {
+      console.log(res);
+    });
     addEvent(eventItem.day, { ...eventItem, originalPic: imagePreviewUrl, pic: imgUrl });
     modalPicOpenToggle(null);
   };

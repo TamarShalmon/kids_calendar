@@ -71,6 +71,7 @@
   cursor: grab;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .day-title {

@@ -26,18 +26,18 @@ const CustomPicModal = ({ eventItem }) => {
     e.preventDefault();
     let canvas = editor.current.getImageScaledToCanvas().toDataURL();
     let blob = await fetch(canvas).then(r => r.blob());
-    let imgUrl = URL.createObjectURL(blob);
+    // let imgUrl = URL.createObjectURL(blob);
 
     const fromData = new FormData();
-    fromData.append("file", file);
+    fromData.append("file", blob);
     fromData.append("upload_preset", "z2uknpel1");
 
     axios.post(
       "https://api.cloudinary.com/v1_1/dnfqzyh4r/image/upload", fromData
     ).then((res) => {
       console.log(res);
+      addEvent(eventItem.day, { ...eventItem, originalPic: imagePreviewUrl, pic: res.data.secure_url });
     });
-    addEvent(eventItem.day, { ...eventItem, originalPic: imagePreviewUrl, pic: imgUrl });
     modalPicOpenToggle(null);
   };
 

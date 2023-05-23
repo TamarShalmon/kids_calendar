@@ -2,6 +2,8 @@ import React, { useState, createContext, useContext } from "react";
 
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import { TouchBackend } from 'react-dnd-touch-backend'
+
 
 import Header from './layers/Header/Header'
 import Week from './layers/Week/Week';
@@ -16,15 +18,16 @@ function Calender() {
 
 
   return (
-        <DndProvider backend={HTML5Backend}>
 
-          <div className='container' >
-            <Header weatherIcon={weatherIcon} days={days} />
-            <Week days={days} events={events} />
-            <Events className="event-show" events={events} />
-          </div>
+    <DndProvider backend={TouchBackend}>
 
-        </DndProvider>
+      <div className='container' >
+        <Header weatherIcon={weatherIcon} days={days} />
+        <Week days={days} events={events} />
+        <Events className="event-show" events={events} />
+      </div>
+
+    </DndProvider>
   )
 }
 

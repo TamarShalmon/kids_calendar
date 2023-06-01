@@ -2,6 +2,7 @@ import Slider from '@mui/material/Slider';
 import React, { useContext, useRef, useState } from "react";
 import AvatarEditor from 'react-avatar-editor'
 import { BoardContext } from '../../context/BoardContext';
+import { toast } from 'react-toastify';
 import axios from 'axios';
 import "./CustomPicModal.css";
 
@@ -18,8 +19,13 @@ const CustomPicModal = ({ eventItem }) => {
 
   const handleImageChange = (e) => {
     let file = e.target.files[0];
+    // const fileSizeLimit = 200 * 1024; // 200KB (in bytes)
+    // if (file && file.size <= fileSizeLimit) {
     setFile(file);
     setImagePreviewUrl(URL.createObjectURL(file));
+    // } else {
+    //   toast.error("You can upload images up to 200KB");
+    // }
   };
 
   const handlePicSubmit = async (e) => {
@@ -35,7 +41,7 @@ const CustomPicModal = ({ eventItem }) => {
     axios.post(
       "https://api.cloudinary.com/v1_1/dnfqzyh4r/image/upload", fromData
     ).then((res) => {
-      console.log(res);
+      // console.log(res);
       addEvent(eventItem.day, { ...eventItem, originalPic: imagePreviewUrl, pic: res.data.secure_url });
     });
     modalPicOpenToggle(null);
@@ -51,7 +57,8 @@ const CustomPicModal = ({ eventItem }) => {
           </button>
         </div>
         <div className="PIC-title">
-          <h1>Choose a photo from your gallery</h1>
+          <h1 className='PIC-h1'>Choose a photo from your gallery</h1>
+          {/* <p className='PIC-p'>You can upload images up to 200KB</p> */}
         </div>
         <form onSubmit={handlePicSubmit}>
           <div className="PIC-body">

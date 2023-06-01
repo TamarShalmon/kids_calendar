@@ -96,11 +96,22 @@ h1 {
   justify-content: space-between;
   align-items: center;
   padding: 0px 115px;
-;
+  ;
 
 }
 
 .rotate-img {
   width: 50px;
   cursor: pointer;
+}
+
+.PIC-p {
+  margin: 0;
+  text-align: center;
+  color: #aa504a;
+  font-weight: bold;
+}
+
+.PIC-h1 {
+  margin: 10px;
 }

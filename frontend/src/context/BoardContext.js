@@ -26,7 +26,7 @@ export const BoardContextProvider = ({ children }) => {
     async function updateWeek(id, week) {
         const token = cookies.access_token;
         const user = await apiReq({ url: `small-user/update/${id}`, data: { week }, token, method: "PUT" });
-        console.log('server update week', week, user);
+        // console.log('server update week', week, user);
     };
 
     useEffect(() => {
@@ -123,7 +123,7 @@ export const BoardContextProvider = ({ children }) => {
                         const newItems = [...day.eventsList]
                         const dragIndex = newItems.findIndex(it => it.id === dragId)
                         const hoverIndex = newItems.findIndex(it => it.id === hoverId)
-                        console.log(dragIndex, hoverIndex);
+                        // console.log(dragIndex, hoverIndex);
                         const draggedItem = newItems[dragIndex];
                         newItems.splice(dragIndex, 1);
                         newItems.splice(hoverIndex, 0, draggedItem);

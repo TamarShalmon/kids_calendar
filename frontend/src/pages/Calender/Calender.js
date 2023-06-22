@@ -18,6 +18,7 @@ function Calender() {
         <Header weatherIcon={weatherIcon} days={days} />
         <Week days={days} events={events} />
         <Events className="event-show" events={events} />
+        <h3 className="print-footer">Website: kids-calender.onrender.com</h3>
       </div>
 
     </DndProvider>

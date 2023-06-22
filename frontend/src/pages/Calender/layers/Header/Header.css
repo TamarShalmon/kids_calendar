@@ -49,3 +49,7 @@
     flex-direction: column;
     gap: 10px;
 }
+
+.print-hello {
+    display: none;
+}

@@ -31,20 +31,35 @@ function Events({ events, title }) {
         <>
 
             <div className={showEvents ? 'flex-events visible' : 'flex-events'}>
+
                 <button
-                    className='toggle-button'
+                    className='toggle-button no-print'
                     onClick={() => {
                         setShowEvents(!showEvents)
                         eventsMenuOpenToggle(!showEvents)
                     }}>
                     <img src={showEvents ? 'https://cdn-icons-png.flaticon.com/512/3416/3416079.png' : 'https://cdn-icons-png.flaticon.com/512/3388/3388823.png'}
                         alt='Toggle Events' />
-
                 </button>
+
+                {!showEvents ?
+                    <button
+                        className='print-toggle-button no-print '
+                        onClick={() => {
+                            window.print()
+                        }}>
+                        <img
+                            // src={`images/printing.png`}
+                            src={"https://cdn-icons-png.flaticon.com/512/3022/3022251.png"}
+                            alt='Toggle print' />
+                    </button> :
+                    null}
 
                 <button onClick={welcome}>
-                    <img src='https://cdn-icons-png.flaticon.com/512/69/69524.png' />
+                    <img src='https://cdn-icons-png.flaticon.com/512/69/69524.png'
+                        alt='home btn' />
                 </button>
+
                 <div className='events'>
                     <Slider {...settings}  >
                         {events.map(event =>
@@ -55,7 +70,9 @@ function Events({ events, title }) {
                                 image={event.image} />)}
                     </Slider>
                 </div>
+
                 <EraseButtom />
+                
             </div>
         </>
     )

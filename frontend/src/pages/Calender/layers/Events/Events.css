@@ -46,11 +46,28 @@ button.toggle-button {
   font-size: 20px;
 }
 
+button.print-toggle-button {
+  color: white;
+  position: absolute;
+  top: 5px;
+  right: 110px;
+  transform: translateY(-100%);
+  white-space: nowrap;
+  width: auto;
+  border-radius: 35px 35px 0 0;
+  background: white;
+  cursor: pointer;
+  font-size: 20px;
+}
+
 button img {
   width: 2.8rem;
 }
 
-
-img[alt='Toggle Events']{
+img[alt='Toggle Events'] {
   width: 3rem;
+}
+
+img[alt='Toggle print'] {
+  width: 2rem;
 }

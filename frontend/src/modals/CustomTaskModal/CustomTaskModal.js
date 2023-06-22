@@ -42,6 +42,7 @@ function CustomTaskModal({ eventItem }) {
               minLength="3"
               maxLength="8"
               value={inputTask}
+              dir="auto"
               onChange={(e) => setInputTask(e.target.value)}
             />
           </div>

@@ -63,12 +63,12 @@ function Day({ name, eventsList, weatherDay, style, currentDay, }) {
 
     return (
         <>
-            <div className={`day ${currentDay ? "current-day-day" : ""}`} style={style}>
+            <div className={`day print-day ${currentDay ? "current-day-day" : ""}`} style={style}>
 
-                <div className={`day-title ${currentDay ? "current-day-title" : ""}`}>
+                <div className={`day-title print-day-title ${currentDay ? "current-day-title" : ""}`}>
                     {name}</div>
 
-                <div ref={dropWeather} className={`day-weather ${currentDay ? "day-current-weather" : ""}`}>
+                <div ref={dropWeather} className={`day-weather print-weather ${currentDay ? "day-current-weather" : ""}`}>
                     {weatherDay && <Weather
                         id={weatherDay.id}
                         day={name}

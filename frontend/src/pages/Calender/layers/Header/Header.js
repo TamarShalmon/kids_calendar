@@ -1,8 +1,8 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { UserContext } from "../../../../context/UserContext";
-
-import "./Header.css";
 import Weather from '../../../../components/Weather/Weather';
+import "./Header.css";
+
 
 function Header({ weatherIcon, days }) {
 
@@ -16,9 +16,13 @@ function Header({ weatherIcon, days }) {
 
             <div className='header'>
 
-                <div className='hello'>
+                <div className='hello no-print'>
                     Hello <span>{userName}</span>,<br />
                     L'ets plan your week!
+                </div>
+
+                <div className="print-hello">
+                    {userName}`s weekly planner
                 </div>
 
                 <div className='right-header'>
@@ -26,7 +30,7 @@ function Header({ weatherIcon, days }) {
                         style={days[dayOfWeek].style}>
                         {new Date().toLocaleString("en-US", { day: '2-digit' }) + " " + new Date().toLocaleString("en-US", { month: "long" }) + " " + new Date().getFullYear()}
                     </div>
-                    <div className='weather'>
+                    <div className='weather no-print'>
                         {weatherIcon.map(icon =>
                             <Weather
                                 key={icon.id}
@@ -36,7 +40,7 @@ function Header({ weatherIcon, days }) {
                             />)}
                     </div>
                 </div>
-            </div>
+            </div >
         </>
     )
 }

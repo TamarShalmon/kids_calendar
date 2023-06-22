@@ -55,3 +55,39 @@ screen and (max-height: 470px) {
     width: 1rem;
     margin-left: 5px;
 }
+
+.print-footer {
+    display: none;
+}
+
+@media print {
+    .no-print {
+        display: none;
+    }
+
+    .print-day {
+        box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 10px;
+        height: 100% !important;
+        background-image: none !important;
+    }
+
+    .print-day-title {
+        background-color: rgba(255, 255, 255, 0.5) !important;
+    }
+
+    .print-hello {
+        display: block !important;
+        font-size: 40px;
+        color: white;
+        font-weight: bold;
+        text-shadow: 0 3px 3px hsl(0deg 0% 0% / 35%);
+    }
+
+    .print-footer {
+        display: block !important;
+        color: white;
+        text-shadow: 2px 2px 10px hsla(0, 0%, 89%, 0.80);
+        float: right;
+        padding: 10px 70px 0 0;
+    }
+}

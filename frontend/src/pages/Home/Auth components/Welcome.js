@@ -1,5 +1,7 @@
 import React, { useContext } from 'react'
 import { UserContext } from "../../../context/UserContext";
+import { useTranslation } from 'react-i18next';
+
 
 import User from '../../../components/User/User';
 import UserModal from '../../../modals/UserModal/UserModal';
@@ -9,6 +11,8 @@ function Welcome() {
 
     const { modalOpen, modalOpenToggle, users, showDeleteIcons, deleteIconsToggle, deleteUser } = useContext(UserContext);
     const { logout } = useContext(UserContext);
+    const { t } = useTranslation();
+
 
     const handleUserDelete = (userId) => {
         deleteUser(userId);
@@ -20,7 +24,7 @@ function Welcome() {
             {modalOpen && <UserModal eventItem={modalOpen} />}
 
             <div className="login-container">
-                <h3 className='h3-home'>This is my name:</h3>
+                <h3 className='h3-home'>{t('h3-home')}</h3>
                 <div className={users.length < 5 ? 'container-name' : 'container-name container-name--wide'} onClick={(userItem) => modalOpenToggle({ ...userItem })}>
                     {users.map((user, index) =>
                         <div key={user._id} className='user-wrapper'>
@@ -42,7 +46,7 @@ function Welcome() {
                         </div>
                     )}
                 </div>
-                <div className='bnt-flex'>
+                <div className='bnt-flex' dir='ltr'>
                     <img src={`/images/add.png`} alt='pic-home' onClick={(userItem) => modalOpenToggle({ ...userItem })} />
                     <img src={`/images/recycle-bin.png`} alt='pic-home' onClick={() => deleteIconsToggle(!showDeleteIcons)} />
                     <img src={`/images/logout.png`} alt='pic-home' onClick={logout} />

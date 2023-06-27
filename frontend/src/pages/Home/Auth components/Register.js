@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 import '../Home.css';
 
 
@@ -12,6 +13,8 @@ const Register = ({ setshowRegister }) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
+    const { t } = useTranslation();
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
@@ -19,12 +22,12 @@ const Register = ({ setshowRegister }) => {
                 username,
                 password,
             });
-            toast.success("Registration Completed! Now login.");
+            toast.success(t('t-success'));
             setshowRegister(false);
 
         } catch (error) {
             console.error(error);
-            toast.error("Username already exists or registration details are missing!");
+            toast.error(t('t-error'));
         }
     };
 
@@ -32,28 +35,30 @@ const Register = ({ setshowRegister }) => {
         <div className="register-container">
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
-                    <label htmlFor="username">Username:</label>
+                    <label htmlFor="username">{t('username')}</label>
                     <input
                         className='input-auth'
                         type="text"
                         id="username"
                         value={username}
+                        dir="auto"
                         onChange={(event) => setUsername(event.target.value)}
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="password">Password:</label>
+                    <label htmlFor="password">{t('password')}</label>
                     <input
                         className='input-auth'
                         type="password"
                         id="password"
                         value={password}
+                        dir="auto"
                         onChange={(event) => setPassword(event.target.value)}
                     />
                 </div>
                 <div className='btn-flex'>
-                    <button className="submit-register" type="submit">Register</button>
-                    <button className="submit-register yellow" onClick={() => setshowRegister(false)} >Back</button>
+                    <button className="submit-register" type="submit">{t('register')}</button>
+                    <button className="submit-register yellow" onClick={() => setshowRegister(false)} >{t('back')}</button>
                 </div>
             </form>
         </div>

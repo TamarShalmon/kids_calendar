@@ -1,12 +1,15 @@
 import React, { useState, useContext } from "react";
 import { BoardContext } from "../../context/BoardContext";
+import { useTranslation } from 'react-i18next';
+
 import "./CustomTaskModal.css";
 
 function CustomTaskModal({ eventItem }) {
 
   const [inputTask, setInputTask] = useState("");
-
   const { modalOpenToggle, addEvent } = useContext(BoardContext);
+
+  const { t } = useTranslation();
 
 
   function handleSubmit(e) {
@@ -30,8 +33,8 @@ function CustomTaskModal({ eventItem }) {
           </button>
         </div>
         <div className="title">
-          <h1>Which task you wanna do?</h1>
-          <p>(3 to 8 characters)</p>
+          <h1>{t('task')}</h1>
+          <p>{t('characters')}</p>
         </div>
         <form onSubmit={handleSubmit}>
           <div className="body">
@@ -53,9 +56,11 @@ function CustomTaskModal({ eventItem }) {
               }}
               id="cancelBtn"
             >
-              Cancel
+              {t('cancel')}
             </button>
-            <button type="submit">Submit</button>
+            <button type="submit">
+              {t('submit')}
+            </button>
           </div>
         </form>
       </div>

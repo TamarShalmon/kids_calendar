@@ -3,6 +3,7 @@ import React, { useContext, useRef, useState } from "react";
 import AvatarEditor from 'react-avatar-editor'
 import { BoardContext } from '../../context/BoardContext';
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import "./CustomPicModal.css";
 
@@ -14,6 +15,7 @@ const CustomPicModal = ({ eventItem }) => {
   const [rotate, setRotate] = useState(0);
 
   const { modalPicOpenToggle, addEvent } = useContext(BoardContext);
+  const { t } = useTranslation();
 
   const editor = useRef()
 
@@ -57,7 +59,7 @@ const CustomPicModal = ({ eventItem }) => {
           </button>
         </div>
         <div className="PIC-title">
-          <h1 className='PIC-h1'>Choose a photo from your gallery</h1>
+          <h1 className='PIC-h1'>{t('pic-modal')}</h1>
           {/* <p className='PIC-p'>You can upload images up to 200KB</p> */}
         </div>
         <form onSubmit={handlePicSubmit}>
@@ -103,9 +105,11 @@ const CustomPicModal = ({ eventItem }) => {
 
           <div className="PIC-footer">
             <button className='PIC-button' onClick={() => modalPicOpenToggle(null)} id="cancelBtn">
-              Cancel
+              {t('cancel')}
             </button>
-            <button className='PIC-button' type="submit">Submit</button>
+            <button className='PIC-button' type="submit">
+              {t('submit')}
+            </button>
           </div>
         </form>
       </div>

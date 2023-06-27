@@ -7,8 +7,12 @@ import './Events.css'
 import Slider from "react-slick";
 import EraseButtom from '../../../../components/EraseButtom/EraseButtom'
 
+import Cookies from 'js-cookie';
+
 
 function Events({ events, title }) {
+    const currentLanguageCode = Cookies.get('i18next') || 'en'
+
     const { eventsMenuOpenToggle } = useContext(BoardContext);
 
     const [showEvents, setShowEvents] = useState(false);
@@ -21,16 +25,18 @@ function Events({ events, title }) {
 
     const settings = {
         dots: false,
-        infinite: false,
+        infinite: true,
         speed: 300,
         slidesToShow: 8,
         slidesToScroll: 1,
+        initialSlide: currentLanguageCode === 'en' ? 0 : -1 ,
+        rtl: currentLanguageCode === 'en' ? false : true,
     };
 
     return (
         <>
 
-            <div className={showEvents ? 'flex-events visible' : 'flex-events'}>
+            <div className={showEvents ? 'flex-events visible' : 'flex-events'} dir='ltr'>
 
                 <button
                     className='toggle-button no-print'

@@ -1,4 +1,4 @@
-export default [
+const events = [
     {
         id: 1,
         title: "Gallery",
@@ -126,3 +126,5 @@ export default [
         image: "https://cdn-icons-png.flaticon.com/512/2278/2278683.png",
     },
 ];
+
+export default events;

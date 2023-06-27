@@ -1,4 +1,3 @@
-import { style } from '@mui/system';
 import React from 'react'
 import { useDrag } from "react-dnd";
 import "./Weather.css";
@@ -21,7 +20,8 @@ function Weather({ day, id, image, style }) {
             ref={drag}>
             <img 
             className='weatherIcon' 
-            src={image} />
+            src={image} 
+            alt='weatherIcon'/>
         </button>
     )
 }

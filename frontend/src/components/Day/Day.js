@@ -1,12 +1,19 @@
 import React, { useEffect, useContext, useCallback } from 'react';
 import { BoardContext } from "../../context/BoardContext";
 import { useDrop } from 'react-dnd';
+import { useTranslation } from 'react-i18next';
+
 import Event from '../../components/Event/Event';
 import "./Day.css";
 import Weather from '../Weather/Weather';
 
+import Cookies from 'js-cookie';
+
 
 function Day({ name, eventsList, weatherDay, style, currentDay, }) {
+
+    const { t } = useTranslation();
+    const currentLanguageCode = Cookies.get('i18next') || 'en'
 
     const { addEvent, modalPicOpenToggle, modalOpenToggle, addWeather, sortEvents, duplicateEvent } = useContext(BoardContext);
 
@@ -63,10 +70,17 @@ function Day({ name, eventsList, weatherDay, style, currentDay, }) {
 
     return (
         <>
-            <div className={`day print-day ${currentDay ? "current-day-day" : ""}`} style={style}>
+            <div className={`day print-day ${currentDay ? "current-day-day" : ""}`} style={currentDay ? {
+                ...style,
+                backgroundImage: `url(${currentLanguageCode === 'he' ? "/images/sunflower-today-he.gif" : "/images/sunflower-today.gif"})`,
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center bottom',
+                backgroundSize: '6.5rem'
+            } : style}>
 
                 <div className={`day-title print-day-title ${currentDay ? "current-day-title" : ""}`}>
-                    {name}</div>
+                    {t(name)}
+                </div>
 
                 <div ref={dropWeather} className={`day-weather print-weather ${currentDay ? "day-current-weather" : ""}`}>
                     {weatherDay && <Weather

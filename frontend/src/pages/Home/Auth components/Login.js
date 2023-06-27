@@ -1,10 +1,13 @@
 import React, { useContext, useState } from 'react'
 import { useCookies } from "react-cookie";
 import { UserContext } from "../../../context/UserContext";
+import { useTranslation } from 'react-i18next';
 import '../Home.css';
 import apiReq from '../../../global/apiReq';
 
 const Login = ({ setshowRegister }) => {
+    const { t } = useTranslation();
+
     const { login } = useContext(UserContext);
     const [loading, setLoading] = useState()
     const [, setCookies] = useCookies(["access_token"]);
@@ -45,29 +48,31 @@ const Login = ({ setshowRegister }) => {
             <div className="login-container">
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
-                        <label htmlFor="username">Username:</label>
+                        <label htmlFor="username">{t('username')}</label>
                         <input
                             className='input-auth'
                             type="text"
                             id="username"
                             value={username}
+                            dir="auto"
                             onChange={(event) => setUsername(event.target.value)}
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="password">Password:</label>
+                        <label htmlFor="password">{t('password')}</label>
                         <input
                             className='input-auth'
                             type="password"
                             id="password"
                             value={password}
+                            dir="auto"
                             onChange={(event) => setPassword(event.target.value)}
                         />
                     </div>
                     <div className='btn-flex'>
-                        <button className='submit-login login' type="submit">Login</button>
-                        <button className='submit-login yellow' onClick={() => setshowRegister(true)}>Create an account</button>
-                        <button type="button" className='submit-login yellow' onClick={handleGuestLogin}>Login as a guest</button>
+                        <button className='submit-login login' type="submit">{t('login')}</button>
+                        <button className='submit-login yellow' onClick={() => setshowRegister(true)}>{t('account')}</button>
+                        <button type="button" className='submit-login yellow' onClick={handleGuestLogin}>{t('guest')}</button>
                     </div>
                 </form>
             </div>

@@ -33,7 +33,7 @@ function EraseButtom() {
 
             <div ref={dropErase} onClick={(eraseItem) => modalEraseToggle(eraseItem)} >
                 <button>
-                    <img src='https://cdn-icons-png.flaticon.com/512/3976/3976956.png' />
+                    <img src='https://cdn-icons-png.flaticon.com/512/3976/3976956.png' alt='erasebtn' />
                 </button>
             </div>
 

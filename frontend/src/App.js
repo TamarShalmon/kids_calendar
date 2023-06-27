@@ -43,7 +43,7 @@ function App() {
     <>
       <MobileOnly />
       <div className="tamar">{t('tamar')}
-        <a href="https://www.linkedin.com/in/tamar-shalmon-318ab01a0" target="_blank">
+        <a href="https://www.linkedin.com/in/tamar-shalmon-318ab01a0" target="_blank" rel="noreferrer">
           <img
             className="tamar-linkdin"
             src="https://cdn-icons-png.flaticon.com/512/61/61109.png?w=360"

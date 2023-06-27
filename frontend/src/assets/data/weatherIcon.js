@@ -1,5 +1,5 @@
 
-export default [
+const weatherIcon = [
     {
         id: 1,
         image: "https://cdn-icons-png.flaticon.com/512/2204/2204346.png",
@@ -29,5 +29,8 @@ export default [
         style: { transform: 'rotate(-10deg)' },
     },
 ];
+
+export default weatherIcon;
+
 
 

@@ -41,6 +41,10 @@
     "pic-modal": "Choose a photo from your gallery",
     "submit": "Submit",
     "cancel": "Cancel",
-    "task":"Which task you wanna do?",
-    "characters": "(3 to 8 characters)"
+    "task": "Which task you wanna do?",
+    "characters": "(3 to 8 characters)",
+    "erase-all-items": "Erase all items",
+    "want-to-erase": "Do you want to erase all item from your calendar?",
+    "yes": "Yes",
+    "your-name": "What is your name?"
 }

@@ -2,6 +2,8 @@ import React, { useState, useContext } from "react";
 import { UserContext } from '../../context/UserContext'
 import { BoardContext } from '../../context/BoardContext';
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
+
 import "../UserModal/UserModal.css";
 
 
@@ -10,6 +12,8 @@ function UserModal() {
   const { modalOpenToggle, addUser, selectUser } = useContext(UserContext);
   const { setWeekbyUser, eventsMenuOpenToggle } = useContext(BoardContext)
   const [inputUser, setInputUser] = useState("")
+  const { t } = useTranslation();
+
 
   let navigate = useNavigate();
 
@@ -34,8 +38,8 @@ function UserModal() {
           </button>
         </div>
         <div className="title">
-          <h1>What is your name?</h1>
-          <p>(3 to 8 characters)</p>
+          <h1>{t('your-name')}</h1>
+          <p>{t('characters')}</p>
         </div>
         <form onSubmit={handleSubmit}>
           <div className="body">
@@ -52,9 +56,9 @@ function UserModal() {
             <button
               onClick={() => { modalOpenToggle(null) }}
               id="cancelBtn" >
-              Cancel
+              {t('cancel')}
             </button>
-            <button type="submit">Submit</button>
+            <button type="submit">{t('submit')}</button>
           </div>
         </form>
       </div>

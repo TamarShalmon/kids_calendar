@@ -9,7 +9,6 @@ function MobileOnly() {
     return (
         <div className="MobileOnly container fill">
             <h1>{t('mobile_only')}</h1>
-            {/* <h1>maybe in the future</h1> */}
         </div>
     );
 }

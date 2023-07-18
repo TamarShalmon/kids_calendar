@@ -9,6 +9,10 @@ function Event({ id, day, name, image, note, pic, from, index }) {
     const [{ isDragging }, drag] = useDrag(() => ({
         type: "button",
         item: { id, day, name, image, type: 'event', from, index, note, pic },
+        options: {
+            // Use touch activation on mobile devices
+            touch: true,
+        },
         collect: (monitor) => ({
             isDragging: !!monitor.isDragging(),
         }),

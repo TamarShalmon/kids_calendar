@@ -2,6 +2,8 @@ import React from "react";
 
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import { TouchBackend } from "react-dnd-touch-backend";
+import { isMobile } from "react-device-detect";
 
 import Header from './layers/Header/Header'
 import Week from './layers/Week/Week';
@@ -11,9 +13,11 @@ import Events from './layers/Events/Events';
 import events from '../../assets/data/events';
 
 function Calender() {
+  const dndBackend = isMobile ? TouchBackend : HTML5Backend;
+
 
   return (
-    <DndProvider backend={HTML5Backend}>
+    <DndProvider backend={dndBackend}>
 
       <div className='container' >
         <Header weatherIcon={weatherIcon} days={days} />

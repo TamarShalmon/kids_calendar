@@ -24,7 +24,7 @@
     display: none;
 }
 
-@media only screen and (max-width: 970px),
+/* @media only screen and (max-width: 970px),
 screen and (max-height: 470px) {
     .App {
         display: none;
@@ -39,7 +39,7 @@ screen and (max-height: 470px) {
         padding: 5px;
         margin: auto 0;
     }
-}
+} */
 
 .tamar {
     position: fixed;

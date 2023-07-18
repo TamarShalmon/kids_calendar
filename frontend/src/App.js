@@ -24,6 +24,7 @@ function App() {
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -33,6 +34,7 @@ function App() {
 
   const currentLanguageCode = Cookies.get('i18next') || 'en'
   const currentLanguage = languages.find(l => l.code === currentLanguageCode)
+  
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -80,7 +82,10 @@ function App() {
           {languages.map(({ code, name, country_code }) =>
             <MenuItem
               key={code}
-              onClick={() => { handleClose(); i18next.changeLanguage(code) }}
+              onClick={() => {
+                handleClose();
+                i18next.changeLanguage(code)
+              }}
               disabled={code === currentLanguageCode}
             >
               <span

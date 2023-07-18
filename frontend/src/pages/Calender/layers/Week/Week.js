@@ -1,18 +1,15 @@
 import React, { useContext, useEffect } from 'react';
 import { BoardContext } from "../../../../context/BoardContext";
 import { UserContext } from "../../../../context/UserContext";
-import { useTranslation } from 'react-i18next';
 
-
-import './Week.css';
 import Day from '../../../../components/Day/Day';
 import EraseModal from '../../../../modals/EraseModal/EraseModal'
 import CustomTaskModal from '../../../../modals/CustomTaskModal/CustomTaskModal'
 import CustomPicModal from '../../../../modals/CustomPicModal/CustomPicModal';
 
+import './Week.css';
 
 function Week() {
-    const { t } = useTranslation();
 
     const { week, modalEraseOpen, modalOpen, modalPicOpen, eventsMenuOpened } = useContext(BoardContext);
     const { users } = useContext(UserContext);

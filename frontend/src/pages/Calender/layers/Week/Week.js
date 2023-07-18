@@ -43,7 +43,7 @@ function Week() {
                         key={day.id}
                         eventsList={day.eventsList}
                         weatherDay={day.weatherDay}
-                        name={t(day.name)}
+                        name={day.name}
                         style={day.style}
                         currentDay={String(currentDay) === String(day.id)}
                     />)

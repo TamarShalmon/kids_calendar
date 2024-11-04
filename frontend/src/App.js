@@ -44,7 +44,7 @@ function App() {
   return (
     <>
       <MobileOnly />
-      <div className="tamar">{t('tamar')}
+      <div className="tamar">© {t('tamar')}
         <a href="https://www.linkedin.com/in/tamar-shalmon-318ab01a0" target="_blank" rel="noreferrer">
           <img
             className="tamar-linkdin"
